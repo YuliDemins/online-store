@@ -4,8 +4,7 @@
     "strict": true,
     "noImplicitAny": true,
     "module": "es6",
-    "target": "ES2016",
-    "allowJs": true
+    "target": "es5",
   },
-  "files": ["**/*.ts"]
+  "files": ["src/index.ts"]
 }
