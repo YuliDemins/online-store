@@ -1,0 +1,10 @@
+@import '../style.scss';
+.header {
+  width: 100%;
+  padding: 15px;
+  flex-grow: 1;
+}
+
+.title {
+  color: $main_color;
+}

@@ -25,8 +25,16 @@ const config = {
     compress: true,
   },
   plugins: [
-    new HtmlWebpackPlugin(),
-
+    new HtmlWebpackPlugin(
+      {
+      template: path.resolve(__dirname, './index.html'),
+    //   // Скрипты, которые нужно подключить к странице
+      // chunks: ['index'],
+    //   // Логика загрузки
+    //   scriptLoading: 'blocking | defer'
+    }
+    ),
+    new MiniCssExtractPlugin(),
     // Add your plugins here
     // Learn more about plugins from https://webpack.js.org/configuration/plugins/
   ],
@@ -43,7 +51,7 @@ const config = {
       },
       {
         test: /.s[ac]ss$/i,
-        use: [stylesHandler, 'css-loader', 'sass-loader'],
+        use: [stylesHandler, 'style-loader', 'css-loader', 'sass-loader'],
       },
       {
         test: /.(eot|svg|ttf|woff|woff2|png|jpg|gif|webp)$/i,

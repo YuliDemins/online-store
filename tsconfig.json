@@ -7,5 +7,5 @@
     "target": "ES2016",
     "allowJs": true
   },
-  "files": ["**/*.ts"]
+  // "files": ["**/*.ts"]
 }
