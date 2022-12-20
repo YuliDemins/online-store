@@ -1,4 +1,4 @@
-import "./style.css";
+import "./style.scss";
 console.log("Hello World!");
 
 import { Header } from "./components/header/header"

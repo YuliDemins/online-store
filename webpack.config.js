@@ -29,7 +29,9 @@ const config = {
     compress: true,
   },
   plugins: [
-    new HtmlWebpackPlugin(),
+    new HtmlWebpackPlugin(
+      {template: path.resolve(__dirname, './index.html')},
+    ),
 
     // Add your plugins here
     // Learn more about plugins from https://webpack.js.org/configuration/plugins/
