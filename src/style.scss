@@ -1,11 +1,12 @@
-body {
-  background-color: red;
-}
+$main_color: rgb(102, 204, 51);
 
 @import './normalize.css';
 @import './components/header/header.scss';
 
-$main_color: rgb(102, 204, 51);
+body {
+  background-color: red;
+}
+
 
 #root {
     max-width: 1440px;
