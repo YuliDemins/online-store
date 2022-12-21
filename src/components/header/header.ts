@@ -1,4 +1,3 @@
-// import { root } from "../../index";
 import {createElement} from '../../utils';
 
 export class Header {
@@ -23,7 +22,7 @@ export class Header {
   cardShoppingTitle: HTMLElement;
 
   constructor() {
-    this.header = createElement('div', 'header');
+    this.header = createElement('header', 'header');
     this.wrapper = createElement('div', 'wrapper');
     this.title = createElement('h1', 'title', 'Store');
 

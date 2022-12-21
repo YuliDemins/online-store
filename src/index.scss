@@ -1,9 +1,11 @@
 $main_color: rgb(102, 204, 51);
 $text_color: rgb(93, 93, 100);
 $additional_color: rgb(128, 129, 150);
+$dim_color: rgb(245, 245, 246);
 
 @import '~normalize.css';
 @import './components/header/header.scss';
+@import "./components/footer/footer.scss";
 
 #root {
   max-width: 1440px;
