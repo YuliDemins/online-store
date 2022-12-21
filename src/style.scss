@@ -1,7 +1,7 @@
 $main_color: rgb(102, 204, 51);
 $text_color: rgb(93, 93, 100);
 
-@import '~normalize.css';
+@import './normalize.css';
 @import './components/header/header.scss';
 
 #root {
