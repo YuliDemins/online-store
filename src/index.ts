@@ -1,4 +1,6 @@
-import './style.scss';
+import './index.scss';
+import './assets/svg/star.svg';
+import './assets/svg/card-order.svg';
 
 import {Header} from './components/header/header';
 
