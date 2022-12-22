@@ -4,6 +4,7 @@
     "allowSyntheticDefaultImports": true,
     "useUnknownInCatchVariables": false,
     "useDefineForClassFields": true,
+    "allowJs": true,
     "esModuleInterop": false,
     "forceConsistentCasingInFileNames": true,
     "skipLibCheck": true,
