@@ -3,6 +3,7 @@ import { Router } from './services/Router';
 import { Header } from './components/header/header';
 import { BaseComponent } from './services/BaseComponent';
 import { Footer } from './components/footer/footer';
+import { Preloader } from './components/preloader/preloader';
 
 export class App extends BaseComponent {
   constructor() {
@@ -14,6 +15,11 @@ export class App extends BaseComponent {
 
   start() {
     const root = document.getElementById('root');
+
+    const preloader:Preloader = new Preloader();
+    preloader.render();
+    preloader.load();
+
     const header: Header = new Header();
     header.render();
 
@@ -22,7 +28,7 @@ export class App extends BaseComponent {
 
     if (root) {
       this.createRouter();
-      root.append(header.elem, this.elem, footer.elem);
+      root.append(preloader.elem, header.elem, this.elem, footer.elem);
     }
   }
 

@@ -13,10 +13,21 @@
   &__contacts {
     display: flex;
     gap: 30px;
+
+    &1:hover {
+        color: $main_color
+      }
+    &2:hover {
+        color: $main_color
+      }
   }
 
   &__copyright {
     display: flex;
     gap: 30px;
+
+    &2:hover {
+      color: $main_color
+    }
   }
 }

@@ -1,14 +1,29 @@
-import { createElement } from '@/utils';
+// import { createElement } from '@/utils';
+import { BaseComponent } from '@/services/BaseComponent';
 
-export default class Home {
-  root: HTMLElement | null;
+export default class Home extends BaseComponent {
+  wrapper: BaseComponent;
 
-  home: HTMLElement;
-
+  // home: HTMLElement | PromiseLike<HTMLElement>;
+  // root: HTMLElement | null;
   constructor() {
-    this.home = createElement('div', 'home', '');
+    super({
+      tag: 'div',
+      className: 'home',
+    });
 
-    this.root = document.getElementById('root');
-    this.root?.append(this.home);
+    this.wrapper = new BaseComponent({
+      tag: 'div',
+      className: 'wrapper',
+    });
+    // this.home = createElement('div', 'home', '');
+
+    // this.root = document.getElementById('root');
+    // this.root?.append(this.home);
+  }
+
+  render() {
+    // this.wrapper.addChildren();
+    this.addChildren(this.wrapper.elem);
   }
 }

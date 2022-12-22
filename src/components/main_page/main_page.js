@@ -54,20 +54,20 @@ export class MainPage {
     // console.log(products);
   }
 
-  addFilters(filters) {
-    filters.map((item) => {
-      this.filterCategoryItemTitle = createElement('h3', 'filter-category-item-title', filters);
-      this.filterCategoryItem.append(this.filterCategoryItemTitle);
-      this.filterCategoryForm = createElement('label', 'filter-category-form', item);
-      this.filterCategoryInput = createElement('input', 'filter-category-input');
-      this.filterCategoryInput.setAttribute('type', 'checkbox');
-      this.filterCategoryInput.setAttribute('name', 'category');
-      this.filterCategoryInput.setAttribute('value', item);
-      this.filterCategorySpan = createElement('span', 'filter-category-span');
-      this.filterCategoryForm.append(this.filterCategoryInput, this.filterCategorySpan);
-      this.filterCategoryItem.append(this.filterCategoryForm);
-      this.filterCategory.append(this.filterCategoryItem);
-      return item;
-    });
-  }
+  // addFilters(filters) {
+  //   filters.map((item) => {
+  //     this.filterCategoryItemTitle = createElement('h3', 'filter-category-item-title', filters);
+  //     this.filterCategoryItem.append(this.filterCategoryItemTitle);
+  //     this.filterCategoryForm = createElement('label', 'filter-category-form', item);
+  //     this.filterCategoryInput = createElement('input', 'filter-category-input');
+  //     this.filterCategoryInput.setAttribute('type', 'checkbox');
+  //     this.filterCategoryInput.setAttribute('name', 'category');
+  //     this.filterCategoryInput.setAttribute('value', item);
+  //     this.filterCategorySpan = createElement('span', 'filter-category-span');
+  //     this.filterCategoryForm.append(this.filterCategoryInput, this.filterCategorySpan);
+  //     this.filterCategoryItem.append(this.filterCategoryForm);
+  //     this.filterCategory.append(this.filterCategoryItem);
+  //     return item;
+  //   });
+  // }
 }

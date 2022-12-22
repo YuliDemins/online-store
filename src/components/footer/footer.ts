@@ -1,5 +1,3 @@
-// import { createElement } from '../../utils';
-
 import { BaseComponent } from '@/services/BaseComponent';
 
 export class Footer extends BaseComponent {
@@ -45,7 +43,7 @@ export class Footer extends BaseComponent {
 
     this.footerContacts2 = new BaseComponent({
       tag: 'a',
-      className: 'footer-contacts2',
+      className: 'footer__contacts2',
       textContent: '@SlikeDollar',
       attrName: 'href',
       attrValue: 'https://github.com/SlikeDollar',
