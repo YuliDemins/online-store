@@ -1,26 +1,24 @@
 import { AppRoute } from './enums/routes';
 import { Router } from './services/Router';
 import { Header } from './components/header/header';
-import { createElement } from './utils';
+import { BaseComponent } from './services/BaseComponent';
 
-export class App {
-  root: HTMLElement | null;
-
-  main: HTMLElement | null;
-
+export class App extends BaseComponent {
   constructor() {
-    this.root = document.getElementById('root');
-    this.main = createElement('main', 'main');
-
-    this.root?.append(this.main);
+    super({
+      tag: 'main',
+      className: 'main',
+    });
   }
 
   start() {
+    const root = document.getElementById('root');
     const head: Header = new Header();
-    console.log(head);
+    head.render();
 
-    if (this.root) {
+    if (root) {
       this.createRouter();
+      root.append(head.elem, this.elem);
     }
   }
 
@@ -38,10 +36,8 @@ export class App {
       (route) => {
         if (route) {
           route.component().then((component) => {
-            if (this.main) {
-              this.main.innerHTML = '';
-              this.main.appendChild(component);
-            }
+            this.element.innerHTML = '';
+            this.addChildren(component);
           });
         }
       },
