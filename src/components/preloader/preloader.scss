@@ -1,0 +1,52 @@
+.preloader {
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  overflow: hidden;
+  background: $white_color;
+  z-index: 1001;
+}
+
+.loader {
+position: relative;
+top: 50%;
+left: 50%;
+height: 5rem;
+width: 5rem;
+border-radius: 50%;
+border: 10px solid $filter_color;
+border-top-color: $main_color;
+box-sizing: border-box;
+background: transparent;
+animation: loading 1.7s linear infinite;
+z-index: 1002;
+}
+
+
+@keyframes loading {
+0% {
+  transform: rotate(0deg);
+}
+0% {
+  transform: rotate(360deg);
+}
+}
+
+.preloader.hide-preloader {
+  animation: hidePreloader 1s;
+}
+
+.preloader.preloader-hidden {
+  display: none;
+}
+
+@keyframes hidePreloader {
+  0% {
+      opacity: 1;
+  }
+  100% {
+      opacity: 0;
+  }
+}

@@ -22,6 +22,8 @@ summary {
 
 a{
   text-decoration: none;
+  color: inherit;
+  font: inherit;
 }
 
 a:active,
