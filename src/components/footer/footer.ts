@@ -1,42 +1,84 @@
-import { createElement } from '../../utils';
+// import { createElement } from '../../utils';
 
-export class Footer {
-  footer: HTMLElement;
+import { BaseComponent } from '@/services/BaseComponent';
 
-  wrapper: HTMLElement;
+export class Footer extends BaseComponent {
+  private wrapper;
 
-  footerNames: HTMLElement;
+  private footerContacts;
 
-  footerNames1: HTMLElement;
+  private footerContacts1;
 
-  footerNames2: HTMLElement;
+  private footerContacts2;
 
-  footerCopy: HTMLElement;
+  private footerCopyright;
 
-  footerCopy1: HTMLElement;
+  private footerCopyright1;
 
-  footerCopy2: HTMLElement;
-
-  root: HTMLElement | null;
+  private footerCopyright2;
 
   constructor() {
-    this.footer = createElement('footer', 'footer');
-    this.wrapper = createElement('div', 'wrapper');
-    this.footerNames = createElement('div', 'footer-names');
+    super({
+      tag: 'footer',
+      className: 'footer',
+    });
 
-    this.footerNames1 = createElement('div', 'footer-names1', '@YuliDemins');
-    this.footerNames2 = createElement('div', 'footer-names2', '@SlikeDollar');
+    this.wrapper = new BaseComponent({
+      tag: 'div',
+      className: 'footer__wrapper',
+    });
 
-    this.footerCopy = createElement('div', 'footer-copy');
-    this.footerCopy1 = createElement('div', 'footer-copy1', '2022');
-    this.footerCopy2 = createElement('div', 'footer-copy2', 'RsSchool');
+    this.footerContacts = new BaseComponent({
+      tag: 'div',
+      className: 'footer__contacts',
+    });
 
-    this.footerCopy.append(this.footerCopy1, this.footerCopy2);
-    this.footerNames.append(this.footerNames1, this.footerNames2);
-    this.wrapper.append(this.footerNames, this.footerCopy);
-    this.footer.append(this.wrapper);
+    this.footerContacts1 = new BaseComponent({
+      tag: 'a',
+      className: 'footer__contacts1',
+      textContent: '@YuliDemins',
+      attrName: 'href',
+      attrValue: 'https://github.com/YuliDemins',
+      // attrName: 'target',
+      // attrValue: '_blanc',
+    });
 
-    this.root = document.getElementById('root');
-    this.root?.append(this.footer);
+    this.footerContacts2 = new BaseComponent({
+      tag: 'a',
+      className: 'footer-contacts2',
+      textContent: '@SlikeDollar',
+      attrName: 'href',
+      attrValue: 'https://github.com/SlikeDollar',
+      // attrName: 'target',
+      // attrValue: '_blanc',
+    });
+
+    this.footerCopyright = new BaseComponent({
+      tag: 'div',
+      className: 'footer__copyright',
+    });
+
+    this.footerCopyright1 = new BaseComponent({
+      tag: 'div',
+      className: 'footer__copyright1',
+      textContent: '2022',
+    });
+
+    this.footerCopyright2 = new BaseComponent({
+      tag: 'a',
+      className: 'footer__copyright2',
+      textContent: 'RsSchool',
+      attrName: 'href',
+      attrValue: 'https://rs.school/js/',
+      // attrName: 'target',
+      // attrValue: '_blanc',
+    });
+  }
+
+  render() {
+    this.footerContacts.addChildren(this.footerContacts1.elem, this.footerContacts2.elem);
+    this.footerCopyright.addChildren(this.footerCopyright1.elem, this.footerCopyright2.elem);
+    this.wrapper.addChildren(this.footerContacts.elem, this.footerCopyright.elem);
+    this.addChildren(this.wrapper.elem);
   }
 }

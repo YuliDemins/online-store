@@ -3,14 +3,20 @@
   width: 100%;
   padding: 15px;
   background: $dim_color;
-  /* margin: 0 15px; */
-}
 
-.footer-names {
-  display: flex;
-  gap: 30px;
-}
-.footer-copy {
-  display: flex;
-  gap: 30px;
+  &__wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__contacts {
+    display: flex;
+    gap: 30px;
+  }
+
+  &__copyright {
+    display: flex;
+    gap: 30px;
+  }
 }

@@ -71,9 +71,9 @@ export class Header extends BaseComponent {
   }
 
   render() {
-    this.cart.addChildren(this.cartShopping, this.cartShoppingTitle);
-    this.mainSearch.addChildren(this.mainSearchInput, this.mainSearchBtn);
-    this.wrapper.addChildren(this.title.elem, this.mainSearch, this.cart);
+    this.cart.addChildren(this.cartShopping.elem, this.cartShoppingTitle.elem);
+    this.mainSearch.addChildren(this.mainSearchInput.elem, this.mainSearchBtn.elem);
+    this.wrapper.addChildren(this.title.elem, this.mainSearch.elem, this.cart.elem);
     this.addChildren(this.wrapper.elem);
   }
 }
