@@ -15,11 +15,11 @@ export class Header {
 
   mainSearchBtn: HTMLElement;
 
-  card: HTMLElement;
+  cart: HTMLElement;
 
-  cardShopping: HTMLElement;
+  cartShopping: HTMLElement;
 
-  cardShoppingTitle: HTMLElement;
+  cartShoppingTitle: HTMLElement;
 
   constructor() {
     this.header = createElement('header', 'header');
@@ -33,12 +33,12 @@ export class Header {
     this.mainSearchBtn = createElement('button', 'main-search-btn');
     this.mainSearch.append(this.mainSearchInput, this.mainSearchBtn);
 
-    this.card = createElement('div', 'card');
-    this.cardShopping = createElement('div', 'card-shopping');
-    this.cardShoppingTitle = createElement('div', 'card-shopping-title', 'Корзина');
+    this.cart = createElement('div', 'cart');
+    this.cartShopping = createElement('div', 'cart-shopping');
+    this.cartShoppingTitle = createElement('div', 'cart-shopping-title', 'Корзина');
 
-    this.card.append(this.cardShopping, this.cardShoppingTitle);
-    this.wrapper.append(this.title, this.mainSearch, this.card);
+    this.cart.append(this.cartShopping, this.cartShoppingTitle);
+    this.wrapper.append(this.title, this.mainSearch, this.cart);
     this.header.append(this.wrapper);
 
     this.root = document.getElementById('root');

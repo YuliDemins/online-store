@@ -4,7 +4,6 @@
     "allowSyntheticDefaultImports": true,
     "useUnknownInCatchVariables": false,
     "useDefineForClassFields": true,
-    "allowJs": false,
     "esModuleInterop": false,
     "forceConsistentCasingInFileNames": true,
     "skipLibCheck": true,
@@ -21,6 +20,8 @@
     "resolveJsonModule": true,
     "isolatedModules": false,
     "noFallthroughCasesInSwitch": true,
+    "allowJs": true,
+    "checkJs": true,
     "plugins": [
       {
         "modules": "typescript-plugin-css-modules"
