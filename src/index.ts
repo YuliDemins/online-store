@@ -1,6 +1,6 @@
 import './style.scss';
 
-import {Header} from './components/header/header';
+import { App } from './App';
 
-const head:Header = new Header();
-console.log(head);
+const app = new App();
+app.start();
