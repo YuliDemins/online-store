@@ -11,8 +11,6 @@ export class App {
   constructor() {
     this.root = document.getElementById('root');
     this.main = createElement('main', 'main');
-
-    this.root?.append(this.main);
   }
 
   start() {
