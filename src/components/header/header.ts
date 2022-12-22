@@ -1,5 +1,5 @@
 // import { root } from "../../index";
-import {createElement} from '../../utils';
+import { createElement } from '../../utils';
 
 export class Header {
   header: HTMLElement;

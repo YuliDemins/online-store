@@ -3,10 +3,7 @@
     "browser": true,
     "es2021": true
   },
-  "extends": [
-    "airbnb-base",
-    "airbnb-typescript/base"
-  ],
+  "extends": ["airbnb-base", "airbnb-typescript/base"],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "ecmaVersion": "latest",
@@ -15,26 +12,17 @@
       "modules": true,
       "experimentalObjectRestSpread": true
     },
-    "project": [
-      "./tsconfig.json"
-    ]
+    "project": ["./tsconfig.json"]
   },
-  "plugins": [
-    "@typescript-eslint"
-  ],
+  "plugins": ["@typescript-eslint"],
   "rules": {
-    "@typescript-eslint/no-explicit-any": [
-      "error"
-    ],
+    "@typescript-eslint/no-explicit-any": ["error"],
     "import/no-unresolved": 0,
     "import/extensions": 0,
     "operator-linebreak": 0,
     "no-new": "off",
     "@typescript-eslint/no-unused-vars": 2,
-    "@typescript-eslint/object-curly-spacing": [
-      "error",
-      "never"
-    ],
+    "@typescript-eslint/object-curly-spacing": ["error", "never"],
     "@typescript-eslint/no-useless-constructor": 0,
     "@typescript-eslint/no-shadow": 0,
     "@typescript-eslint/no-implied-eval": 0,
@@ -64,6 +52,7 @@
     "no-use-before-define": 0,
     "no-await-in-loop": 0,
     "no-continue": 0,
+    "@typescript-eslint/object-curly-spacing": ["error", "always"],
     "no-plusplus": 0,
     "no-debugger": 1,
     "no-console": 0,
