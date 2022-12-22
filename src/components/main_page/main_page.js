@@ -1,5 +1,5 @@
 // @ts-nocheck
-import {addFilters, createElement} from '../../utils';
+import { addFilters, createElement } from '../../utils';
 // import {getProducts} from '../products';
 
 export class MainPage {

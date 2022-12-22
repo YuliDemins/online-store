@@ -1,5 +1,5 @@
-import {createElement} from '../../utils';
-import {getProducts} from '../products';
+import { createElement } from '../../utils';
+import { getProducts } from '../products';
 
 export interface Product {
   id: string,
