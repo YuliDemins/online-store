@@ -11,6 +11,8 @@ $dark_color:rgb(0, 0, 0);
 @import "./components/footer/footer.scss";
 @import "./components/main_page/main_page.scss";
 @import "./components/preloader/preloader.scss";
+@import "./components/products/productCard.scss";
+@import "./components/products/productList.scss";
 
 #root {
   max-width: 1440px;

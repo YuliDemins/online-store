@@ -4,6 +4,8 @@ import { Header } from './components/header/header';
 import { BaseComponent } from './services/BaseComponent';
 import { Footer } from './components/footer/footer';
 import { Preloader } from './components/preloader/preloader';
+// import { ProductCard } from './components/products/productCard';
+import { ProductList } from './components/products/productList';
 
 export class App extends BaseComponent {
   constructor() {
@@ -18,46 +20,51 @@ export class App extends BaseComponent {
 
     const preloader:Preloader = new Preloader();
     preloader.render();
-    preloader.load();
+    // preloader.hide();
 
     const header: Header = new Header();
     header.render();
+
+    const list:ProductList = new ProductList();
+    list.render();
 
     const footer:Footer = new Footer();
     footer.render();
 
     if (root) {
-      this.createRouter();
-      root.append(preloader.elem, header.elem, this.elem, footer.elem);
+      // this.createRouter();
+      root.append(preloader.elem, header.elem, list.elem, this.elem, footer.elem);
+      preloader.hide();
+      setTimeout(() => preloader.destroy(), 1100);
     }
   }
 
-  createRouter() {
-    return new Router(
-      [
-        {
-          name: AppRoute.Main,
-          component: async () => {
-            const { default: Home } = await import('./components/main/Home');
-            return new Home().home;
-          },
-        },
-      ],
-      (route) => {
-        if (route) {
-          route.component().then((component) => {
-            this.element.innerHTML = '';
-            this.addChildren(component);
-          });
-        }
-      },
-      {
-        name: AppRoute.Default,
-        component: async () => {
-          const { default: Home } = await import('./components/main/Home');
-          return new Home().home;
-        },
-      },
-    );
-  }
+  // createRouter() {
+  //   return new Router(
+  //     [
+  //       {
+  //         name: AppRoute.Main,
+  //         component: async () => {
+  //           const { default: Home } = await import('./components/main/Home');
+  //           return new Home().home;
+  //         },
+  //       },
+  //     ],
+  //     (route) => {
+  //       if (route) {
+  //         route.component().then((component) => {
+  //           this.element.innerHTML = '';
+  //           this.addChildren(component);
+  //         });
+  //       }
+  //     },
+  //     {
+  //       name: AppRoute.Default,
+  //       component: async () => {
+  //         const { default: Home } = await import('./components/main/Home');
+  //         return new Home().home;
+  //       },
+  //     },
+  //   );
+  // }
 }
