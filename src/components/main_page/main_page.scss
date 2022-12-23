@@ -1,0 +1,92 @@
+.main {
+  flex-grow: 1;
+  display: flex;
+  width: 100%;
+  padding: 15px;
+}
+
+.filter {
+  flex: 0 1 25%;
+  background: $dim_color;
+  color: $text_color;
+  padding: 25px;
+
+  &-category {
+
+    &-item {
+      font-size: 16px;
+      margin-bottom: 16px;
+  
+      &-title {
+        font-size: 22px;
+        font-weight: normal;
+        color: $dark_color;
+        margin-bottom: 16px;
+      }
+    }
+  
+    &-form {
+      display: block;
+      position: relative;
+      padding-left: 35px;
+      margin-bottom: 10px;
+      cursor: pointer;
+      font-size: 18px;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+  }
+}
+
+/* скрываем дефолтный чекбокс */
+.filter-category-form .filter-category-input {
+  position: absolute;
+  opacity: 0;
+}
+
+/* создаем кастомный чекбокс */
+.filter-category-span {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 20px;
+  width: 20px;
+  background-color: $white_color;
+  border: 1px solid $text_color;
+  border-radius: 4px;
+}
+
+/* При наведении указателя мыши перекрашиваем */
+.filter-category-form:hover .filter-category-input ~ .filter-category-span {
+  background-color: $filter_color;
+}
+
+/* Когда отмечен, то красим */
+.filter-category-form .filter-category-input:checked ~ .filter-category-span {
+  background-color: $text_color;
+}
+/* Создаем когда отмечено (не видно, когда не отмечено) */
+.filter-category-span:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+/* Показываем когда отмечен */
+.filter-category-form
+  .filter-category-input:checked
+  ~ .filter-category-span:after {
+  display: block;
+}
+
+/* Стили индикатора */
+.filter-category-form .filter-category-span:after {
+  left: 4px;
+  top: -1px;
+  width: 8px;
+  height: 10px;
+  border: solid $white_color;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
