@@ -1,17 +1,3 @@
-<<<<<<< HEAD
-import { createElement } from '@/utils';
-
-export default class Home {
-  root: HTMLElement | null;
-
-  home: HTMLElement;
-
-  constructor() {
-    this.home = createElement('div', 'home', '');
-
-    this.root = document.getElementById('root');
-    this.root?.append(this.home);
-=======
 // import { createElement } from '@/utils';
 import { BaseComponent } from '@/services/BaseComponent';
 
@@ -39,6 +25,5 @@ export default class Home extends BaseComponent {
   render() {
     // this.wrapper.addChildren();
     this.addChildren(this.wrapper.elem);
->>>>>>> develop
   }
 }

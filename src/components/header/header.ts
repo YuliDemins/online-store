@@ -1,15 +1,9 @@
-<<<<<<< HEAD
-// import { root } from "../../index";
-=======
->>>>>>> develop
 import { BaseComponent } from '@/services/BaseComponent';
 
 export class Header extends BaseComponent {
   private wrapper;
 
   private title;
-<<<<<<< HEAD
-=======
 
   private mainSearch;
 
@@ -22,7 +16,6 @@ export class Header extends BaseComponent {
   private cartShopping;
 
   private cartShoppingTitle;
->>>>>>> develop
 
   constructor() {
     super({
@@ -37,15 +30,6 @@ export class Header extends BaseComponent {
 
     this.title = new BaseComponent({
       tag: 'h1',
-<<<<<<< HEAD
-      className: 'title',
-      textContent: 'Store',
-    });
-  }
-
-  render() {
-    this.wrapper.addChildren(this.title.elem);
-=======
       className: 'header__title',
       textContent: 'Store',
     });
@@ -58,10 +42,9 @@ export class Header extends BaseComponent {
     this.mainSearchInput = new BaseComponent({
       tag: 'input',
       className: 'main-search__input',
-      attrName: 'type',
-      attrValue: 'text',
-      // attrName: 'placeholder',
-      // attrValue: 'Поиск по товарам',
+      attributes: {
+        type: 'text',
+      },
     });
 
     this.mainSearchBtn = new BaseComponent({
@@ -90,7 +73,6 @@ export class Header extends BaseComponent {
     this.cart.addChildren(this.cartShopping.elem, this.cartShoppingTitle.elem);
     this.mainSearch.addChildren(this.mainSearchInput.elem, this.mainSearchBtn.elem);
     this.wrapper.addChildren(this.title.elem, this.mainSearch.elem, this.cart.elem);
->>>>>>> develop
     this.addChildren(this.wrapper.elem);
   }
 }
