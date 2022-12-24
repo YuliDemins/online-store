@@ -38,6 +38,7 @@ box-shadow: 0px 2px 8px 1px rgba(128, 129, 150, 0.21); */
 
 &-rating {
   display: flex;
+  align-items: flex-end;
 
   &-stars {
     background: url(../../assets/svg/star.svg) center/cover no-repeat;

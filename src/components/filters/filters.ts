@@ -90,8 +90,13 @@ export class Filters extends BaseComponent {
     this.input1 = new BaseComponent({
       tag: 'input',
       className: 'filter-category-input',
-      attrName: 'type',
-      attrValue: 'checkbox',
+      attr: {
+				type: 'checkbox',
+				target: '_blank',
+        name: 'brand'
+			}
+      // attrName: 'type',
+      // attrValue: 'checkbox',
       // attrName: 'name',
       // attrValue: "brand"
       // attrName: 'value',

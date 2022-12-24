@@ -9,6 +9,7 @@ export interface IBaseComponent {
   tag?: keyof HTMLElementTagNameMap;
   className?: string;
   textContent?: string;
-  attrName?: string;
-  attrValue?: string;
+  // attrName?: string;
+  // attrValue?: string;
+  attr?: any;
 }
