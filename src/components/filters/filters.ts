@@ -90,17 +90,12 @@ export class Filters extends BaseComponent {
     this.input1 = new BaseComponent({
       tag: 'input',
       className: 'filter-category-input',
-      attr: {
-				type: 'checkbox',
-				target: '_blank',
-        name: 'brand'
-			}
-      // attrName: 'type',
-      // attrValue: 'checkbox',
-      // attrName: 'name',
-      // attrValue: "brand"
-      // attrName: 'value',
-      // attrValue: brand[0]
+      attributes: {
+        type: 'checkbox',
+        target: '_blank',
+        name: 'brand',
+        value: brand[0],
+      },
     });
 
     this.span1 = new BaseComponent({
@@ -117,12 +112,12 @@ export class Filters extends BaseComponent {
     this.input11 = new BaseComponent({
       tag: 'input',
       className: 'filter-category-input',
-      attrName: 'type',
-      attrValue: 'checkbox',
-      // attrName: 'name',
-      // attrValue: "brand"
-      // attrName: 'value',
-      // attrValue: brand[0]
+      attributes: {
+        type: 'checkbox',
+        target: '_blank',
+        name: 'brand',
+        value: brand[1],
+      },
     });
 
     this.span11 = new BaseComponent({
@@ -139,12 +134,12 @@ export class Filters extends BaseComponent {
     this.input12 = new BaseComponent({
       tag: 'input',
       className: 'filter-category-input',
-      attrName: 'type',
-      attrValue: 'checkbox',
-      // attrName: 'name',
-      // attrValue: "brand"
-      // attrName: 'value',
-      // attrValue: brand[0]
+      attributes: {
+        type: 'checkbox',
+        target: '_blank',
+        name: 'brand',
+        value: brand[2],
+      },
     });
 
     this.span12 = new BaseComponent({
@@ -182,12 +177,12 @@ export class Filters extends BaseComponent {
     this.input2 = new BaseComponent({
       tag: 'input',
       className: 'filter-category-input',
-      attrName: 'type',
-      attrValue: 'checkbox',
-      // attrName: 'name',
-      // attrValue: "brand"
-      // attrName: 'value',
-      // attrValue: brand[0]
+      attributes: {
+        type: 'checkbox',
+        target: '_blank',
+        name: 'brand',
+        value: brand[0],
+      },
     });
 
     this.span2 = new BaseComponent({
@@ -204,12 +199,12 @@ export class Filters extends BaseComponent {
     this.input21 = new BaseComponent({
       tag: 'input',
       className: 'filter-category-input',
-      attrName: 'type',
-      attrValue: 'checkbox',
-      // attrName: 'name',
-      // attrValue: "brand"
-      // attrName: 'value',
-      // attrValue: brand[0]
+      attributes: {
+        type: 'checkbox',
+        target: '_blank',
+        name: 'brand',
+        value: brand[0],
+      },
     });
 
     this.span21 = new BaseComponent({
@@ -226,12 +221,12 @@ export class Filters extends BaseComponent {
     this.input22 = new BaseComponent({
       tag: 'input',
       className: 'filter-category-input',
-      attrName: 'type',
-      attrValue: 'checkbox',
-      // attrName: 'name',
-      // attrValue: "brand"
-      // attrName: 'value',
-      // attrValue: brand[0]
+      attributes: {
+        type: 'checkbox',
+        target: '_blank',
+        name: 'brand',
+        value: brand[0],
+      },
     });
 
     this.span22 = new BaseComponent({

@@ -5,7 +5,7 @@ export class BaseComponent {
 
   private _children: BaseComponent[] = [];
 
-  constructor({ tag = 'div', className = '', textContent = '', attrName, attrValue = '' }: IBaseComponent) {
+  constructor({ tag = 'div', className = '', textContent = '', attributes }: IBaseComponent) {
     this.element = document.createElement(tag);
     if (Array.isArray(className)) {
       this.element.classList.add(...className);
@@ -13,8 +13,12 @@ export class BaseComponent {
       this.element.className = className;
     }
     this.element.textContent = textContent;
-    if (attrName) {
-      this.elem.setAttribute(attrName, attrValue);
+    if (attributes) {
+      for (const attrName in attributes) {
+        if (attrName) {
+          this.element.setAttribute(attrName, attributes[attrName]);
+        }
+      }
     }
   }
 
