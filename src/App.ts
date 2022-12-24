@@ -4,7 +4,6 @@ import { Header } from './components/header/header';
 import { BaseComponent } from './services/BaseComponent';
 import { Footer } from './components/footer/footer';
 import { Preloader } from './components/preloader/preloader';
-import Home from './components/main/Home';
 
 export class App extends BaseComponent {
   constructor() {
@@ -16,15 +15,16 @@ export class App extends BaseComponent {
 
   start() {
     const root = document.getElementById('root');
-    const head: Header = new Header();
-    head.render();
 
-    const preloader: Preloader = new Preloader();
+    const preloader:Preloader = new Preloader();
     preloader.render();
     // preloader.hide();
 
     const header: Header = new Header();
     header.render();
+
+    const home: Home = new Home();
+    home.render();
 
     const footer:Footer = new Footer();
     footer.render();
@@ -43,8 +43,19 @@ export class App extends BaseComponent {
         {
           name: AppRoute.Main,
           component: async () => {
-            const { default: Home } = await import('./components/main/Home');
-            return new Home().home;
+            const { Home } = await import('./components/main/Home');
+            const home = new Home();
+            home.render();
+            return home.elem;
+          },
+        },
+        {
+          name: AppRoute.Cart,
+          component: async () => {
+            const { Cart } = await import('./components/cart/Cart');
+            const cartPage = new Cart();
+            cartPage.render();
+            return cartPage.elem;
           },
         },
       ],
@@ -59,8 +70,10 @@ export class App extends BaseComponent {
       {
         name: AppRoute.Default,
         component: async () => {
-          const { default: Home } = await import('./components/main/Home');
-          return new Home().home;
+          const { Home } = await import('./components/main/Home');
+          const home = new Home();
+          home.render();
+          return home.elem;
         },
       },
     );

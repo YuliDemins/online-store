@@ -10,8 +10,6 @@ export default class Home extends BaseComponent {
 
   filters: Filters;
 
-  // home: HTMLElement | PromiseLike<HTMLElement>;
-  // root: HTMLElement | null;
   constructor() {
     super({
       tag: 'div',
