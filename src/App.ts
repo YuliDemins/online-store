@@ -1,11 +1,10 @@
-import { AppRoute } from './enums/routes';
-import { Router } from './services/Router';
+// import { AppRoute } from './enums/routes';
+// import { Router } from './services/Router';
 import { Header } from './components/header/header';
 import { BaseComponent } from './services/BaseComponent';
 import { Footer } from './components/footer/footer';
 import { Preloader } from './components/preloader/preloader';
-// import { ProductCard } from './components/products/productCard';
-import { ProductList } from './components/products/productList';
+import Home from './components/main/Home';
 
 export class App extends BaseComponent {
   constructor() {
@@ -25,15 +24,15 @@ export class App extends BaseComponent {
     const header: Header = new Header();
     header.render();
 
-    const list:ProductList = new ProductList();
-    list.render();
+    const home: Home = new Home();
+    home.render();
 
     const footer:Footer = new Footer();
     footer.render();
 
     if (root) {
       // this.createRouter();
-      root.append(preloader.elem, header.elem, list.elem, this.elem, footer.elem);
+      root.append(preloader.elem, header.elem, home.elem, this.elem, footer.elem);
       preloader.hide();
       setTimeout(() => preloader.destroy(), 1100);
     }

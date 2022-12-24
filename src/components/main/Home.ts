@@ -1,8 +1,14 @@
 // import { createElement } from '@/utils';
 import { BaseComponent } from '@/services/BaseComponent';
+import { Filters } from '../filters/filters';
+import { ProductList } from '../products/productList';
 
 export default class Home extends BaseComponent {
   wrapper: BaseComponent;
+
+  list: ProductList;
+
+  filters: Filters;
 
   // home: HTMLElement | PromiseLike<HTMLElement>;
   // root: HTMLElement | null;
@@ -16,14 +22,16 @@ export default class Home extends BaseComponent {
       tag: 'div',
       className: 'wrapper',
     });
-    // this.home = createElement('div', 'home', '');
+    this.filters = new Filters();
+    this.filters.render();
 
-    // this.root = document.getElementById('root');
-    // this.root?.append(this.home);
+    this.list = new ProductList();
+    this.list.render();
   }
 
   render() {
-    // this.wrapper.addChildren();
+    this.wrapper.addChildren(this.filters.elem, this.list.elem);
     this.addChildren(this.wrapper.elem);
+    console.log(this.filters);
   }
 }

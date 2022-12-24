@@ -182,7 +182,7 @@ export class ProductCard extends BaseComponent {
 
     this.order = new BaseComponent({
       tag: 'div',
-      className: 'proposals-list-item-order',
+      className: 'proposals__list-item-order',
     });
     this.counter = new BaseComponent({
       tag: 'div',
@@ -207,7 +207,7 @@ export class ProductCard extends BaseComponent {
       textContent: '+',
     });
     this.btnCardPlus = new BaseComponent({
-      tag: 'span',
+      tag: 'button',
       className: 'proposals__list-item-card',
     });
   }

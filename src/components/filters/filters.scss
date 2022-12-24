@@ -1,43 +1,36 @@
-.main {
-  flex-grow: 1;
-  display: flex;
-  width: 100%;
-  padding: 15px;
-}
-
 .filter {
   flex: 0 1 25%;
+  /* width: 30%; */
   background: $dim_color;
+  border-bottom: 1px solid $white_color;
   color: $text_color;
   padding: 25px;
+}
+.filter-category {
+  // display: block;
+}
 
-  &-category {
+.filter-category-item-title {
+  font-size: 22px;
+  font-weight: normal;
+  color: $dark_color;
+  margin-bottom: 16px;
+}
 
-    &-item {
-      font-size: 16px;
-      margin-bottom: 16px;
-  
-      &-title {
-        font-size: 22px;
-        font-weight: normal;
-        color: $dark_color;
-        margin-bottom: 16px;
-      }
-    }
-  
-    &-form {
-      display: block;
-      position: relative;
-      padding-left: 35px;
-      margin-bottom: 10px;
-      cursor: pointer;
-      font-size: 18px;
-      -webkit-user-select: none;
-      -moz-user-select: none;
-      -ms-user-select: none;
-      user-select: none;
-    }
-  }
+.filter-category-item {
+  font-size: 16px;
+  margin-bottom: 16px;
+}
+
+/* стили для контейнера */
+.filter-category-form {
+  display: block;
+  // padding-bottom: 6px;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  font-size: 16px;
 }
 
 /* скрываем дефолтный чекбокс */
@@ -89,4 +82,20 @@
   border: solid $white_color;
   border-width: 0 2px 2px 0;
   transform: rotate(45deg);
+}
+
+.filter-category-input {
+}
+
+.filter-category-more {
+  &-text {
+    cursor: pointer;
+    font-size: 14px;
+    color: $additional_color;
+  
+    &:hover {
+      color: $main_color;
+    }
+  }
+
 }

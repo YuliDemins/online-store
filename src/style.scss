@@ -9,10 +9,11 @@ $dark_color:rgb(0, 0, 0);
 @import '~normalize.css';
 @import './components/header/header.scss';
 @import "./components/footer/footer.scss";
-@import "./components/main_page/main_page.scss";
+@import "./components/main/Home.scss";
 @import "./components/preloader/preloader.scss";
 @import "./components/products/productCard.scss";
 @import "./components/products/productList.scss";
+@import "./components/filters/filters.scss";
 
 #root {
   max-width: 1440px;
