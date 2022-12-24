@@ -66,8 +66,9 @@ export class Header extends BaseComponent {
       tag: 'a',
       className: 'cart__title',
       textContent: 'Корзина',
-      attrName: 'href',
-      attrValue: '#cart',
+      attributes: {
+        href: '#cart',
+      },
     });
   }
 
