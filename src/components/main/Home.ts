@@ -1,9 +1,13 @@
 import { BaseComponent } from '@/services/BaseComponent';
+import { Filters } from '../filters/filters';
+import { ProductList } from '../products/productList';
 
 export class Home extends BaseComponent {
   wrapper: BaseComponent;
 
-  title;
+  list: ProductList;
+
+  filters: Filters;
 
   constructor() {
     super({
@@ -16,15 +20,17 @@ export class Home extends BaseComponent {
       className: 'wrapper',
     });
 
-    this.title = new BaseComponent({
-      tag: 'h1',
-      className: 'title',
-      textContent: 'Home',
-    });
+    this.filters = new Filters();
+    this.filters.render();
+
+    this.list = new ProductList();
+    this.list.render();
   }
 
   render() {
-    this.wrapper.addChildren(this.title.elem);
+    this.wrapper.addChildren(this.filters.elem, this.list.elem);
+
     this.addChildren(this.wrapper.elem);
+    console.log(this.filters);
   }
 }

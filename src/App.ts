@@ -4,6 +4,7 @@ import { Header } from './components/header/header';
 import { BaseComponent } from './services/BaseComponent';
 import { Footer } from './components/footer/footer';
 import { Preloader } from './components/preloader/preloader';
+import Home from './components/main/Home';
 
 export class App extends BaseComponent {
   constructor() {
@@ -15,22 +16,25 @@ export class App extends BaseComponent {
 
   start() {
     const root = document.getElementById('root');
-    const head: Header = new Header();
-    head.render();
 
-    const preloader: Preloader = new Preloader();
+    const preloader:Preloader = new Preloader();
     preloader.render();
-    preloader.load();
+    // preloader.hide();
 
     const header: Header = new Header();
     header.render();
 
-    const footer: Footer = new Footer();
+    const home: Home = new Home();
+    home.render();
+
+    const footer:Footer = new Footer();
     footer.render();
 
     if (root) {
-      //       this.createRouter();
-      root.append(preloader.elem, header.elem, this.elem, footer.elem);
+      // this.createRouter();
+      root.append(preloader.elem, header.elem, home.elem, this.elem, footer.elem);
+      preloader.hide();
+      setTimeout(() => preloader.destroy(), 1100);
     }
   }
 

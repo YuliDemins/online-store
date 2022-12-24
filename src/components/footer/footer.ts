@@ -37,6 +37,7 @@ export class Footer extends BaseComponent {
       textContent: '@YuliDemins',
       attributes: {
         href: 'https://github.com/YuliDemins',
+        target: '_blanc',
       },
     });
 
@@ -46,6 +47,7 @@ export class Footer extends BaseComponent {
       textContent: '@SlikeDollar',
       attributes: {
         href: 'https://github.com/SlikeDollar',
+        target: '_blanc',
       },
     });
 
