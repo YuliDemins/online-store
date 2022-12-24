@@ -1,6 +1,6 @@
 import { BaseComponent } from '@/services/BaseComponent';
 
-export class Home extends BaseComponent {
+export class Cart extends BaseComponent {
   wrapper: BaseComponent;
 
   title;
@@ -8,7 +8,7 @@ export class Home extends BaseComponent {
   constructor() {
     super({
       tag: 'div',
-      className: 'home',
+      className: 'cart',
     });
 
     this.wrapper = new BaseComponent({
@@ -19,7 +19,7 @@ export class Home extends BaseComponent {
     this.title = new BaseComponent({
       tag: 'h1',
       className: 'title',
-      textContent: 'Home',
+      textContent: 'Cart',
     });
   }
 

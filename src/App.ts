@@ -1,5 +1,5 @@
-/* import { AppRoute } from './enums/routes'; */
-/* import { Router } from './services/Router'; */
+import { AppRoute } from './enums/routes';
+import { Router } from './services/Router';
 import { Header } from './components/header/header';
 import { BaseComponent } from './services/BaseComponent';
 import { Footer } from './components/footer/footer';
@@ -34,32 +34,45 @@ export class App extends BaseComponent {
     }
   }
 
-  /* createRouter() { */
-  /*   return new Router( */
-  /*     [ */
-  /*       { */
-  /*         name: AppRoute.Main, */
-  /*         component: async () => { */
-  /*           const { default: Home } = await import('./components/main/Home'); */
-  /*           return new Home().home; */
-  /*         }, */
-  /*       }, */
-  /*     ], */
-  /*     (route) => { */
-  /*       if (route) { */
-  /*         route.component().then((component) => { */
-  /*           this.element.innerHTML = ''; */
-  /*           this.addChildren(component); */
-  /*         }); */
-  /*       } */
-  /*     }, */
-  /*     { */
-  /*       name: AppRoute.Default, */
-  /*       component: async () => { */
-  /*         const { default: Home } = await import('./components/main/Home'); */
-  /*         return new Home().home; */
-  /*       }, */
-  /*     }, */
-  /*   ); */
-  /* } */
+  createRouter() {
+    return new Router(
+      [
+        {
+          name: AppRoute.Main,
+          component: async () => {
+            const { Home } = await import('./components/main/Home');
+            const home = new Home();
+            home.render();
+            return home.elem;
+          },
+        },
+        {
+          name: AppRoute.Cart,
+          component: async () => {
+            const { Cart } = await import('./components/cart/Cart');
+            const cartPage = new Cart();
+            cartPage.render();
+            return cartPage.elem;
+          },
+        },
+      ],
+      (route) => {
+        if (route) {
+          route.component().then((component) => {
+            this.element.innerHTML = '';
+            this.addChildren(component);
+          });
+        }
+      },
+      {
+        name: AppRoute.Default,
+        component: async () => {
+          const { Home } = await import('./components/main/Home');
+          const home = new Home();
+          home.render();
+          return home.elem;
+        },
+      },
+    );
+  }
 }

@@ -1,5 +1,5 @@
 export const enum AppRoute {
-  Default = 'cart',
+  Default = 'default',
   Main = 'main',
   Cart = 'cart',
   NotFound = 'notFound',
