@@ -73,8 +73,9 @@ export class ProductCard extends BaseComponent {
     this.link = new BaseComponent({
       tag: 'a',
       className: 'proposals__list-item-link',
-      attrName: 'href',
-      attrValue: '#',
+      attributes: {
+        href: '#',
+      },
     });
 
     this.dots = new BaseComponent({
@@ -147,8 +148,9 @@ export class ProductCard extends BaseComponent {
       tag: 'a',
       className: 'proposals__list-item-title-link',
       textContent: 'iPhone 13',
-      attrName: 'href',
-      attrValue: '#',
+      attributes: {
+        href: '#',
+      },
     });
 
     this.category = new BaseComponent({
@@ -159,8 +161,9 @@ export class ProductCard extends BaseComponent {
       tag: 'a',
       className: 'proposals__list-item-category-link',
       textContent: 'телефон',
-      attrName: 'href',
-      attrValue: '#',
+      attributes: {
+        href: '#',
+      },
     });
 
     this.price = new BaseComponent({
@@ -171,8 +174,9 @@ export class ProductCard extends BaseComponent {
       tag: 'a',
       className: 'proposals__list-item-price-link',
       textContent: '549',
-      attrName: 'href',
-      attrValue: '#',
+      attributes: {
+        href: '#',
+      },
     });
     this.priceSpan = new BaseComponent({
       tag: 'span',
@@ -196,10 +200,10 @@ export class ProductCard extends BaseComponent {
     this.count = new BaseComponent({
       tag: 'input',
       className: 'proposals__list-item-count',
-      attrName: 'type',
-      attrValue: 'number',
-      // attrName: 'value',
-      // attrValue:'1'
+      attributes: {
+        type: 'name',
+        value: '1',
+      },
     });
     this.counterInc = new BaseComponent({
       tag: 'span',

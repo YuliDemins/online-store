@@ -4,7 +4,7 @@ import { Header } from './components/header/header';
 import { BaseComponent } from './services/BaseComponent';
 import { Footer } from './components/footer/footer';
 import { Preloader } from './components/preloader/preloader';
-import Home from './components/main/Home';
+import { Home } from './components/main/Home';
 
 export class App extends BaseComponent {
   constructor() {
