@@ -42,10 +42,9 @@ export class Header extends BaseComponent {
     this.mainSearchInput = new BaseComponent({
       tag: 'input',
       className: 'main-search__input',
-      attrName: 'type',
-      attrValue: 'text',
-      // attrName: 'placeholder',
-      // attrValue: 'Поиск по товарам',
+      attributes: {
+        type: 'text',
+      },
     });
 
     this.mainSearchBtn = new BaseComponent({

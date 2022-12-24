@@ -5,19 +5,17 @@ export class BaseComponent {
 
   private _children: BaseComponent[] = [];
 
-  constructor({ tag = 'div', className = '', textContent = '',
-  // attrName, attrValue = '' 
-  attr
-}: IBaseComponent) {
+  constructor({ tag = 'div', className = '', textContent = '', attrName, attrValue = '' }: IBaseComponent) {
     this.element = document.createElement(tag);
-    this.element.className = className;
+    if (Array.isArray(className)) {
+      this.element.classList.add(...className);
+    } else {
+      this.element.className = className;
+    }
     this.element.textContent = textContent;
-    // if (attrName) {
-    //   this.elem.setAttribute(attrName, attrValue);
-    // }
-    if (attr) {
-			Object.assign(this.elem, attr);
-		}
+    if (attrName) {
+      this.elem.setAttribute(attrName, attrValue);
+    }
   }
 
   get elem() {

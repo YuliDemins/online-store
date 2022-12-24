@@ -7,9 +7,9 @@ export interface Route {
 
 export interface IBaseComponent {
   tag?: keyof HTMLElementTagNameMap;
-  className?: string;
+  className?: string | string[];
   textContent?: string;
-  // attrName?: string;
-  // attrValue?: string;
-  attr?: any;
+  attributes?: {
+    [key: string]: string;
+  };
 }
