@@ -1,9 +1,8 @@
-// import { createElement } from '@/utils';
 import { BaseComponent } from '@/services/BaseComponent';
 import { Filters } from '../filters/filters';
 import { ProductList } from '../products/productList';
 
-export default class Home extends BaseComponent {
+export class Home extends BaseComponent {
   wrapper: BaseComponent;
 
   list: ProductList;
@@ -20,6 +19,7 @@ export default class Home extends BaseComponent {
       tag: 'div',
       className: 'wrapper',
     });
+
     this.filters = new Filters();
     this.filters.render();
 
@@ -29,6 +29,7 @@ export default class Home extends BaseComponent {
 
   render() {
     this.wrapper.addChildren(this.filters.elem, this.list.elem);
+
     this.addChildren(this.wrapper.elem);
     console.log(this.filters);
   }
