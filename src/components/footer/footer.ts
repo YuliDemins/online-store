@@ -35,20 +35,18 @@ export class Footer extends BaseComponent {
       tag: 'a',
       className: 'footer__contacts1',
       textContent: '@YuliDemins',
-      attrName: 'href',
-      attrValue: 'https://github.com/YuliDemins',
-      // attrName: 'target',
-      // attrValue: '_blanc',
+      attributes: {
+        href: 'https://github.com/YuliDemins',
+      },
     });
 
     this.footerContacts2 = new BaseComponent({
       tag: 'a',
       className: 'footer__contacts2',
       textContent: '@SlikeDollar',
-      attrName: 'href',
-      attrValue: 'https://github.com/SlikeDollar',
-      // attrName: 'target',
-      // attrValue: '_blanc',
+      attributes: {
+        href: 'https://github.com/SlikeDollar',
+      },
     });
 
     this.footerCopyright = new BaseComponent({
@@ -66,10 +64,9 @@ export class Footer extends BaseComponent {
       tag: 'a',
       className: 'footer__copyright2',
       textContent: 'RsSchool',
-      attrName: 'href',
-      attrValue: 'https://rs.school/js/',
-      // attrName: 'target',
-      // attrValue: '_blanc',
+      attributes: {
+        href: 'https://rs.school/js/',
+      },
     });
   }
 
