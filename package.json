@@ -9,6 +9,7 @@
     "build": "npx webpack --mode production --config webpack.config.js",
     "dev": "npx webpack --mode development --config webpack.config.js",
     "start": "npx webpack serve --mode development",
+    "start8080": "npx webpack serve --mode development --port 8080",
     "deploy": "gh-pages -d dist -m 'Deploying to gh-pages'",
     "clean": "rm -rf dist cache",
     "lint-fix": "npx eslint --ext js,jsx,ts,tsx ./src --fix"
