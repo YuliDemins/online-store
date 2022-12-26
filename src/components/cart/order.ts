@@ -75,10 +75,6 @@ export class Order extends BaseComponent {
       tag: 'div',
       className: 'order__counter',
     });
-    // this.orderCounter = new BaseComponent({
-    //   tag: 'div',
-    //   className: 'buy_order-counter',
-    // });
     this.orderCounterDec = new BaseComponent({
       tag: 'span',
       className: 'order__counter-dec',

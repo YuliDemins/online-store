@@ -1,5 +1,6 @@
 import { BaseComponent } from '@/services/BaseComponent';
 import { Order } from './order';
+import { Total } from './total';
 
 export class Cart extends BaseComponent {
   item1;
@@ -13,6 +14,8 @@ export class Cart extends BaseComponent {
   shopping: BaseComponent;
 
   item2;
+
+  total: Total;
 
   constructor() {
     super({
@@ -47,11 +50,14 @@ export class Cart extends BaseComponent {
 
     this.item2 = new Order();
     this.item2.render();
+
+    this.total = new Total();
+    this.total.render();
   }
 
   render() {
     this.shopping.addChildren(this.item1, this.item2);
-    this.wrapper.addChildren(this.shopping.elem);
+    this.wrapper.addChildren(this.shopping.elem, this.total);
     this.addChildren(this.prev.elem, this.title.elem, this.wrapper.elem);
   }
 }

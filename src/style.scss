@@ -19,6 +19,7 @@ $dark_color:rgb(0, 0, 0);
 @import './components/products/slider.scss';
 @import "./components/cart/cart.scss";
 @import "./components/cart/order.scss";
+@import "./components/cart/total.scss";
 
 #root {
   max-width: 1440px;
