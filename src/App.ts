@@ -1,6 +1,5 @@
 import { AppRoute } from './enums/routes';
 import { Router } from './services/Router';
-import { Header } from './components/header/header';
 import { BaseComponent } from './services/BaseComponent';
 import { Footer } from './components/footer/footer';
 import { Preloader } from './components/preloader/preloader';
@@ -16,7 +15,7 @@ export class App extends BaseComponent {
   start() {
     const root = document.getElementById('root');
 
-    const preloader:Preloader = new Preloader();
+    const preloader: Preloader = new Preloader();
     preloader.render();
 
     const header: Header = new Header();
@@ -27,7 +26,9 @@ export class App extends BaseComponent {
 
     if (root) {
       this.createRouter();
-      root.append(preloader.elem, header.elem, this.elem, footer.elem);
+      window.location.hash = '#main';
+      
+      root.append(preloader.elem, header.elem, home.elem, this.elem, footer.elem);
       preloader.hide();
       setTimeout(() => preloader.destroy(), 1100);
     }
@@ -64,12 +65,12 @@ export class App extends BaseComponent {
         }
       },
       {
-        name: AppRoute.Default,
+        name: AppRoute.NotFound,
         component: async () => {
-          const { Home } = await import('./components/main/Home');
-          const home = new Home();
-          home.render();
-          return home.elem;
+          const { NotFound } = await import('./components/notFound/notFound');
+          const notFoundPage = new NotFound();
+          notFoundPage.render();
+          return notFoundPage.elem;
         },
       },
     );
