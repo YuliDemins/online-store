@@ -1,9 +1,10 @@
 import { BaseComponent } from '@/services/BaseComponent';
+import { Slider } from './slider';
 
 export class ProductCard extends BaseComponent {
   image;
 
-  link;
+  // link;
 
   dots;
 
@@ -59,24 +60,29 @@ export class ProductCard extends BaseComponent {
 
   btnCardPlus;
 
+  slider: Slider;
+
   constructor() {
     super({
       tag: 'div',
       className: 'proposals__list-item',
     });
 
+    this.slider = new Slider();
+    this.slider.render();
+
     this.image = new BaseComponent({
       tag: 'div',
       className: 'proposals__list-item-image',
     });
 
-    this.link = new BaseComponent({
-      tag: 'a',
-      className: 'proposals__list-item-link',
-      attributes: {
-        href: '#',
-      },
-    });
+    // this.link = new BaseComponent({
+    //   tag: 'a',
+    //   className: 'proposals__list-item-link',
+    //   attributes: {
+    //     href: '#',
+    //   },
+    // });
 
     this.dots = new BaseComponent({
       tag: 'div',
@@ -217,7 +223,7 @@ export class ProductCard extends BaseComponent {
   }
 
   render() {
-    this.link.addChildren(this.image);
+    this.image.addChildren(this.slider);
     this.order.addChildren(this.counter, this.btnCardPlus);
     this.counter.addChildren(this.counterDec, this.count, this.counterInc);
     this.priceLink.addChildren(this.priceSpan);
@@ -230,7 +236,7 @@ export class ProductCard extends BaseComponent {
     this.dots.addChildren(this.dot1.elem, this.dot2.elem, this.dot3.elem);
     // this.image.addChildren(this.img);
     this.addChildren(
-      this.link.elem,
+      this.image.elem,
       this.dots.elem,
       this.info.elem,
       this.title.elem,
@@ -238,5 +244,6 @@ export class ProductCard extends BaseComponent {
       this.price.elem,
       this.order.elem,
     );
+    console.log(this.slider);
   }
 }

@@ -44,6 +44,7 @@ export class Header extends BaseComponent {
       className: 'main-search__input',
       attributes: {
         type: 'text',
+        placeholder: 'Поиск по товарам',
       },
     });
 

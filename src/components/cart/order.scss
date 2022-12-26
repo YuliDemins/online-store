@@ -1,0 +1,97 @@
+.order {
+  display: flex;
+  align-items: center;
+  border: 1px solid $dim_color;
+  padding: 20px;
+
+  &__number {
+    width: 20px;
+    height: 20px;
+    flex: 0 1 3%;
+    text-align: center;
+    }
+
+    &__image {
+      background: url(../../assets/img/iphone13.jpg) center/cover no-repeat;
+      aspect-ratio: 1/1.33;
+      flex: 0 1 10%;
+    }
+    &__info {
+      display: flex;
+      flex: 0 1 27%;
+      flex-direction: column;
+      margin-left: 15px;
+
+      &-title{
+        margin-bottom: 15px;
+        font-size: 28px;
+        color: $dark_color;
+      }
+      &-desc {
+        /* border: 1px solid green */
+
+        &:hover {
+          color: $main_color;
+        }
+      }
+    }
+    &__instock {
+      flex: 0 1 20%;
+      text-align: center;
+    }
+
+    .order__counter{
+      display: flex;
+      align-items: center;
+      flex: 0 1 20%;
+      text-align: center;
+
+      &-dec,
+      &-inc {
+        font-size: 25px;
+        cursor: pointer;
+      }
+
+      &-number {
+        margin: 0 15px;
+        max-width: 50px;
+        font-size: 20px;
+        border: none;
+        border-bottom: 1px solid $text_color;
+        text-align: center;
+      }
+    }
+    &__price {
+      flex: 0 1 10%;
+      text-align: center;
+      font-size: 28px;
+      color: $dark_color;
+
+      & span {
+        color: $additional_color;
+      }
+    }
+
+&-delete {
+  flex: 0 1 10%;
+  background: url(../../assets/svg/trash-can.svg) center no-repeat;
+  width: 29px;
+  height: 29px;
+}   
+
+}
+
+
+
+
+
+
+
+
+
+// .buy__order-counter {
+//   /* margin-right: 20px; */
+//   /* flex: 0 1 30%; */
+//   display: flex;
+// }
+

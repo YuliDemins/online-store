@@ -10,10 +10,11 @@ box-shadow: 0px 2px 8px 1px rgba(128, 129, 150, 0.21); */
 
 &-image {
   margin: 0 auto;
-  background: url(../../assets/img/iphone13.jpg) center/cover no-repeat;
-    width: 200px;
-  height: auto;
-  aspect-ratio: 1/1.33;
+  // background: url(../../assets/img/iphone13.jpg) center/cover no-repeat;
+  width: 200px;
+  height: 250px;
+  min-width: 0;
+  // aspect-ratio: 1/1.33;
 }
 
 &-dots {
