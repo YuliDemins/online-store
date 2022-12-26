@@ -17,6 +17,10 @@ export class Header extends BaseComponent {
 
   private cartShoppingTitle;
 
+  cartValue: BaseComponent;
+
+  cartValueInner: BaseComponent;
+
   constructor() {
     super({
       tag: 'header',
@@ -44,6 +48,7 @@ export class Header extends BaseComponent {
       className: 'main-search__input',
       attributes: {
         type: 'text',
+        placeholder: 'Поиск по товарам',
       },
     });
 
@@ -70,9 +75,21 @@ export class Header extends BaseComponent {
         href: '#cart',
       },
     });
+
+    this.cartValue = new BaseComponent({
+      tag: 'div',
+      className: 'cart__value',
+    });
+
+    this.cartValueInner = new BaseComponent({
+      tag: 'div',
+      textContent: '2',
+    });
   }
 
   render() {
+    this.cartValue.addChildren(this.cartValueInner);
+    this.cartShopping.addChildren(this.cartValue.elem);
     this.cart.addChildren(this.cartShopping.elem, this.cartShoppingTitle.elem);
     this.mainSearch.addChildren(this.mainSearchInput.elem, this.mainSearchBtn.elem);
     this.wrapper.addChildren(this.title.elem, this.mainSearch.elem, this.cart.elem);

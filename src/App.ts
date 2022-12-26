@@ -1,9 +1,9 @@
 import { AppRoute } from './enums/routes';
 import { Router } from './services/Router';
 import { BaseComponent } from './services/BaseComponent';
+import { Header } from './components/header/header';
 import { Footer } from './components/footer/footer';
 import { Preloader } from './components/preloader/preloader';
-import { Header } from './components/header/header';
 
 export class App extends BaseComponent {
   constructor() {
@@ -18,12 +18,11 @@ export class App extends BaseComponent {
 
     const preloader: Preloader = new Preloader();
     preloader.render();
-    // preloader.hide();
 
     const header: Header = new Header();
     header.render();
 
-    const footer: Footer = new Footer();
+    const footer:Footer = new Footer();
     footer.render();
 
     if (root) {

@@ -1,0 +1,48 @@
+.total {
+  flex: 0 1 30%;
+  background: $dim_color;
+  color: $text_color;
+  padding: 30px;
+  border-bottom: 1px solid $white_color;
+
+  &__title {
+    margin-bottom: 12px;
+    font-size: 26px;
+  }
+
+  &__count {
+    font-size: 18px;
+    margin-bottom: 12px;
+  }
+
+  &__input {
+    background: $dim_color;
+    width: 50%;
+    height: 50px;
+    border: none;
+    border-bottom: 1px solid $text_color;
+    outline: none;
+    margin-bottom: 18px;
+
+    &::placeholder {
+      font-size: 18px;
+    }
+  }
+  
+&__price {
+  font-size: 26px;
+  color: $dark_color;
+  margin-bottom: 18px;
+}
+
+&__btn {
+  background: $main_color;
+  border-radius: 10px;
+  display: block;
+  padding: 15px 0px;
+  width: 100%;
+  color: $white_color;
+  font-size: 18px;
+}
+}
+
