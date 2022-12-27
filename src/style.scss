@@ -4,29 +4,27 @@ $additional_color: rgb(128, 129, 150);
 $dim_color: rgb(245, 245, 246);
 $white_color: rgb(255, 255, 255);
 $filter_color: rgb(204, 204, 204);
-$dark_color:rgb(0, 0, 0);
-
-@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@600&display=swap');
+$dark_color: rgb(0, 0, 0);
 
 @import '~normalize.css';
 @import './components/header/header.scss';
-@import "./components/footer/footer.scss";
-@import "./components/main/Home.scss";
-@import "./components/preloader/preloader.scss";
-@import "./components/products/productCard.scss";
-@import "./components/products/productList.scss";
-@import "./components/filters/filters.scss";
-@import './components/products/slider.scss';
-@import "./components/cart/cart.scss";
-@import "./components/cart/order.scss";
-@import "./components/cart/total.scss";
+@import './components/footer/footer.scss';
+@import './components/main/Home.scss';
+@import './components/preloader/preloader.scss';
+@import './components/products/productCard.scss';
+@import './components/products/productList.scss';
+@import './components/filters/filters.scss';
+@import './components/slider/slider.scss';
+@import './components/cart/cart.scss';
+@import './components/cart/order.scss';
+@import './components/cart/total.scss';
 
 #root {
   max-width: 1440px;
   margin: 0px auto 0;
   display: flex;
   flex-direction: column;
-  font-family: "Inter", sans-serif;
+  font-family: 'Inter', sans-serif;
   font-size: 16px;
   font-weight: 26px;
   color: $text_color;

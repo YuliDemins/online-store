@@ -1,18 +1,10 @@
 import { BaseComponent } from '@/services/BaseComponent';
-import { Slider } from './slider';
+import { SliderItem } from '../slider/sliderItem';
 
 export class ProductCard extends BaseComponent {
   image;
 
   // link;
-
-  dots;
-
-  dot1;
-
-  dot2;
-
-  dot3;
 
   info;
 
@@ -60,15 +52,15 @@ export class ProductCard extends BaseComponent {
 
   btnCardPlus;
 
-  slider: Slider;
+  slider;
 
-  constructor() {
+  constructor(id:string) {
     super({
       tag: 'div',
       className: 'proposals__list-item',
     });
 
-    this.slider = new Slider();
+    this.slider = new SliderItem(id);
     this.slider.render();
 
     this.image = new BaseComponent({
@@ -83,24 +75,6 @@ export class ProductCard extends BaseComponent {
     //     href: '#',
     //   },
     // });
-
-    this.dots = new BaseComponent({
-      tag: 'div',
-      className: 'proposals__list-item-dots',
-    });
-
-    this.dot1 = new BaseComponent({
-      tag: 'div',
-      className: 'proposals__list-item-dot',
-    });
-    this.dot2 = new BaseComponent({
-      tag: 'div',
-      className: 'proposals__list-item-dot',
-    });
-    this.dot3 = new BaseComponent({
-      tag: 'div',
-      className: 'proposals__list-item-dot',
-    });
 
     this.info = new BaseComponent({
       tag: 'div',
@@ -233,17 +207,13 @@ export class ProductCard extends BaseComponent {
     this.infoStock.addChildren(this.infoStock1, this.infoStock2, this.infoStock3, this.infoStock4, this.infoStock5);
     this.rating.addChildren(this.ratingStars, this.ratingCount);
     this.info.addChildren(this.rating, this.infoStock);
-    this.dots.addChildren(this.dot1.elem, this.dot2.elem, this.dot3.elem);
-    // this.image.addChildren(this.img);
     this.addChildren(
       this.image.elem,
-      this.dots.elem,
       this.info.elem,
       this.title.elem,
       this.category.elem,
       this.price.elem,
       this.order.elem,
     );
-    console.log(this.slider);
   }
 }

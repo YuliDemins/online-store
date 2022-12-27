@@ -21,7 +21,6 @@
     "resolveJsonModule": true,
     "isolatedModules": false,
     "noFallthroughCasesInSwitch": true,
-    "allowJs": true,
     "checkJs": true,
     "plugins": [
       {

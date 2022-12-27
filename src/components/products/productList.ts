@@ -21,18 +21,22 @@ export class ProductList extends BaseComponent {
       className: 'proposals__list',
     });
 
-    this.product1 = new ProductCard();
+    this.product1 = new ProductCard('first');
     this.product1.render();
 
-    this.product2 = new ProductCard();
+    this.product2 = new ProductCard('second');
     this.product2.render();
 
-    this.product3 = new ProductCard();
+    this.product3 = new ProductCard('third');
     this.product3.render();
   }
 
   render() {
-    this.listItem.addChildren(this.product1, this.product2, this.product3);
+    this.listItem.addChildren(
+      this.product1,
+      this.product2,
+      this.product3,
+    );
     this.addChildren(this.listItem);
   }
 }
