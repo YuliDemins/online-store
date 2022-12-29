@@ -1,30 +1,36 @@
+import { SliderSet } from '@/interfaces/sliderset';
+// import { BaseComponent } from '@/services/BaseComponent';
+
 export class Slider {
-  element: HTMLElement;
+  element;
 
-  sliderList: Element;
+  wrapper;
 
-  indicatorDots: Element;
+  sliderDots;
 
-  sliderElements: HTMLCollection;
+  sliderElements!: HTMLCollectionOf<HTMLElement>;
 
-  sliderElemFirst: HTMLElement;
+  sliderElemFirst;
 
-  options: HTMLElement;
+  options: SliderSet;
 
-  static defaults: HTMLElement;
+  elemCount!: number;
 
-  elemCount: number | undefined;
+  currentElement!: number;
 
-  currentElement: number | undefined;
+  indicatorDotsAll!: HTMLCollectionOf<HTMLElement>;
 
-  indicatorDotsAll: HTMLCollection | undefined;
+  static defaults: SliderSet;
 
   constructor(element: HTMLElement) {
     this.element = element;
-    [this.sliderList, this.indicatorDots] = this.element.children;
-    this.sliderElements = this.sliderList.children;
-    [this.sliderElemFirst] = this.sliderList.children;
-    console.log(this.indicatorDots);
+
+    [this.wrapper, this.sliderDots] = this.element.children as HTMLCollectionOf<HTMLElement>;
+    if (this.wrapper.children) {
+      this.sliderElements = this.wrapper.children as HTMLCollectionOf<HTMLElement>;
+      [this.sliderElemFirst] = this.wrapper.children;
+      // console.log(this.indicatorDots);
+    }
 
     // Initialization
     this.options = Slider.defaults;
@@ -39,26 +45,27 @@ export class Slider {
       item.options.dots = false;
     }
     if (item.elemCount >= 1) { // показать первый элемент
-      item.sliderElemFirst.style.opacity = '1';
+      if (item.sliderElemFirst instanceof HTMLElement) {
+        item.sliderElemFirst.style.opacity = '1';
+      }
     }
     if (item.options.dots) { // инициализация индикаторных точек
       let sum = '';
-      let numb;
+      let numb: number;
       for (let i = 0; i < item.elemCount; i++) {
         sum += '<span class="slider__dot"></span>';
       }
-      item.indicatorDots.innerHTML = sum;
-      item.indicatorDotsAll = item.indicatorDots.children;
-      for (let n = 0; n < item.elemCount; n++) {
-        item.indicatorDotsAll[n].addEventListener('click', () => {
-          if (typeof item.currentElement === 'number') {
-            numb = Math.abs(n - item.currentElement);
-            if (n < item.currentElement) {
-              item.elemPrev(numb);
-            } else if (n > item.currentElement) {
-              item.elemNext(numb);
-            }
+      item.sliderDots.innerHTML = sum;
+      item.indicatorDotsAll = item.sliderDots.children as HTMLCollectionOf<HTMLElement>;
+      for (let i = 0; i < item.elemCount; i++) {
+        item.indicatorDotsAll[i].addEventListener('click', () => {
+          numb = Math.abs(i - item.currentElement);
+          if (i < item.currentElement) {
+            item.elemPrev(numb);
+          } else if (i > item.currentElement) {
+            item.elemNext(numb);
           }
+          // }
         }, false);
       }
     }
@@ -103,18 +110,21 @@ export class Slider {
   }
 
   dotOn(num:number):void {
-    this.indicatorDotsAll[num].style.cssText = 'background-color:rgb(128, 129, 150); cursor:pointer;';
+    if (this.indicatorDotsAll && this.indicatorDotsAll[num] instanceof HTMLElement) {
+      this.indicatorDotsAll[num].style.cssText = 'background-color:rgb(128, 129, 150); cursor:pointer;';
+    }
   }
 
   dotOff(num:number):void {
-    this.indicatorDotsAll[num].style.cssText = 'background-color:rgb(102, 204, 51); cursor:default;';
+    if (this.indicatorDotsAll && this.indicatorDotsAll[num] instanceof HTMLElement) {
+      this.indicatorDotsAll[num].style.cssText = 'background-color:rgb(102, 204, 51); cursor:default;';
+    }
   }
 }
-
 Slider.defaults = {
   loop: true, // Бесконечное зацикливание слайдера
-  // auto: true, // Автоматическое пролистывание
-  // interval: 5000, // Интервал между пролистыванием элементов (мс)
-  // arrows: true, // Пролистывание стрелками
+  auto: false, // Автоматическое пролистывание
+  interval: 5000, // Интервал между пролистыванием элементов (мс)
+  arrows: false, // Пролистывание стрелками
   dots: true, // Индикаторные точки
 };
