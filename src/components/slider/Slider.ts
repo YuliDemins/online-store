@@ -1,6 +1,5 @@
 import { SliderSet } from '@/interfaces/sliderset';
-// import { BaseComponent } from '@/services/BaseComponent';
-
+import { BaseComponent } from '@/services/BaseComponent';
 export class Slider {
   element;
 
@@ -22,6 +21,8 @@ export class Slider {
 
   static defaults: SliderSet;
 
+  dotsItems: BaseComponent[] = [];
+
   constructor(element: HTMLElement) {
     this.element = element;
 
@@ -29,7 +30,6 @@ export class Slider {
     if (this.wrapper.children) {
       this.sliderElements = this.wrapper.children as HTMLCollectionOf<HTMLElement>;
       [this.sliderElemFirst] = this.wrapper.children;
-      // console.log(this.indicatorDots);
     }
 
     // Initialization
@@ -55,7 +55,19 @@ export class Slider {
       for (let i = 0; i < item.elemCount; i++) {
         sum += '<span class="slider__dot"></span>';
       }
+      // item.dotsItems = [];
+      // for (let i = 0; i < item.elemCount; i++) {
+      //   const elem = new BaseComponent({
+      //     tag: 'span',
+      //     className: 'slider__dot',
+      //   });
+      //   item.dotsItems.push(elem);
+      // }
+
+      // console.log(item.dotsItems);
+      // item.sliderDots.addChildren(...item.dotsItems);
       item.sliderDots.innerHTML = sum;
+
       item.indicatorDotsAll = item.sliderDots.children as HTMLCollectionOf<HTMLElement>;
       for (let i = 0; i < item.elemCount; i++) {
         item.indicatorDotsAll[i].addEventListener('click', () => {

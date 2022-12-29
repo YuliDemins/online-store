@@ -6,7 +6,7 @@ export interface Route {
 }
 
 export interface IBaseComponent {
-  tag?: keyof HTMLElementTagNameMap;
+  tag: keyof HTMLElementTagNameMap;
   className?: string | string[];
   textContent?: string;
   attributes?: {
