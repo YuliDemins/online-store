@@ -4,5 +4,5 @@ export async function getProducts() {
     .then((json) => {
       console.log(json.products);
       return json.products;
-  });
+    });
 }

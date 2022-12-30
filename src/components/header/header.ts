@@ -65,6 +65,9 @@ export class Header extends BaseComponent {
     this.cartShopping = new BaseComponent({
       tag: 'a',
       className: 'cart__shopping',
+      attributes: {
+        href: '#cart',
+      },
     });
 
     this.cartShoppingTitle = new BaseComponent({

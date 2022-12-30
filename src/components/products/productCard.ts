@@ -1,18 +1,7 @@
 import { BaseComponent } from '@/services/BaseComponent';
-import { Slider } from './slider';
 
 export class ProductCard extends BaseComponent {
   image;
-
-  // link;
-
-  dots;
-
-  dot1;
-
-  dot2;
-
-  dot3;
 
   info;
 
@@ -52,7 +41,7 @@ export class ProductCard extends BaseComponent {
 
   btnCardPlus;
 
-  slider: Slider;
+  id: number;
 
   name: string;
 
@@ -64,20 +53,29 @@ export class ProductCard extends BaseComponent {
 
   thumbnail: string;
 
-  constructor(name: string, rating: number, price: number, category: string, thumbnail: string) {
+  images: string[];
+
+  constructor(
+    id: number,
+    name: string,
+    rating: number,
+    price: number,
+    category: string,
+    thumbnail: string,
+    images: string[],
+  ) {
     super({
       tag: 'div',
       className: 'proposals__list-item',
     });
 
+    this.id = id;
     this.name = name;
     this.thumbnail = thumbnail;
     this.category = category;
     this.price = price;
     this.rating = rating;
-
-    this.slider = new Slider();
-    this.slider.render();
+    this.images = images;
 
     this.image = new BaseComponent({
       tag: 'div',
@@ -85,32 +83,6 @@ export class ProductCard extends BaseComponent {
       attributes: {
         style: `background-image: url(${this.thumbnail}`,
       },
-    });
-
-    // this.link = new BaseComponent({
-    //   tag: 'a',
-    //   className: 'proposals__list-item-link',
-    //   attributes: {
-    //     href: '#',
-    //   },
-    // });
-
-    this.dots = new BaseComponent({
-      tag: 'div',
-      className: 'proposals__list-item-dots',
-    });
-
-    this.dot1 = new BaseComponent({
-      tag: 'div',
-      className: 'proposals__list-item-dot',
-    });
-    this.dot2 = new BaseComponent({
-      tag: 'div',
-      className: 'proposals__list-item-dot',
-    });
-    this.dot3 = new BaseComponent({
-      tag: 'div',
-      className: 'proposals__list-item-dot',
     });
 
     this.info = new BaseComponent({
@@ -228,7 +200,6 @@ export class ProductCard extends BaseComponent {
   }
 
   render() {
-    this.image.addChildren(this.slider);
     this.order.addChildren(this.counter, this.btnCardPlus);
     this.counter.addChildren(this.counterDec, this.count, this.counterInc);
     this.priceLink.addChildren(this.priceSpan);
@@ -238,17 +209,13 @@ export class ProductCard extends BaseComponent {
     this.infoStock.addChildren(...this.infoStockValues);
     this.ratingElem.addChildren(this.ratingStars, this.ratingCount);
     this.info.addChildren(this.ratingElem, this.infoStock);
-    this.dots.addChildren(this.dot1.elem, this.dot2.elem, this.dot3.elem);
-    // this.image.addChildren(this.img);
     this.addChildren(
       this.image.elem,
-      this.dots.elem,
       this.info.elem,
       this.title.elem,
       this.categoryElem.elem,
       this.priceElem.elem,
       this.order.elem,
     );
-    console.log(this.slider);
   }
 }

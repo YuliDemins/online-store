@@ -31,6 +31,5 @@ export class Home extends BaseComponent {
     this.wrapper.addChildren(this.filters.elem, this.list.elem);
 
     this.addChildren(this.wrapper.elem);
-    console.log(this.filters);
   }
 }

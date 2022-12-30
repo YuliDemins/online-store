@@ -21,11 +21,13 @@ export class ProductList extends BaseComponent {
     let productsElem = await this.getProducts();
     productsElem = productsElem.map((item: IProduct) => {
       const elem = new ProductCard(
+        item.id,
         item.title,
         item.rating,
         item.price,
         item.category,
         item.thumbnail,
+        item.images,
       );
       elem.render();
       return elem;
