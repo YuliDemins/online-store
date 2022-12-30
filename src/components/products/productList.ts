@@ -1,13 +1,8 @@
+import { IProduct } from '@/interfaces/product';
 import { BaseComponent } from '@/services/BaseComponent';
 import { ProductCard } from './productCard';
 
 export class ProductList extends BaseComponent {
-  product1: ProductCard;
-
-  product2: ProductCard;
-
-  product3: ProductCard;
-
   listItem: BaseComponent;
 
   constructor() {
@@ -20,23 +15,33 @@ export class ProductList extends BaseComponent {
       tag: 'div',
       className: 'proposals__list',
     });
-
-    this.product1 = new ProductCard('first');
-    this.product1.render();
-
-    this.product2 = new ProductCard('second');
-    this.product2.render();
-
-    this.product3 = new ProductCard('third');
-    this.product3.render();
   }
 
-  render() {
-    this.listItem.addChildren(
-      this.product1,
-      this.product2,
-      this.product3,
-    );
+  async render() {
+    let productsElem = await this.getProducts();
+    productsElem = productsElem.map((item: IProduct) => {
+      const elem = new ProductCard(
+        item.id,
+        item.title,
+        item.rating,
+        item.price,
+        item.category,
+        item.thumbnail,
+        item.images,
+      );
+      elem.render();
+      return elem;
+    });
+
+    this.listItem.addChildren(...productsElem);
     this.addChildren(this.listItem);
+  }
+
+  async getProducts() {
+    const promise = await fetch('https://dummyjson.com/products')
+      .then((res) => res.json())
+      .then((json) => json.products);
+
+    return promise;
   }
 }

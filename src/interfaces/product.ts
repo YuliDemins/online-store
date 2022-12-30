@@ -1,13 +1,13 @@
-export interface Product {
-  id: string,
+export interface IProduct {
+  id: number,
   title: string,
-  brand: string,
-  category: string,
   description: string,
-  discountPercentage: string,
-  price: string,
-  rating: string,
-  stock: string,
+  price: number,
+  discountPercentage: number,
+  rating: number,
+  stock: number,
+  brand: string,
+  category: string;
   thumbnail: string,
-  images:string[],
+  images: string[],
 }

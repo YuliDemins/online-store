@@ -24,9 +24,12 @@ export class Cart extends BaseComponent {
     });
 
     this.prev = new BaseComponent({
-      tag: 'div',
+      tag: 'a',
       className: 'prev',
       textContent: 'Вернуться к покупкам',
+      attributes: {
+        href: '#main',
+      },
     });
 
     this.title = new BaseComponent({

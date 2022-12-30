@@ -21,22 +21,25 @@
     left: 0;
     top: 0;
     display: block;
-    max-width: 100%;
+    width: 100%;
     height: 100%;
     aspect-ratio: 1/1;
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
 
 
-    &:nth-child(1){
-      background: url(../../assets/img/iphone13.jpg) center/contain no-repeat;
-      }
+    // &:nth-child(1){
+    //   background: url(../../assets/img/iphone13.jpg) center/contain no-repeat;
+    //   }
 
-    &:nth-child(2){
-      background: url(../../assets/img/1829240_v02_b.webp) center/contain no-repeat;
-      }
+    // &:nth-child(2){
+    //   background: url(../../assets/img/1829240_v02_b.webp) center/contain no-repeat;
+    //   }
 
-    &:nth-child(3){
-        background: url(../../assets/img/1829240_v03_b.webp) center/contain no-repeat;
-      }
+    // &:nth-child(3){
+    //     background: url(../../assets/img/1829240_v03_b.webp) center/contain no-repeat;
+    //   }
   }
 
   &__dots {

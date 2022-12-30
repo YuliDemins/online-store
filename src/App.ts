@@ -22,7 +22,7 @@ export class App extends BaseComponent {
     const header: Header = new Header();
     header.render();
 
-    const footer:Footer = new Footer();
+    const footer: Footer = new Footer();
     footer.render();
 
     if (root) {

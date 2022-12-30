@@ -1,5 +1,6 @@
 import { SliderSet } from '@/interfaces/sliderset';
 import { BaseComponent } from '@/services/BaseComponent';
+
 export class Slider {
   element;
 
@@ -133,10 +134,12 @@ export class Slider {
     }
   }
 }
+
 Slider.defaults = {
   loop: true, // Бесконечное зацикливание слайдера
   auto: false, // Автоматическое пролистывание
   interval: 5000, // Интервал между пролистыванием элементов (мс)
   arrows: false, // Пролистывание стрелками
   dots: true, // Индикаторные точки
+
 };
