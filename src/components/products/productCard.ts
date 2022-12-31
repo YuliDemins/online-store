@@ -1,3 +1,4 @@
+import { app } from '@/index';
 import { IProduct } from '@/interfaces/product';
 import { BaseComponent } from '@/services/BaseComponent';
 import { ProductCardOrder } from './productCardOrder';
@@ -218,6 +219,7 @@ export class ProductCard extends BaseComponent {
   storeCard() {
     const arr = JSON.parse(window.localStorage.getItem('productsList') ?? '[]');
     arr.push(this.productData);
+    app.header.Cart.updateCartNum();
     window.localStorage.setItem('productsList', JSON.stringify(arr));
   }
 }

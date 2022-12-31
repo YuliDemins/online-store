@@ -1,4 +1,5 @@
 import { BaseComponent } from '@/services/BaseComponent';
+import { HeaderCart } from './HeaderCart';
 
 export class Header extends BaseComponent {
   private wrapper;
@@ -11,15 +12,7 @@ export class Header extends BaseComponent {
 
   private mainSearchInput;
 
-  private cart;
-
-  private cartShopping;
-
-  private cartShoppingTitle;
-
-  cartValue: BaseComponent;
-
-  cartValueInner: BaseComponent;
+  public Cart: HeaderCart;
 
   constructor() {
     super({
@@ -57,45 +50,13 @@ export class Header extends BaseComponent {
       className: 'main-search__btn',
     });
 
-    this.cart = new BaseComponent({
-      tag: 'div',
-      className: 'cart',
-    });
-
-    this.cartShopping = new BaseComponent({
-      tag: 'a',
-      className: 'cart__shopping',
-      attributes: {
-        href: '#cart',
-      },
-    });
-
-    this.cartShoppingTitle = new BaseComponent({
-      tag: 'a',
-      className: 'cart__title',
-      textContent: 'Корзина',
-      attributes: {
-        href: '#cart',
-      },
-    });
-
-    this.cartValue = new BaseComponent({
-      tag: 'div',
-      className: 'cart__value',
-    });
-
-    this.cartValueInner = new BaseComponent({
-      tag: 'div',
-      textContent: '2',
-    });
+    this.Cart = new HeaderCart();
+    this.Cart.render();
   }
 
   render() {
-    this.cartValue.addChildren(this.cartValueInner);
-    this.cartShopping.addChildren(this.cartValue.elem);
-    this.cart.addChildren(this.cartShopping.elem, this.cartShoppingTitle.elem);
     this.mainSearch.addChildren(this.mainSearchInput.elem, this.mainSearchBtn.elem);
-    this.wrapper.addChildren(this.title.elem, this.mainSearch.elem, this.cart.elem);
+    this.wrapper.addChildren(this.title.elem, this.mainSearch.elem, this.Cart.elem);
     this.addChildren(this.wrapper.elem);
   }
 }

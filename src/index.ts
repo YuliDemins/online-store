@@ -2,5 +2,5 @@ import './style.scss';
 
 import { App } from './App';
 
-const app = new App();
+export const app = new App();
 app.start();
