@@ -6,7 +6,7 @@ export class ProductCardOrder extends BaseComponent {
 
   private Counter: ProductCardCounter;
 
-  constructor() {
+  constructor(limit: number) {
     super({
       tag: 'div',
       className: 'proposals__list-item-order',
@@ -17,11 +17,15 @@ export class ProductCardOrder extends BaseComponent {
       className: 'proposals__list-item-card',
     });
 
-    this.Counter = new ProductCardCounter();
+    this.Counter = new ProductCardCounter(limit);
     this.Counter.render();
   }
 
   render() {
     this.addChildren(this.Counter, this.btnCardPlus);
+  }
+
+  addProduct(callback: () => void) {
+    this.btnCardPlus.elem.addEventListener('click', callback);
   }
 }

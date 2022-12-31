@@ -1,3 +1,4 @@
+import { IProduct } from '@/interfaces/product';
 import { BaseComponent } from '@/services/BaseComponent';
 import { ProductCardOrder } from './productCardOrder';
 
@@ -46,6 +47,16 @@ export class ProductCard extends BaseComponent {
 
   images: string[];
 
+  stock: number;
+
+  brand: string;
+
+  description: string;
+
+  discountPercentage: number;
+
+  productData: IProduct;
+
   constructor(
     id: number,
     name: string,
@@ -54,6 +65,10 @@ export class ProductCard extends BaseComponent {
     category: string,
     thumbnail: string,
     images: string[],
+    stock: number,
+    brand: string,
+    description: string,
+    discountPercentage: number,
   ) {
     super({
       tag: 'div',
@@ -67,6 +82,24 @@ export class ProductCard extends BaseComponent {
     this.price = price;
     this.rating = rating;
     this.images = images;
+    this.stock = stock;
+    this.brand = brand;
+    this.description = description;
+    this.discountPercentage = discountPercentage;
+
+    this.productData = {
+      id: this.id,
+      title: this.name,
+      rating: this.rating,
+      price: this.price,
+      category: this.category,
+      thumbnail: this.thumbnail,
+      images: this.images,
+      stock: this.stock,
+      brand: this.brand,
+      description: this.description,
+      discountPercentage: this.discountPercentage,
+    };
 
     this.image = new BaseComponent({
       tag: 'div',
@@ -159,8 +192,9 @@ export class ProductCard extends BaseComponent {
       textContent: '$',
     });
 
-    this.Order = new ProductCardOrder();
+    this.Order = new ProductCardOrder(this.stock);
     this.Order.render();
+    this.Order.addProduct(this.storeCard.bind(this));
   }
 
   render() {
@@ -179,5 +213,11 @@ export class ProductCard extends BaseComponent {
       this.priceElem.elem,
       this.Order,
     );
+  }
+
+  storeCard() {
+    const arr = JSON.parse(window.localStorage.getItem('productsList') ?? '[]');
+    arr.push(this.productData);
+    window.localStorage.setItem('productsList', JSON.stringify(arr));
   }
 }

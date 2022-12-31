@@ -28,6 +28,10 @@ export class ProductList extends BaseComponent {
         item.category,
         item.thumbnail,
         item.images,
+        item.stock,
+        item.brand,
+        item.description,
+        item.discountPercentage,
       );
       elem.render();
       return elem;

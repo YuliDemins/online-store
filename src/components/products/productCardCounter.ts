@@ -7,7 +7,7 @@ export class ProductCardCounter extends BaseComponent {
 
   private counterInc;
 
-  constructor() {
+  constructor(limit: number) {
     super({
       tag: 'div',
       className: 'proposals__list-item-counter',
@@ -25,6 +25,8 @@ export class ProductCardCounter extends BaseComponent {
       attributes: {
         type: 'name',
         value: '1',
+        readonly: 'readonly',
+        style: 'outline: none',
       },
     });
 
@@ -33,14 +35,14 @@ export class ProductCardCounter extends BaseComponent {
       className: 'proposals__list-item-inc',
       textContent: '+',
     });
-    this.changeCountValue();
+    this.changeCountValue(limit);
   }
 
   render() {
     this.addChildren(this.counterDec, this.count, this.counterInc);
   }
 
-  changeCountValue() {
+  changeCountValue(limit: number) {
     this.counterDec.elem.addEventListener('click', () => {
       if (this.count.elem instanceof HTMLInputElement && +this.count.elem.value > 1) {
         this.count.elem.value = `${+this.count.elem.value - 1}`;
@@ -48,7 +50,7 @@ export class ProductCardCounter extends BaseComponent {
     });
 
     this.counterInc.elem.addEventListener('click', () => {
-      if (this.count.elem instanceof HTMLInputElement) {
+      if (this.count.elem instanceof HTMLInputElement && +this.count.elem.value < limit) {
         this.count.elem.value = `${+this.count.elem.value + 1}`;
       }
     });
