@@ -1,4 +1,5 @@
 import { BaseComponent } from '@/services/BaseComponent';
+import { ProductCardOrder } from './productCardOrder';
 
 export class ProductCard extends BaseComponent {
   image;
@@ -29,17 +30,7 @@ export class ProductCard extends BaseComponent {
 
   priceSpan;
 
-  counter;
-
-  counterDec;
-
-  count;
-
-  counterInc;
-
-  order;
-
-  btnCardPlus;
+  Order: ProductCardOrder;
 
   id: number;
 
@@ -153,6 +144,7 @@ export class ProductCard extends BaseComponent {
       tag: 'div',
       className: 'proposals__list-item-price',
     });
+
     this.priceLink = new BaseComponent({
       tag: 'a',
       className: 'proposals__list-item-price-link',
@@ -167,41 +159,11 @@ export class ProductCard extends BaseComponent {
       textContent: '$',
     });
 
-    this.order = new BaseComponent({
-      tag: 'div',
-      className: 'proposals__list-item-order',
-    });
-    this.counter = new BaseComponent({
-      tag: 'div',
-      className: 'proposals__list-item-counter',
-    });
-    this.counterDec = new BaseComponent({
-      tag: 'span',
-      className: 'proposals__list-item-dec',
-      textContent: '-',
-    });
-    this.count = new BaseComponent({
-      tag: 'input',
-      className: 'proposals__list-item-count',
-      attributes: {
-        type: 'name',
-        value: '1',
-      },
-    });
-    this.counterInc = new BaseComponent({
-      tag: 'span',
-      className: 'proposals__list-item-inc',
-      textContent: '+',
-    });
-    this.btnCardPlus = new BaseComponent({
-      tag: 'button',
-      className: 'proposals__list-item-card',
-    });
+    this.Order = new ProductCardOrder();
+    this.Order.render();
   }
 
   render() {
-    this.order.addChildren(this.counter, this.btnCardPlus);
-    this.counter.addChildren(this.counterDec, this.count, this.counterInc);
     this.priceLink.addChildren(this.priceSpan);
     this.priceElem.addChildren(this.priceLink);
     this.categoryElem.addChildren(this.categoryLink);
@@ -215,7 +177,7 @@ export class ProductCard extends BaseComponent {
       this.title.elem,
       this.categoryElem.elem,
       this.priceElem.elem,
-      this.order.elem,
+      this.Order,
     );
   }
 }
