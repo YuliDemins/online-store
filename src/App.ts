@@ -6,11 +6,15 @@ import { Footer } from './components/footer/footer';
 import { Preloader } from './components/preloader/preloader';
 
 export class App extends BaseComponent {
+  header: Header;
+
   constructor() {
     super({
       tag: 'main',
       className: 'main',
     });
+
+    this.header = new Header();
   }
 
   start() {
@@ -19,8 +23,7 @@ export class App extends BaseComponent {
     const preloader: Preloader = new Preloader();
     preloader.render();
 
-    const header: Header = new Header();
-    header.render();
+    this.header.render();
 
     const footer: Footer = new Footer();
     footer.render();
@@ -29,7 +32,7 @@ export class App extends BaseComponent {
       this.createRouter();
       window.location.hash = '#main';
 
-      root.append(preloader.elem, header.elem, this.elem, footer.elem);
+      root.append(preloader.elem, this.header.elem, this.elem, footer.elem);
       preloader.hide();
       setTimeout(() => preloader.destroy(), 1100);
     }

@@ -1,4 +1,7 @@
+import { app } from '@/index';
+import { IProduct, IProductData } from '@/interfaces/product';
 import { BaseComponent } from '@/services/BaseComponent';
+import { ProductCardOrder } from './productCardOrder';
 
 export class ProductCard extends BaseComponent {
   image;
@@ -29,17 +32,7 @@ export class ProductCard extends BaseComponent {
 
   priceSpan;
 
-  counter;
-
-  counterDec;
-
-  count;
-
-  counterInc;
-
-  order;
-
-  btnCardPlus;
+  Order: ProductCardOrder;
 
   id: number;
 
@@ -55,6 +48,16 @@ export class ProductCard extends BaseComponent {
 
   images: string[];
 
+  stock: number;
+
+  brand: string;
+
+  description: string;
+
+  discountPercentage: number;
+
+  productData: IProductData;
+
   constructor(
     id: number,
     name: string,
@@ -63,6 +66,10 @@ export class ProductCard extends BaseComponent {
     category: string,
     thumbnail: string,
     images: string[],
+    stock: number,
+    brand: string,
+    description: string,
+    discountPercentage: number,
   ) {
     super({
       tag: 'div',
@@ -76,6 +83,10 @@ export class ProductCard extends BaseComponent {
     this.price = price;
     this.rating = rating;
     this.images = images;
+    this.stock = stock;
+    this.brand = brand;
+    this.description = description;
+    this.discountPercentage = discountPercentage;
 
     this.image = new BaseComponent({
       tag: 'div',
@@ -153,6 +164,7 @@ export class ProductCard extends BaseComponent {
       tag: 'div',
       className: 'proposals__list-item-price',
     });
+
     this.priceLink = new BaseComponent({
       tag: 'a',
       className: 'proposals__list-item-price-link',
@@ -167,41 +179,27 @@ export class ProductCard extends BaseComponent {
       textContent: '$',
     });
 
-    this.order = new BaseComponent({
-      tag: 'div',
-      className: 'proposals__list-item-order',
-    });
-    this.counter = new BaseComponent({
-      tag: 'div',
-      className: 'proposals__list-item-counter',
-    });
-    this.counterDec = new BaseComponent({
-      tag: 'span',
-      className: 'proposals__list-item-dec',
-      textContent: '-',
-    });
-    this.count = new BaseComponent({
-      tag: 'input',
-      className: 'proposals__list-item-count',
-      attributes: {
-        type: 'name',
-        value: '1',
-      },
-    });
-    this.counterInc = new BaseComponent({
-      tag: 'span',
-      className: 'proposals__list-item-inc',
-      textContent: '+',
-    });
-    this.btnCardPlus = new BaseComponent({
-      tag: 'button',
-      className: 'proposals__list-item-card',
-    });
+    this.Order = new ProductCardOrder(this.stock);
+    this.Order.render();
+    this.Order.addProduct(this.storeCard.bind(this));
+
+    this.productData = {
+      id: this.id,
+      title: this.name,
+      rating: this.rating,
+      price: this.price,
+      category: this.category,
+      thumbnail: this.thumbnail,
+      images: this.images,
+      stock: this.stock,
+      brand: this.brand,
+      description: this.description,
+      discountPercentage: this.discountPercentage,
+      amount: 1,
+    };
   }
 
   render() {
-    this.order.addChildren(this.counter, this.btnCardPlus);
-    this.counter.addChildren(this.counterDec, this.count, this.counterInc);
     this.priceLink.addChildren(this.priceSpan);
     this.priceElem.addChildren(this.priceLink);
     this.categoryElem.addChildren(this.categoryLink);
@@ -215,7 +213,26 @@ export class ProductCard extends BaseComponent {
       this.title.elem,
       this.categoryElem.elem,
       this.priceElem.elem,
-      this.order.elem,
+      this.Order,
     );
+  }
+
+  storeCard() {
+    const arr = JSON.parse(window.localStorage.getItem('productsList') ?? '[]');
+    const findIndex = arr.findIndex((obj: IProduct) => obj.id === this.productData.id);
+
+    if (this.Order.Counter.count.elem instanceof HTMLInputElement) {
+      const val = this.Order.Counter.count.elem.getAttribute('value');
+      if (val) this.productData.amount = +val;
+    }
+
+    if (findIndex !== -1) {
+      arr[findIndex].amount += this.productData.amount;
+    } else {
+      arr.push(this.productData);
+    }
+
+    window.localStorage.setItem('productsList', JSON.stringify(arr));
+    app.header.Cart.updateCartNum();
   }
 }

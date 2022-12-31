@@ -1,10 +1,9 @@
+import { IProductData } from '@/interfaces/product';
 import { BaseComponent } from '@/services/BaseComponent';
 import { Order } from './order';
 import { Total } from './total';
 
 export class Cart extends BaseComponent {
-  item1;
-
   title;
 
   prev: BaseComponent;
@@ -13,7 +12,7 @@ export class Cart extends BaseComponent {
 
   shopping: BaseComponent;
 
-  item2;
+  orders: Order[];
 
   total: Total;
 
@@ -48,18 +47,19 @@ export class Cart extends BaseComponent {
       className: 'shopping',
     });
 
-    this.item1 = new Order();
-    this.item1.render();
-
-    this.item2 = new Order();
-    this.item2.render();
+    this.orders = JSON.parse(window.localStorage.getItem('productsList') ?? '[]').map((item: IProductData) => {
+      const elem = new Order(item.title, item.thumbnail, item.description, item.stock, item.price, item.amount);
+      elem.render();
+      return elem;
+    });
+    console.log(this.orders);
 
     this.total = new Total();
     this.total.render();
   }
 
   render() {
-    this.shopping.addChildren(this.item1, this.item2);
+    this.shopping.addChildren(...this.orders);
     this.wrapper.addChildren(this.shopping.elem, this.total);
     this.addChildren(this.prev.elem, this.title.elem, this.wrapper.elem);
   }

@@ -12,7 +12,8 @@
     }
 
     &__image {
-      background: url(../../assets/img/iphone13.jpg) center/cover no-repeat;
+      background-image: url(../../assets/img/iphone13.jpg) center/cover no-repeat;
+      background-size: cover;
       aspect-ratio: 1/1.33;
       flex: 0 1 10%;
     }
@@ -76,7 +77,7 @@
   background: url(../../assets/svg/trash-can.svg) center no-repeat;
   width: 29px;
   height: 29px;
-}   
+}
 
 }
 

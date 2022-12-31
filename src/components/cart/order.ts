@@ -29,7 +29,7 @@ export class Order extends BaseComponent {
 
   private orderDelete;
 
-  constructor() {
+  constructor(title: string, thumbnail: string, description: string, stock: number, price: number, amount: number) {
     super({
       tag: 'div',
       className: 'order',
@@ -40,9 +40,13 @@ export class Order extends BaseComponent {
       className: 'order__number',
       textContent: '1',
     });
+
     this.image = new BaseComponent({
       tag: 'div',
       className: 'order__image',
+      attributes: {
+        style: `background-image: url(${thumbnail})`,
+      },
     });
 
     this.info = new BaseComponent({
@@ -53,42 +57,48 @@ export class Order extends BaseComponent {
     this.title = new BaseComponent({
       tag: 'div',
       className: 'order__info-title',
-      textContent: 'iPhone 13',
+      textContent: `${title}`,
     });
 
     this.desc = new BaseComponent({
       tag: 'div',
       className: 'order__info-desc',
-      textContent: 'Дополнительная информация...',
+      textContent: `${description}`,
     });
+
     this.inStock = new BaseComponent({
       tag: 'div',
       className: 'order__instock',
       textContent: 'В наличии ',
     });
+
     this.inStockSpan = new BaseComponent({
       tag: 'span',
       className: 'order__instock-span',
-      textContent: '3',
+      textContent: `${stock}`,
     });
+
     this.orderCounter = new BaseComponent({
       tag: 'div',
       className: 'order__counter',
     });
+
     this.orderCounterDec = new BaseComponent({
       tag: 'span',
       className: 'order__counter-dec',
       textContent: '-',
     });
+
     this.orderCounterNumber = new BaseComponent({
       tag: 'input',
       className: 'order__counter-number',
       textContent: '-',
       attributes: {
         type: 'number',
-        value: '1',
+        value: `${amount}`,
       },
     });
+
     this.orderCounterInc = new BaseComponent({
       tag: 'span',
       className: 'order__counter-inc',
@@ -98,13 +108,15 @@ export class Order extends BaseComponent {
     this.orderPrice = new BaseComponent({
       tag: 'div',
       className: 'order__price',
-      textContent: '549',
+      textContent: `${price}`,
     });
+
     this.orderPriceSpan = new BaseComponent({
       tag: 'span',
       className: 'order__price-span',
       textContent: '$',
     });
+
     this.orderDelete = new BaseComponent({
       tag: 'div',
       className: 'order__delete',
