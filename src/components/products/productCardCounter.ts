@@ -1,7 +1,7 @@
 import { BaseComponent } from '@/services/BaseComponent';
 
 export class ProductCardCounter extends BaseComponent {
-  private count;
+  public count;
 
   private counterDec;
 
@@ -45,13 +45,13 @@ export class ProductCardCounter extends BaseComponent {
   changeCountValue(limit: number) {
     this.counterDec.elem.addEventListener('click', () => {
       if (this.count.elem instanceof HTMLInputElement && +this.count.elem.value > 1) {
-        this.count.elem.value = `${+this.count.elem.value - 1}`;
+        this.count.elem.setAttribute('value', `${+this.count.elem.value - 1}`);
       }
     });
 
     this.counterInc.elem.addEventListener('click', () => {
       if (this.count.elem instanceof HTMLInputElement && +this.count.elem.value < limit) {
-        this.count.elem.value = `${+this.count.elem.value + 1}`;
+        this.count.elem.setAttribute('value', `${+this.count.elem.value + 1}`);
       }
     });
   }

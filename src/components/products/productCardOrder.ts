@@ -4,7 +4,7 @@ import { ProductCardCounter } from './productCardCounter';
 export class ProductCardOrder extends BaseComponent {
   private btnCardPlus;
 
-  private Counter: ProductCardCounter;
+  public Counter: ProductCardCounter;
 
   constructor(limit: number) {
     super({

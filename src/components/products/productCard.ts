@@ -1,5 +1,5 @@
 import { app } from '@/index';
-import { IProduct } from '@/interfaces/product';
+import { IProduct, IProductData } from '@/interfaces/product';
 import { BaseComponent } from '@/services/BaseComponent';
 import { ProductCardOrder } from './productCardOrder';
 
@@ -56,7 +56,7 @@ export class ProductCard extends BaseComponent {
 
   discountPercentage: number;
 
-  productData: IProduct;
+  productData: IProductData;
 
   constructor(
     id: number,
@@ -87,20 +87,6 @@ export class ProductCard extends BaseComponent {
     this.brand = brand;
     this.description = description;
     this.discountPercentage = discountPercentage;
-
-    this.productData = {
-      id: this.id,
-      title: this.name,
-      rating: this.rating,
-      price: this.price,
-      category: this.category,
-      thumbnail: this.thumbnail,
-      images: this.images,
-      stock: this.stock,
-      brand: this.brand,
-      description: this.description,
-      discountPercentage: this.discountPercentage,
-    };
 
     this.image = new BaseComponent({
       tag: 'div',
@@ -196,6 +182,21 @@ export class ProductCard extends BaseComponent {
     this.Order = new ProductCardOrder(this.stock);
     this.Order.render();
     this.Order.addProduct(this.storeCard.bind(this));
+
+    this.productData = {
+      id: this.id,
+      title: this.name,
+      rating: this.rating,
+      price: this.price,
+      category: this.category,
+      thumbnail: this.thumbnail,
+      images: this.images,
+      stock: this.stock,
+      brand: this.brand,
+      description: this.description,
+      discountPercentage: this.discountPercentage,
+      amount: 1,
+    };
   }
 
   render() {
@@ -218,8 +219,20 @@ export class ProductCard extends BaseComponent {
 
   storeCard() {
     const arr = JSON.parse(window.localStorage.getItem('productsList') ?? '[]');
-    arr.push(this.productData);
-    app.header.Cart.updateCartNum();
+    const findIndex = arr.findIndex((obj: IProduct) => obj.id === this.productData.id);
+
+    if (this.Order.Counter.count.elem instanceof HTMLInputElement) {
+      const val = this.Order.Counter.count.elem.getAttribute('value');
+      if (val) this.productData.amount = +val;
+    }
+
+    if (findIndex !== -1) {
+      arr[findIndex].amount += this.productData.amount;
+    } else {
+      arr.push(this.productData);
+    }
+
     window.localStorage.setItem('productsList', JSON.stringify(arr));
+    app.header.Cart.updateCartNum();
   }
 }
