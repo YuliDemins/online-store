@@ -2,52 +2,42 @@ import { IProduct } from '@/interfaces/product';
 import { BaseComponent } from '@/services/BaseComponent';
 import { ProductCard } from '../products/productCard';
 
-export class FiltersItem extends BaseComponent {
-  span: BaseComponent;
+export class HeaderInput extends BaseComponent {
+  mainSearchInput: BaseComponent;
 
-  input:BaseComponent;
+  mainSearchBtn: BaseComponent;
 
-  constructor(elem: string) {
+  constructor() {
     super({
-      tag: 'label',
-      className: 'filter-category-form',
-      textContent: elem,
+      tag: 'form',
+      className: 'main-search',
     });
-
-    this.input = new BaseComponent({
+    this.mainSearchInput = new BaseComponent({
       tag: 'input',
-      className: 'filter-category-input',
+      className: 'main-search__input',
       attributes: {
-        type: 'checkbox',
-        // target: '_blank',
-        name: 'brand',
-        value: elem,
+        type: 'text',
+        placeholder: 'Поиск по товарам',
       },
     });
 
-    this.span = new BaseComponent({
-      tag: 'span',
-      className: 'filter-category-span',
+    this.mainSearchBtn = new BaseComponent({
+      tag: 'button',
+      className: 'main-search__btn',
     });
-
     this.checkBtn();
   }
 
   render() {
-    this.addChildren(this.input.elem, this.span.elem);
+    this.addChildren(this.mainSearchInput.elem, this.mainSearchBtn.elem);
   }
 
   checkBtn() {
-    this.input.elem.addEventListener('click', () => {
-      // console.log(this.input.elem.value);
-      if (this.input.elem instanceof HTMLInputElement) {
-        if (this.input.elem.hasAttribute('checked')) {
-          this.input.elem.removeAttribute('checked');
-          this.show();
-        } else {
-          this.input.elem.setAttribute('checked', 'true');
-          this.show(this.input.elem.value);
-        }
+    this.mainSearchBtn.elem.addEventListener('click', (e) => {
+      e.preventDefault();
+      if (this.mainSearchInput.elem instanceof HTMLInputElement) {
+        console.log(this.mainSearchInput.elem.value);
+        this.show();
       }
     });
   }
@@ -60,17 +50,24 @@ export class FiltersItem extends BaseComponent {
     return promise;
   }
 
-  async show(target = '') {
+  async show() {
     const productsElem = await this.getProducts();
     const productsFilterElem:ProductCard[] = [];
-    productsElem.map((item: ProductCard) => {
-      if (item.category === target || item.brand === target) {
-        productsFilterElem.push(item);
+    const copy = [...productsElem];
+    copy.map((item: ProductCard) => {
+      const arr = Object.values(item).map((el) => {
+        delete el.images;
+        delete el.thumbnail;
+        return el.toString().toLowerCase();
+      });
+
+      if (this.mainSearchInput.elem instanceof HTMLInputElement) {
+        if (arr.includes(this.mainSearchInput.elem.value)) {
+          productsFilterElem.push(item);
+        }
       }
-      if (target === '') productsFilterElem.push(item);
       return productsFilterElem;
     });
-
     const newRender = document.querySelector<HTMLElement>('.proposals__list');
     newRender!.innerHTML = '';
     console.log(productsFilterElem);

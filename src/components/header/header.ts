@@ -1,5 +1,6 @@
 import { BaseComponent } from '@/services/BaseComponent';
 import { HeaderCart } from './HeaderCart';
+import { HeaderInput } from './headerInput';
 
 export class Header extends BaseComponent {
   private wrapper;
@@ -13,6 +14,8 @@ export class Header extends BaseComponent {
   private mainSearchInput;
 
   public Cart: HeaderCart;
+
+  input: HeaderInput;
 
   constructor() {
     super({
@@ -31,32 +34,35 @@ export class Header extends BaseComponent {
       textContent: 'Store',
     });
 
-    this.mainSearch = new BaseComponent({
-      tag: 'form',
-      className: 'main-search',
-    });
+    // this.mainSearch = new BaseComponent({
+    //   tag: 'form',
+    //   className: 'main-search',
+    // });
 
-    this.mainSearchInput = new BaseComponent({
-      tag: 'input',
-      className: 'main-search__input',
-      attributes: {
-        type: 'text',
-        placeholder: 'Поиск по товарам',
-      },
-    });
+    // this.mainSearchInput = new BaseComponent({
+    //   tag: 'input',
+    //   className: 'main-search__input',
+    //   attributes: {
+    //     type: 'text',
+    //     placeholder: 'Поиск по товарам',
+    //   },
+    // });
 
-    this.mainSearchBtn = new BaseComponent({
-      tag: 'button',
-      className: 'main-search__btn',
-    });
+    // this.mainSearchBtn = new BaseComponent({
+    //   tag: 'button',
+    //   className: 'main-search__btn',
+    // });
+
+    this.input = new HeaderInput();
+    this.input.render();
 
     this.Cart = new HeaderCart();
     this.Cart.render();
   }
 
   render() {
-    this.mainSearch.addChildren(this.mainSearchInput.elem, this.mainSearchBtn.elem);
-    this.wrapper.addChildren(this.title.elem, this.mainSearch.elem, this.Cart.elem);
+    // this.mainSearch.addChildren(this.mainSearchInput.elem, this.mainSearchBtn.elem);
+    this.wrapper.addChildren(this.title.elem, this.input.elem, this.Cart.elem);
     this.addChildren(this.wrapper.elem);
   }
 }

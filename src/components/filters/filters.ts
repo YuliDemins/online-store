@@ -1,6 +1,7 @@
-import { IProduct } from '@/interfaces/product';
+// import { IProduct } from '@/interfaces/product';
 import { BaseComponent } from '@/services/BaseComponent';
 import { ProductCard } from '../products/productCard';
+// import { ProductList } from '../products/productList';
 import { FiltersItem } from './filterItem';
 
 export class Filters extends BaseComponent {
@@ -41,7 +42,7 @@ export class Filters extends BaseComponent {
     this.title1 = new BaseComponent({
       tag: 'h3',
       className: 'filter-category-item-title',
-      textContent: 'Категория',
+      textContent: 'Category',
     });
 
     this.categoryItem2 = new BaseComponent({
@@ -52,7 +53,7 @@ export class Filters extends BaseComponent {
     this.title2 = new BaseComponent({
       tag: 'h3',
       className: 'filter-category-item-title',
-      textContent: 'Бренд',
+      textContent: 'Brand',
     });
   }
 
@@ -89,7 +90,7 @@ export class Filters extends BaseComponent {
       acc[item] = (acc[item] || 0) + 1;
       return acc;
     }, {});
-    console.log(some);
+    // console.log(some);
     return some;
   }
 
@@ -101,21 +102,35 @@ export class Filters extends BaseComponent {
     return promise;
   }
 
-  async show() {
-    let productsElem = await this.getProducts();
-    productsElem = productsElem.map((item: IProduct) => {
-      const elem = new ProductCard(
-        item.id,
-        item.title,
-        item.rating,
-        item.price,
-        item.category,
-        item.thumbnail,
-        item.images,
-      );
-      elem.render();
-      return elem;
-    });
-    console.log(productsElem);
-  }
+  // async show() {
+  //   const productsElem = await this.getProducts();
+  //   const productsFilterElem:IProduct[] = [];
+  //   productsElem.map((item: IProduct) => {
+  //     if (item.category === 'smartphones') {
+  //       productsFilterElem.push(item);
+  //       return item;
+  //     }
+  //   });
+
+  //   productsFilterElem.map((item) => {
+  //     const elem = new ProductCard(
+  //       item.id,
+  //       item.title,
+  //       item.rating,
+  //       item.price,
+  //       item.category,
+  //       item.thumbnail,
+  //       item.images,
+  //       item.stock,
+  //       item.brand,
+  //       item.description,
+  //       item.discountPercentage,
+  //     );
+  //     elem.render();
+  //     return elem;
+  //   });
+  //   console.log(productsFilterElem);
+  //   console.log(new ProductList().listItem);
+  //   new ProductList().listItem.addChildren(...productsElem);
+  // }
 }
