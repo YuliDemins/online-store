@@ -3,9 +3,9 @@ import { BaseComponent } from '@/services/BaseComponent';
 export class ProductCardCounter extends BaseComponent {
   public count;
 
-  private counterDec;
+  public counterDec;
 
-  private counterInc;
+  public counterInc;
 
   constructor(limit: number) {
     super({
@@ -35,6 +35,7 @@ export class ProductCardCounter extends BaseComponent {
       className: 'proposals__list-item-inc',
       textContent: '+',
     });
+
     this.changeCountValue(limit);
   }
 

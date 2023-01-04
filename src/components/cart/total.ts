@@ -1,11 +1,4 @@
-// <div class="total">
-//   <div class="total-title">В корзине</div>
-//   <div class="total-count">2 <span>товара</span></div>
-//   <input class="total-input" type="text" placeholder="Ввести промокод">
-//   <div class="total-price">1249 <span>$</span></div>
-
-//   <button class="total-btn">Перейти к оформлению</button>
-// </div>
+import { IProductData } from '@/interfaces/product';
 import { BaseComponent } from '@/services/BaseComponent';
 
 export class Total extends BaseComponent {
@@ -13,13 +6,9 @@ export class Total extends BaseComponent {
 
   totalCount: BaseComponent;
 
-  totalCountSpan: BaseComponent;
-
   totalInput: BaseComponent;
 
   totalPrice: BaseComponent;
-
-  totalPriceSpan: BaseComponent;
 
   totalBtn: BaseComponent;
 
@@ -38,14 +27,9 @@ export class Total extends BaseComponent {
     this.totalCount = new BaseComponent({
       tag: 'div',
       className: 'total__count',
-      textContent: '2',
+      textContent: `${this.calcTotalAmount(JSON.parse(window.localStorage.getItem('productsList') ?? '[]'))} items`,
     });
 
-    this.totalCountSpan = new BaseComponent({
-      tag: 'span',
-      className: 'total__count-span',
-      textContent: 'товара',
-    });
     this.totalInput = new BaseComponent({
       tag: 'input',
       className: 'total__input',
@@ -58,13 +42,7 @@ export class Total extends BaseComponent {
     this.totalPrice = new BaseComponent({
       tag: 'div',
       className: 'total__price',
-      textContent: '1249',
-    });
-
-    this.totalPriceSpan = new BaseComponent({
-      tag: 'span',
-      className: 'total__price-span',
-      textContent: '$',
+      textContent: `${this.calcTotalPrice(JSON.parse(window.localStorage.getItem('productsList') ?? '[]'))}$`,
     });
 
     this.totalBtn = new BaseComponent({
@@ -75,8 +53,6 @@ export class Total extends BaseComponent {
   }
 
   render() {
-    this.totalPrice.addChildren(this.totalPriceSpan);
-    this.totalCount.addChildren(this.totalCountSpan.elem);
     this.addChildren(
       this.title.elem,
       this.totalCount.elem,
@@ -84,5 +60,13 @@ export class Total extends BaseComponent {
       this.totalPrice.elem,
       this.totalBtn.elem,
     );
+  }
+
+  calcTotalPrice(arr: IProductData[]) {
+    return arr.reduce((p, k) => +p + (+k.price * +k.amount), 0);
+  }
+
+  calcTotalAmount(arr: IProductData[]) {
+    return arr.reduce((p, k) => +p + (+k.amount), 0);
   }
 }

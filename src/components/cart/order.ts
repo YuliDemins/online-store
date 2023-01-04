@@ -1,4 +1,6 @@
+import { IProduct } from '@/interfaces/product';
 import { BaseComponent } from '@/services/BaseComponent';
+import { OrderCounter } from './orderCounter';
 
 export class Order extends BaseComponent {
   private number;
@@ -13,10 +15,6 @@ export class Order extends BaseComponent {
 
   private orderCounter;
 
-  private orderCounterDec;
-
-  private orderCounterInc;
-
   private orderPrice;
 
   private orderPriceSpan;
@@ -25,15 +23,32 @@ export class Order extends BaseComponent {
 
   private inStockSpan;
 
-  private orderCounterNumber;
-
   private orderDelete;
 
-  constructor(title: string, thumbnail: string, description: string, stock: number, price: number, amount: number) {
+  id;
+
+  price;
+
+  amount;
+
+  constructor(
+    title: string,
+    thumbnail: string,
+    description: string,
+    stock: number,
+    price: number,
+    amount: number,
+    id: number,
+    callback: () => void,
+  ) {
     super({
       tag: 'div',
       className: 'order',
     });
+
+    this.id = id;
+    this.price = price;
+    this.amount = amount;
 
     this.number = new BaseComponent({
       tag: 'div',
@@ -78,37 +93,20 @@ export class Order extends BaseComponent {
       textContent: `${stock}`,
     });
 
-    this.orderCounter = new BaseComponent({
-      tag: 'div',
-      className: 'order__counter',
-    });
+    this.orderCounter = new OrderCounter(stock);
 
-    this.orderCounterDec = new BaseComponent({
-      tag: 'span',
-      className: 'order__counter-dec',
-      textContent: '-',
-    });
+    if (this.orderCounter.count.elem instanceof HTMLInputElement) {
+      this.orderCounter.count.elem.setAttribute('value', `${amount}`);
+    }
 
-    this.orderCounterNumber = new BaseComponent({
-      tag: 'input',
-      className: 'order__counter-number',
-      textContent: '-',
-      attributes: {
-        type: 'number',
-        value: `${amount}`,
-      },
-    });
-
-    this.orderCounterInc = new BaseComponent({
-      tag: 'span',
-      className: 'order__counter-inc',
-      textContent: '+',
-    });
+    this.orderCounter.render();
+    this.orderCounter.onCountChange(this.updateOrder.bind(this));
+    this.orderCounter.onCountChange(callback);
 
     this.orderPrice = new BaseComponent({
       tag: 'div',
       className: 'order__price',
-      textContent: `${price}`,
+      textContent: `${price * amount}`,
     });
 
     this.orderPriceSpan = new BaseComponent({
@@ -125,7 +123,6 @@ export class Order extends BaseComponent {
 
   render() {
     this.orderPrice.addChildren(this.orderPriceSpan.elem);
-    this.orderCounter.addChildren(this.orderCounterDec.elem, this.orderCounterNumber.elem, this.orderCounterInc.elem);
     this.inStock.addChildren(this.inStockSpan);
     this.info.addChildren(this.title.elem, this.desc.elem);
     this.addChildren(
@@ -137,5 +134,15 @@ export class Order extends BaseComponent {
       this.orderPrice.elem,
       this.orderDelete.elem,
     );
+  }
+
+  updateOrder() {
+    const cards = JSON.parse(window.localStorage.getItem('productsList') ?? '[]');
+    const index = cards.findIndex((item: IProduct) => item.id === this.id);
+    const val = this.orderCounter.count.elem.getAttribute('value') ?? 0;
+    cards[index].amount = +val;
+    window.localStorage.setItem('productsList', JSON.stringify(cards));
+
+    this.orderPrice.elem.textContent = `${+(this.orderCounter.count.elem.getAttribute('value') ?? 1) * this.price}$`;
   }
 }

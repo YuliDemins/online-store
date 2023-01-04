@@ -1,3 +1,4 @@
+import { IProductData } from '@/interfaces/product';
 import { BaseComponent } from '@/services/BaseComponent';
 import { HeaderCart } from './HeaderCart';
 
@@ -13,6 +14,8 @@ export class Header extends BaseComponent {
   private mainSearchInput;
 
   public Cart: HeaderCart;
+
+  public totalSum;
 
   constructor() {
     super({
@@ -50,13 +53,30 @@ export class Header extends BaseComponent {
       className: 'main-search__btn',
     });
 
+    this.totalSum = new BaseComponent({
+      tag: 'div',
+      className: 'header__total-sum',
+      textContent: `${this.updateTotal()}$`,
+    });
+
     this.Cart = new HeaderCart();
     this.Cart.render();
   }
 
   render() {
     this.mainSearch.addChildren(this.mainSearchInput.elem, this.mainSearchBtn.elem);
-    this.wrapper.addChildren(this.title.elem, this.mainSearch.elem, this.Cart.elem);
+    this.wrapper.addChildren(this.title.elem, this.mainSearch.elem, this.totalSum.elem, this.Cart.elem);
     this.addChildren(this.wrapper.elem);
+  }
+
+  updateTotal() {
+    const arr = JSON.parse(window.localStorage.getItem('productsList') ?? '[]');
+    const value = arr.reduce((p: number, k: IProductData) => +p + (+k.price * +k.amount), 0);
+
+    if (this.totalSum) {
+      this.totalSum.elem.textContent = `${+value}$`;
+    }
+
+    return value;
   }
 }
