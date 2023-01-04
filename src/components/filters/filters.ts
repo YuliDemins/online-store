@@ -1,31 +1,13 @@
+// import { IProduct } from '@/interfaces/product';
 import { BaseComponent } from '@/services/BaseComponent';
+import { ProductCard } from '../products/productCard';
+// import { ProductList } from '../products/productList';
+import { FiltersItem } from './filterItem';
 
 export class Filters extends BaseComponent {
   categoryItem1;
 
   title1;
-
-  form1;
-
-  input1;
-
-  span1;
-
-  span12;
-
-  input12;
-
-  form12;
-
-  span11;
-
-  input11;
-
-  form11;
-
-  more1;
-
-  moreText1;
 
   filterCategory;
 
@@ -33,37 +15,19 @@ export class Filters extends BaseComponent {
 
   title2;
 
-  form2;
+  filterItem1!: BaseComponent | HTMLElement;
 
-  input2;
+  form!: BaseComponent;
 
-  span2;
+  input!: BaseComponent;
 
-  form21;
-
-  input21;
-
-  span21;
-
-  form22;
-
-  span22;
-
-  more2;
-
-  moreText2;
-
-  input22;
+  span!: BaseComponent;
 
   constructor() {
     super({
       tag: 'aside',
       className: 'filter',
     });
-
-    const brand:string[] = ['Apple', 'Samsung', 'OPPO', 'Huawei', 'Microsoft Surface', 'Infinix', 'HP Pavilion'];
-
-    const category = ['smartphones', 'laptops', 'fragrances', 'skincare', 'groceries', 'home-decoration'];
 
     this.filterCategory = new BaseComponent({
       tag: 'div',
@@ -77,84 +41,8 @@ export class Filters extends BaseComponent {
 
     this.title1 = new BaseComponent({
       tag: 'h3',
-      className: 'filter-category-item',
-      textContent: 'Бренд',
-    });
-
-    this.form1 = new BaseComponent({
-      tag: 'label',
-      className: 'filter-category-form',
-      textContent: brand[0],
-    });
-
-    this.input1 = new BaseComponent({
-      tag: 'input',
-      className: 'filter-category-input',
-      attributes: {
-        type: 'checkbox',
-        target: '_blank',
-        name: 'brand',
-        value: brand[0],
-      },
-    });
-
-    this.span1 = new BaseComponent({
-      tag: 'span',
-      className: 'filter-category-span',
-    });
-
-    this.form11 = new BaseComponent({
-      tag: 'label',
-      className: 'filter-category-form',
-      textContent: brand[1],
-    });
-
-    this.input11 = new BaseComponent({
-      tag: 'input',
-      className: 'filter-category-input',
-      attributes: {
-        type: 'checkbox',
-        target: '_blank',
-        name: 'brand',
-        value: brand[1],
-      },
-    });
-
-    this.span11 = new BaseComponent({
-      tag: 'span',
-      className: 'filter-category-span',
-    });
-
-    this.form12 = new BaseComponent({
-      tag: 'label',
-      className: 'filter-category-form',
-      textContent: brand[2],
-    });
-
-    this.input12 = new BaseComponent({
-      tag: 'input',
-      className: 'filter-category-input',
-      attributes: {
-        type: 'checkbox',
-        target: '_blank',
-        name: 'brand',
-        value: brand[2],
-      },
-    });
-
-    this.span12 = new BaseComponent({
-      tag: 'span',
-      className: 'filter-category-span',
-    });
-
-    this.more1 = new BaseComponent({
-      tag: 'div',
-      className: 'filter-category-more',
-    });
-    this.moreText1 = new BaseComponent({
-      tag: 'div',
-      className: 'filter-category-more-text',
-      textContent: 'Показать еще...',
+      className: 'filter-category-item-title',
+      textContent: 'Category',
     });
 
     this.categoryItem2 = new BaseComponent({
@@ -164,100 +52,85 @@ export class Filters extends BaseComponent {
 
     this.title2 = new BaseComponent({
       tag: 'h3',
-      className: 'filter-category-item',
-      textContent: 'Категория',
-    });
-
-    this.form2 = new BaseComponent({
-      tag: 'label',
-      className: 'filter-category-form',
-      textContent: category[0],
-    });
-
-    this.input2 = new BaseComponent({
-      tag: 'input',
-      className: 'filter-category-input',
-      attributes: {
-        type: 'checkbox',
-        target: '_blank',
-        name: 'brand',
-        value: brand[0],
-      },
-    });
-
-    this.span2 = new BaseComponent({
-      tag: 'span',
-      className: 'filter-category-span',
-    });
-
-    this.form21 = new BaseComponent({
-      tag: 'label',
-      className: 'filter-category-form',
-      textContent: category[1],
-    });
-
-    this.input21 = new BaseComponent({
-      tag: 'input',
-      className: 'filter-category-input',
-      attributes: {
-        type: 'checkbox',
-        target: '_blank',
-        name: 'brand',
-        value: brand[0],
-      },
-    });
-
-    this.span21 = new BaseComponent({
-      tag: 'span',
-      className: 'filter-category-span',
-    });
-
-    this.form22 = new BaseComponent({
-      tag: 'label',
-      className: 'filter-category-form',
-      textContent: category[2],
-    });
-
-    this.input22 = new BaseComponent({
-      tag: 'input',
-      className: 'filter-category-input',
-      attributes: {
-        type: 'checkbox',
-        target: '_blank',
-        name: 'brand',
-        value: brand[0],
-      },
-    });
-
-    this.span22 = new BaseComponent({
-      tag: 'span',
-      className: 'filter-category-span',
-    });
-
-    this.more2 = new BaseComponent({
-      tag: 'div',
-      className: 'filter-category-more',
-    });
-    this.moreText2 = new BaseComponent({
-      tag: 'div',
-      className: 'filter-category-more-text',
-      textContent: 'Показать еще...',
+      className: 'filter-category-item-title',
+      textContent: 'Brand',
     });
   }
 
   render() {
-    this.form22.addChildren(this.input22, this.span22);
-    this.form21.addChildren(this.input21, this.span21);
-    this.form2.addChildren(this.input2, this.span2);
-    this.categoryItem2.addChildren(this.title2, this.form2, this.form21, this.form22, this.more2);
-
-    this.more2.addChildren(this.moreText2);
-    this.more1.addChildren(this.moreText1);
-    this.form12.addChildren(this.input12, this.span12);
-    this.form11.addChildren(this.input11, this.span11);
-    this.form1.addChildren(this.input1, this.span1);
-    this.categoryItem1.addChildren(this.title1, this.form1, this.form11, this.form12, this.more1);
-    this.filterCategory.addChildren(this.categoryItem1, this.categoryItem2);
+    this.getFiltersView('category');
+    this.getFiltersView('brand');
+    this.categoryItem1.addChildren(this.title1);
+    this.categoryItem2.addChildren(this.title2);
+    this.filterCategory.addChildren(this.categoryItem1.elem, this.categoryItem2.elem);
     this.addChildren(this.filterCategory.elem);
   }
+
+  async getFiltersView(type: 'category' | 'brand') {
+    const productsElem = await this.getProducts();
+    // const a = this.getFilter(productsElem, 'category');
+    const forFilters = Object.keys(this.getFilter(productsElem, type));
+    const filtergo:BaseComponent[] = [];
+    forFilters.map((item) => {
+      const elem = new FiltersItem(item);
+      elem.render();
+      filtergo.push(elem);
+      return elem;
+    });
+    type === 'category' ? this.categoryItem1.addChildren(...filtergo) : this.categoryItem2.addChildren(...filtergo);
+  }
+
+  getFilter(arr: ProductCard[], type: 'category' | 'brand') {
+    const filterPart: string[] = [];
+    arr.map((item) => {
+      filterPart.push(item[type]);
+      return filterPart;
+    });
+    const some = filterPart.reduce((acc, item) => {
+      acc[item] = (acc[item] || 0) + 1;
+      return acc;
+    }, {});
+    // console.log(some);
+    return some;
+  }
+
+  async getProducts() {
+    const promise = await fetch('https://dummyjson.com/products')
+      .then((res) => res.json())
+      .then((json) => json.products);
+    // console.log(promise);
+    return promise;
+  }
+
+  // async show() {
+  //   const productsElem = await this.getProducts();
+  //   const productsFilterElem:IProduct[] = [];
+  //   productsElem.map((item: IProduct) => {
+  //     if (item.category === 'smartphones') {
+  //       productsFilterElem.push(item);
+  //       return item;
+  //     }
+  //   });
+
+  //   productsFilterElem.map((item) => {
+  //     const elem = new ProductCard(
+  //       item.id,
+  //       item.title,
+  //       item.rating,
+  //       item.price,
+  //       item.category,
+  //       item.thumbnail,
+  //       item.images,
+  //       item.stock,
+  //       item.brand,
+  //       item.description,
+  //       item.discountPercentage,
+  //     );
+  //     elem.render();
+  //     return elem;
+  //   });
+  //   console.log(productsFilterElem);
+  //   console.log(new ProductList().listItem);
+  //   new ProductList().listItem.addChildren(...productsElem);
+  // }
 }
