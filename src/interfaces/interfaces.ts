@@ -13,3 +13,9 @@ export interface IBaseComponent {
     [key: string]: string;
   };
 }
+
+export interface IPromo {
+  id: string,
+  descr: string,
+  disc: number,
+}

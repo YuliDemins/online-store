@@ -17,7 +17,7 @@
 
   &__input {
     background: $dim_color;
-    width: 50%;
+    width: 100%;
     height: 50px;
     border: none;
     border-bottom: 1px solid $text_color;
@@ -28,7 +28,7 @@
       font-size: 18px;
     }
   }
-  
+
 &__price {
   font-size: 26px;
   color: $dark_color;
@@ -46,3 +46,67 @@
 }
 }
 
+.promo__used {
+  border: 2px solid grey;
+  border-radius: 5px;
+  padding: 5px;
+
+  &-title {
+    font-size: 21px;
+  }
+}
+
+.promo__used-codes {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.promo__used-code {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  &-name {
+    font-size: 14px;
+  }
+
+  &-btn {
+    border: 1px solid grey;
+    padding: 3px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+}
+
+.promo__hint {
+  margin-bottom: 10px;
+
+  &-inner {
+    border: 2px solid grey;
+    padding: 6px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &-button {
+    border: 1px solid grey;
+    padding: 3px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  &-text {
+   font-size: 14px;
+  }
+}
+
+.promo__options {
+  margin-bottom: 10px;
+}
+
+.old-price {
+  text-decoration: line-through;
+}
