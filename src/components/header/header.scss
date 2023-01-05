@@ -8,6 +8,7 @@
     width: 100%;
     display: flex;
     justify-content: space-between;
+    align-items: center;
   }
 
   &__title {
@@ -91,7 +92,7 @@
     right: 0;
     width: 22px;
     height: 22px;
-  
+
     & div{
       color: $white_color;
       text-align: center;
@@ -108,5 +109,9 @@
       color: $main_color;
     }
   }
+}
+
+.header__total-sum {
+  font-size: 18px;
 }
 

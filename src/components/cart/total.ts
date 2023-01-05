@@ -1,33 +1,44 @@
-// <div class="total">
-//   <div class="total-title">В корзине</div>
-//   <div class="total-count">2 <span>товара</span></div>
-//   <input class="total-input" type="text" placeholder="Ввести промокод">
-//   <div class="total-price">1249 <span>$</span></div>
-
-//   <button class="total-btn">Перейти к оформлению</button>
-// </div>
+import { IPromo } from '@/interfaces/interfaces';
+import { IProductData } from '@/interfaces/product';
 import { BaseComponent } from '@/services/BaseComponent';
+import { promoState } from '@/states/promoState';
+import { Promo } from './promo';
+import { PromoUsedCode } from './promoUsedCode';
 
 export class Total extends BaseComponent {
   private title;
 
   totalCount: BaseComponent;
 
-  totalCountSpan: BaseComponent;
-
-  totalInput: BaseComponent;
-
   totalPrice: BaseComponent;
 
-  totalPriceSpan: BaseComponent;
+  totalPriceDiscount: BaseComponent;
 
   totalBtn: BaseComponent;
+
+  Promo: Promo;
 
   constructor() {
     super({
       tag: 'div',
       className: 'total',
     });
+
+    this.totalPrice = new BaseComponent({
+      tag: 'div',
+      className: 'total__price',
+      textContent: `${this.calcTotalPrice(JSON.parse(window.localStorage.getItem('productsList') ?? '[]'))}$`,
+    });
+
+    this.totalPriceDiscount = new BaseComponent({
+      tag: 'div',
+      className: 'total__price',
+      textContent: `${this.calcAmountWithPromo()}$`,
+    });
+
+    this.Promo = new Promo(this.update.bind(this), this.totalPrice, this.totalPriceDiscount);
+    this.Promo.render();
+    this.onPromoDelete();
 
     this.title = new BaseComponent({
       tag: 'div',
@@ -38,33 +49,7 @@ export class Total extends BaseComponent {
     this.totalCount = new BaseComponent({
       tag: 'div',
       className: 'total__count',
-      textContent: '2',
-    });
-
-    this.totalCountSpan = new BaseComponent({
-      tag: 'span',
-      className: 'total__count-span',
-      textContent: 'товара',
-    });
-    this.totalInput = new BaseComponent({
-      tag: 'input',
-      className: 'total__input',
-      attributes: {
-        type: 'text',
-        placeholder: 'Ввести промокод',
-      },
-    });
-
-    this.totalPrice = new BaseComponent({
-      tag: 'div',
-      className: 'total__price',
-      textContent: '1249',
-    });
-
-    this.totalPriceSpan = new BaseComponent({
-      tag: 'span',
-      className: 'total__price-span',
-      textContent: '$',
+      textContent: `${this.calcTotalAmount(JSON.parse(window.localStorage.getItem('productsList') ?? '[]'))} items`,
     });
 
     this.totalBtn = new BaseComponent({
@@ -75,14 +60,72 @@ export class Total extends BaseComponent {
   }
 
   render() {
-    this.totalPrice.addChildren(this.totalPriceSpan);
-    this.totalCount.addChildren(this.totalCountSpan.elem);
     this.addChildren(
       this.title.elem,
       this.totalCount.elem,
-      this.totalInput.elem,
+      this.Promo,
       this.totalPrice.elem,
+      this.totalPriceDiscount.elem,
       this.totalBtn.elem,
     );
+  }
+
+  calcTotalPrice(arr: IProductData[]) {
+    return arr.reduce((p, k) => +p + (+k.price * +k.amount), 0);
+  }
+
+  calcTotalAmount(arr: IProductData[]) {
+    return arr.reduce((p, k) => +p + (+k.amount), 0);
+  }
+
+  calcAmountWithPromo() {
+    const totalAmount = this.calcTotalPrice(JSON.parse(window.localStorage.getItem('productsList') ?? '[]'));
+    const allPromos = (JSON.parse(window.localStorage.getItem('usedPromos') ?? '[]'));
+    const percent = allPromos.reduce((p: number, k: IPromo) => p + +k.disc, 0);
+
+    console.log(percent);
+    return (Math.round(totalAmount * +`0.${(100 - percent)}`));
+  }
+
+  updateDiscountTitle() {
+    this.totalPriceDiscount.elem.textContent = `${this.calcAmountWithPromo()}`;
+  }
+
+  update(e: Event) {
+    const target = e.target as HTMLInputElement;
+    if (target) {
+      const item = promoState.find((promo) => promo.id === target.value.toLowerCase());
+      if (item?.id) {
+        this.Promo.promoHint.promoHintText.elem.textContent = item.descr;
+        this.Promo.promoHint.render();
+        this.Promo.promoHint.btnOnClick(item, this.updateTitle.bind(this));
+      } else {
+        this.Promo.promoHint.promoHintInner.destroy();
+      }
+    }
+  }
+
+  updateTitle() {
+    this.Promo.promoUsed.updatePromos(this.totalPrice, this.totalPriceDiscount);
+    this.updateDiscountTitle();
+    this.onPromoDelete();
+  }
+
+  onPromoDelete() {
+    this.Promo.promoUsed.promoUsedCode.forEach((element: PromoUsedCode) => {
+      element.promoUsedCodeBtn.elem.addEventListener('click', () => {
+        let arr = JSON.parse(window.localStorage.getItem('usedPromos') ?? '[]');
+        arr = arr.filter((item: IPromo) => item.id !== element.id);
+
+        window.localStorage.setItem('usedPromos', JSON.stringify(arr));
+        element.destroy();
+        this.updateDiscountTitle();
+        if (arr.length === 0) {
+          this.totalPrice.elem.classList.remove('old-price');
+          this.totalPriceDiscount.elem.classList.remove('show');
+          this.totalPriceDiscount.elem.classList.add('hide');
+        }
+      });
+    });
   }
 }

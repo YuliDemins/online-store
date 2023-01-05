@@ -227,12 +227,13 @@ export class ProductCard extends BaseComponent {
     }
 
     if (findIndex !== -1) {
-      arr[findIndex].amount += this.productData.amount;
+      arr[findIndex].amount += +this.productData.amount;
     } else {
       arr.push(this.productData);
     }
 
     window.localStorage.setItem('productsList', JSON.stringify(arr));
     app.header.Cart.updateCartNum();
+    app.header.updateTotal();
   }
 }
