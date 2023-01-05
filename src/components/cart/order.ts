@@ -100,8 +100,8 @@ export class Order extends BaseComponent {
     }
 
     this.orderCounter.render();
-    this.orderCounter.onCountChange(this.updateOrder.bind(this));
-    this.orderCounter.onCountChange(callback);
+    this.orderCounter.onCountChange(this.updateOrder.bind(this), id);
+    this.orderCounter.onCountChange(callback, id);
 
     this.orderPrice = new BaseComponent({
       tag: 'div',
@@ -140,9 +140,13 @@ export class Order extends BaseComponent {
     const cards = JSON.parse(window.localStorage.getItem('productsList') ?? '[]');
     const index = cards.findIndex((item: IProduct) => item.id === this.id);
     const val = this.orderCounter.count.elem.getAttribute('value') ?? 0;
-    cards[index].amount = +val;
-    window.localStorage.setItem('productsList', JSON.stringify(cards));
+    if (cards[index]) {
+      cards[index].amount = +val;
+      window.localStorage.setItem('productsList', JSON.stringify(cards));
 
-    this.orderPrice.elem.textContent = `${+(this.orderCounter.count.elem.getAttribute('value') ?? 1) * this.price}$`;
+      this.orderPrice.elem.textContent = `${+(this.orderCounter.count.elem.getAttribute('value') ?? 1) * this.price}$`;
+    } else {
+      this.destroy();
+    }
   }
 }
