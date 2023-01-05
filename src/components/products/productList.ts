@@ -45,7 +45,7 @@ export class ProductList extends BaseComponent {
     const promise = await fetch('https://dummyjson.com/products')
       .then((res) => res.json())
       .then((json) => json.products);
-
+    // console.log(promise);
     return promise;
   }
 }
