@@ -19,7 +19,7 @@ export class Header extends BaseComponent {
   public totalSum;
 
   input: HeaderInput;
-  
+
   constructor() {
     super({
       tag: 'header',
@@ -37,24 +37,24 @@ export class Header extends BaseComponent {
       textContent: 'Store',
     });
 
-    // this.mainSearch = new BaseComponent({
-    //   tag: 'form',
-    //   className: 'main-search',
-    // });
+    this.mainSearch = new BaseComponent({
+      tag: 'form',
+      className: 'main-search',
+    });
 
-    // this.mainSearchInput = new BaseComponent({
-    //   tag: 'input',
-    //   className: 'main-search__input',
-    //   attributes: {
-    //     type: 'text',
-    //     placeholder: 'Поиск по товарам',
-    //   },
-    // });
+    this.mainSearchInput = new BaseComponent({
+      tag: 'input',
+      className: 'main-search__input',
+      attributes: {
+        type: 'text',
+        placeholder: 'Поиск по товарам',
+      },
+    });
 
-    // this.mainSearchBtn = new BaseComponent({
-    //   tag: 'button',
-    //   className: 'main-search__btn',
-    // });
+    this.mainSearchBtn = new BaseComponent({
+      tag: 'button',
+      className: 'main-search__btn',
+    });
 
     this.input = new HeaderInput();
     this.input.render();

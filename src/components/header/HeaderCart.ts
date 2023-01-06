@@ -2,9 +2,9 @@ import { IProductData } from '@/interfaces/product';
 import { BaseComponent } from '@/services/BaseComponent';
 
 export class HeaderCart extends BaseComponent {
-  private cartShopping;
+  private cartShopping: BaseComponent;
 
-  private cartShoppingTitle;
+  private cartShoppingTitle: BaseComponent;
 
   cartValue: BaseComponent;
 

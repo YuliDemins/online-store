@@ -88,7 +88,7 @@ export class Total extends BaseComponent {
   }
 
   updateDiscountTitle() {
-    this.totalPriceDiscount.elem.textContent = `${this.calcAmountWithPromo()}`;
+    this.totalPriceDiscount.elem.textContent = `${this.calcAmountWithPromo()}$`;
   }
 
   update(e: Event) {
