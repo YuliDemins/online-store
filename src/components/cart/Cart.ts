@@ -5,7 +5,7 @@ import { Order } from './order';
 import { Total } from './total';
 
 export class Cart extends BaseComponent {
-  title;
+  title: BaseComponent;
 
   prev: BaseComponent;
 
@@ -48,20 +48,22 @@ export class Cart extends BaseComponent {
       className: 'shopping',
     });
 
-    this.orders = JSON.parse(window.localStorage.getItem('productsList') ?? '[]').map((item: IProductData) => {
-      const elem = new Order(
-        item.title,
-        item.thumbnail,
-        item.description,
-        item.stock,
-        item.price,
-        item.amount,
-        item.id,
-        this.updateOnCount.bind(this),
-      );
-      elem.render();
-      return elem;
-    });
+    this.orders = JSON.parse(window.localStorage.getItem('productsList') ?? '[]')
+      .map((item: IProductData, index: number) => {
+        const elem = new Order(
+          item.title,
+          item.thumbnail,
+          item.description,
+          item.stock,
+          item.price,
+          item.amount,
+          item.id,
+          this.updateOnCount.bind(this),
+          index + 1,
+        );
+        elem.render();
+        return elem;
+      });
 
     this.total = new Total();
     this.total.render();

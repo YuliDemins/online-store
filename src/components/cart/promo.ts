@@ -3,9 +3,9 @@ import { PromoHint } from './promoHint';
 import { PromoUsed } from './promoUsed';
 
 export class Promo extends BaseComponent {
-  promoInput;
+  promoInput: BaseComponent;
 
-  promoVars;
+  promoVars: BaseComponent;
 
   promoUsed: PromoUsed;
 

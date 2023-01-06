@@ -25,11 +25,11 @@ export class Order extends BaseComponent {
 
   private orderDelete;
 
-  id;
+  id: number;
 
-  price;
+  price: number;
 
-  amount;
+  amount: number;
 
   constructor(
     title: string,
@@ -40,6 +40,7 @@ export class Order extends BaseComponent {
     amount: number,
     id: number,
     callback: () => void,
+    orderNum: number,
   ) {
     super({
       tag: 'div',
@@ -53,7 +54,7 @@ export class Order extends BaseComponent {
     this.number = new BaseComponent({
       tag: 'div',
       className: 'order__number',
-      textContent: '1',
+      textContent: `${orderNum}`,
     });
 
     this.image = new BaseComponent({
