@@ -7,12 +7,6 @@ export class Header extends BaseComponent {
 
   private title;
 
-  private mainSearch;
-
-  private mainSearchBtn;
-
-  private mainSearchInput;
-
   public Cart: HeaderCart;
 
   input: HeaderInput;
@@ -31,27 +25,8 @@ export class Header extends BaseComponent {
     this.title = new BaseComponent({
       tag: 'h1',
       className: 'header__title',
-      textContent: 'Store',
+      textContent: 'SmartStore',
     });
-
-    // this.mainSearch = new BaseComponent({
-    //   tag: 'form',
-    //   className: 'main-search',
-    // });
-
-    // this.mainSearchInput = new BaseComponent({
-    //   tag: 'input',
-    //   className: 'main-search__input',
-    //   attributes: {
-    //     type: 'text',
-    //     placeholder: 'Поиск по товарам',
-    //   },
-    // });
-
-    // this.mainSearchBtn = new BaseComponent({
-    //   tag: 'button',
-    //   className: 'main-search__btn',
-    // });
 
     this.input = new HeaderInput();
     this.input.render();
@@ -61,7 +36,6 @@ export class Header extends BaseComponent {
   }
 
   render() {
-    // this.mainSearch.addChildren(this.mainSearchInput.elem, this.mainSearchBtn.elem);
     this.wrapper.addChildren(this.title.elem, this.input.elem, this.Cart.elem);
     this.addChildren(this.wrapper.elem);
   }
