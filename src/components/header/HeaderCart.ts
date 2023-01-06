@@ -27,7 +27,7 @@ export class HeaderCart extends BaseComponent {
     this.cartShoppingTitle = new BaseComponent({
       tag: 'a',
       className: 'cart__title',
-      textContent: 'Корзина',
+      textContent: 'Cart',
       attributes: {
         href: '#cart',
       },

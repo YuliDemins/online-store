@@ -17,7 +17,7 @@ export class HeaderInput extends BaseComponent {
       className: 'main-search__input',
       attributes: {
         type: 'text',
-        placeholder: 'Поиск по товарам',
+        placeholder: 'Search for anything',
       },
     });
 
@@ -52,9 +52,9 @@ export class HeaderInput extends BaseComponent {
 
   async show() {
     const productsElem = await this.getProducts();
-    const productsFilterElem:ProductCard[] = [];
+    const productsFilterElem:IProduct[] = [];
     const copy = [...productsElem];
-    copy.map((item: ProductCard) => {
+    copy.map((item: IProduct) => {
       const arr = Object.values(item).map((el) => {
         delete el.images;
         delete el.thumbnail;
@@ -70,8 +70,8 @@ export class HeaderInput extends BaseComponent {
     });
     const newRender = document.querySelector<HTMLElement>('.proposals__list');
     newRender!.innerHTML = '';
-    console.log(productsFilterElem);
     productsFilterElem.map((item: IProduct) => {
+      console.log(item);
       const elem = new ProductCard(
         item.id,
         item.title,

@@ -14,7 +14,7 @@ export class ProductCard extends BaseComponent {
 
   ratingCount;
 
-  infoStockValues: BaseComponent[];
+  // infoStockValues: BaseComponent[];
 
   infoStock;
 
@@ -57,6 +57,10 @@ export class ProductCard extends BaseComponent {
   discountPercentage: number;
 
   productData: IProductData;
+
+  infoStockImage: BaseComponent;
+
+  infoStockValue: BaseComponent;
 
   constructor(
     id: number,
@@ -109,6 +113,9 @@ export class ProductCard extends BaseComponent {
     this.ratingStars = new BaseComponent({
       tag: 'div',
       className: 'proposals__list-item-rating-stars',
+      attributes: {
+        'data-tooltip': 'Rating',
+      },
     });
 
     this.ratingCount = new BaseComponent({
@@ -122,16 +129,19 @@ export class ProductCard extends BaseComponent {
       className: 'proposals__list-item-stock',
     });
 
-    this.infoStockValues = [];
+    this.infoStockImage = new BaseComponent({
+      tag: 'div',
+      className: 'proposals__list-item-stock-image',
+      attributes: {
+        'data-tooltip': 'Stock',
+      },
+    });
 
-    for (let i = 0; i < 5; i++) {
-      const elem = new BaseComponent({
-        tag: 'div',
-        className: 'proposals__list-item-stockval',
-      });
-
-      this.infoStockValues.push(elem);
-    }
+    this.infoStockValue = new BaseComponent({
+      tag: 'div',
+      className: 'proposals__list-item-stock-value',
+      textContent: `${this.stock}`,
+    });
 
     this.title = new BaseComponent({
       tag: 'h4',
@@ -204,7 +214,7 @@ export class ProductCard extends BaseComponent {
     this.priceElem.addChildren(this.priceLink);
     this.categoryElem.addChildren(this.categoryLink);
     this.title.addChildren(this.titleLink);
-    this.infoStock.addChildren(...this.infoStockValues);
+    this.infoStock.addChildren(this.infoStockImage.elem, this.infoStockValue.elem);
     this.ratingElem.addChildren(this.ratingStars, this.ratingCount);
     this.info.addChildren(this.ratingElem, this.infoStock);
     this.addChildren(
