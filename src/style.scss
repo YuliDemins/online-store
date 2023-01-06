@@ -32,8 +32,10 @@ $hover_color: rgb(83, 192, 29);
   color: $text_color;
 }
 
-// .wrapper {
-//   width: 100%;
-//   display: flex;
-//   justify-content: space-between;
-// }
+.hide {
+  display: none;
+}
+
+.show {
+  display: block;
+}

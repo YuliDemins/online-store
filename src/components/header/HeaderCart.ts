@@ -1,9 +1,10 @@
+import { IProductData } from '@/interfaces/product';
 import { BaseComponent } from '@/services/BaseComponent';
 
 export class HeaderCart extends BaseComponent {
-  private cartShopping;
+  private cartShopping: BaseComponent;
 
-  private cartShoppingTitle;
+  private cartShoppingTitle: BaseComponent;
 
   cartValue: BaseComponent;
 
@@ -39,7 +40,7 @@ export class HeaderCart extends BaseComponent {
 
     this.cartValueInner = new BaseComponent({
       tag: 'div',
-      textContent: `${JSON.parse(window.localStorage.getItem('productsList') ?? '[]').length}`,
+      textContent: `${this.updateCartNum()}`,
     });
   }
 
@@ -49,7 +50,14 @@ export class HeaderCart extends BaseComponent {
     this.addChildren(this.cartShopping.elem, this.cartShoppingTitle.elem);
   }
 
-  updateCartNum() {
-    this.cartValueInner.elem.textContent = `${JSON.parse(window.localStorage.getItem('productsList') ?? '[]').length}`;
+  updateCartNum(): number {
+    const arr = JSON.parse(window.localStorage.getItem('productsList') ?? '[]');
+    const value = arr.reduce((p:IProductData, k:IProductData) => +p + k.amount, 0);
+
+    if (this.cartValueInner) {
+      this.cartValueInner.elem.textContent = `${value}`;
+    }
+
+    return value;
   }
 }

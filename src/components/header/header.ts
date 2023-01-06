@@ -1,3 +1,4 @@
+import { IProductData } from '@/interfaces/product';
 import { BaseComponent } from '@/services/BaseComponent';
 import { HeaderCart } from './HeaderCart';
 import { HeaderInput } from './headerInput';
@@ -8,6 +9,8 @@ export class Header extends BaseComponent {
   private title;
 
   public Cart: HeaderCart;
+
+  public totalSum;
 
   input: HeaderInput;
 
@@ -28,8 +31,15 @@ export class Header extends BaseComponent {
       textContent: 'SmartStore',
     });
 
+
     this.input = new HeaderInput();
     this.input.render();
+
+    this.totalSum = new BaseComponent({
+      tag: 'div',
+      className: 'header__total-sum',
+      textContent: `${this.updateTotal()}$`,
+    });
 
     this.Cart = new HeaderCart();
     this.Cart.render();
@@ -38,5 +48,16 @@ export class Header extends BaseComponent {
   render() {
     this.wrapper.addChildren(this.title.elem, this.input.elem, this.Cart.elem);
     this.addChildren(this.wrapper.elem);
+  }
+
+  updateTotal() {
+    const arr = JSON.parse(window.localStorage.getItem('productsList') ?? '[]');
+    const value = arr.reduce((p: number, k: IProductData) => +p + (+k.price * +k.amount), 0);
+
+    if (this.totalSum) {
+      this.totalSum.elem.textContent = `${+value}$`;
+    }
+
+    return value;
   }
 }

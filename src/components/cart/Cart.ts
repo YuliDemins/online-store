@@ -1,10 +1,11 @@
+import { app } from '@/index';
 import { IProductData } from '@/interfaces/product';
 import { BaseComponent } from '@/services/BaseComponent';
 import { Order } from './order';
 import { Total } from './total';
 
 export class Cart extends BaseComponent {
-  title;
+  title: BaseComponent;
 
   prev: BaseComponent;
 
@@ -47,12 +48,22 @@ export class Cart extends BaseComponent {
       className: 'shopping',
     });
 
-    this.orders = JSON.parse(window.localStorage.getItem('productsList') ?? '[]').map((item: IProductData) => {
-      const elem = new Order(item.title, item.thumbnail, item.description, item.stock, item.price, item.amount);
-      elem.render();
-      return elem;
-    });
-    console.log(this.orders);
+    this.orders = JSON.parse(window.localStorage.getItem('productsList') ?? '[]')
+      .map((item: IProductData, index: number) => {
+        const elem = new Order(
+          item.title,
+          item.thumbnail,
+          item.description,
+          item.stock,
+          item.price,
+          item.amount,
+          item.id,
+          this.updateOnCount.bind(this),
+          index + 1,
+        );
+        elem.render();
+        return elem;
+      });
 
     this.total = new Total();
     this.total.render();
@@ -62,5 +73,18 @@ export class Cart extends BaseComponent {
     this.shopping.addChildren(...this.orders);
     this.wrapper.addChildren(this.shopping.elem, this.total);
     this.addChildren(this.prev.elem, this.title.elem, this.wrapper.elem);
+  }
+
+  updateOnCount() {
+    const arr = JSON.parse(window.localStorage.getItem('productsList') ?? '[]');
+    const totalPrice = `${this.total.calcTotalPrice(arr)}$`;
+    const totalAmount = `${this.total.calcTotalAmount(arr)}`;
+
+    this.total.totalPrice.elem.textContent = totalPrice;
+    this.total.updateDiscountTitle();
+    this.total.totalCount.elem.textContent = `${totalAmount} items`;
+
+    app.header.Cart.updateCartNum();
+    app.header.updateTotal();
   }
 }

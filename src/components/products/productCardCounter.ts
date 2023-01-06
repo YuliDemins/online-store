@@ -3,9 +3,9 @@ import { BaseComponent } from '@/services/BaseComponent';
 export class ProductCardCounter extends BaseComponent {
   public count;
 
-  private counterDec;
+  public counterDec;
 
-  private counterInc;
+  public counterInc;
 
   constructor(limit: number) {
     super({
@@ -35,6 +35,7 @@ export class ProductCardCounter extends BaseComponent {
       className: 'proposals__list-item-inc',
       textContent: '+',
     });
+
     this.changeCountValue(limit);
   }
 
@@ -44,13 +45,17 @@ export class ProductCardCounter extends BaseComponent {
 
   changeCountValue(limit: number) {
     this.counterDec.elem.addEventListener('click', () => {
-      if (this.count.elem instanceof HTMLInputElement && +this.count.elem.value > 1) {
-        this.count.elem.setAttribute('value', `${+this.count.elem.value - 1}`);
+      if (this.count.elem instanceof HTMLInputElement) {
+        this.count.elem.setAttribute('oldValue', `${+this.count.elem.value}`);
+        if (+this.count.elem.value > 1) {
+          this.count.elem.setAttribute('value', `${+this.count.elem.value - 1}`);
+        }
       }
     });
 
     this.counterInc.elem.addEventListener('click', () => {
       if (this.count.elem instanceof HTMLInputElement && +this.count.elem.value < limit) {
+        this.count.elem.setAttribute('oldValue', `${+this.count.elem.value}`);
         this.count.elem.setAttribute('value', `${+this.count.elem.value + 1}`);
       }
     });
