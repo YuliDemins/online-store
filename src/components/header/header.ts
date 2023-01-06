@@ -31,7 +31,6 @@ export class Header extends BaseComponent {
       textContent: 'SmartStore',
     });
 
-
     this.input = new HeaderInput();
     this.input.render();
 

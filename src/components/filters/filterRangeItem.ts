@@ -166,7 +166,6 @@ export class FilterRangeItem extends BaseComponent {
     if (this.maxInput.elem instanceof HTMLInputElement && this.minInput.elem instanceof HTMLInputElement) {
       this.maxInput.elem.value = this.maxInput.elem.getAttribute('data-value')!;
       this.minInput.elem.value = this.minInput.elem.getAttribute('data-value')!;
-      console.log(this.minInput.elem.getAttribute('data-value'));
       this.initialValue.elem.innerHTML = this.minInput.elem.getAttribute('data-value')!;
       this.finalValue.elem.innerHTML = this.maxInput.elem.getAttribute('data-value')!;
     }
