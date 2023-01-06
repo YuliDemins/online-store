@@ -26,7 +26,7 @@ export class Cart extends BaseComponent {
     this.prev = new BaseComponent({
       tag: 'a',
       className: 'prev',
-      textContent: 'Вернуться к покупкам',
+      textContent: 'Back to shopping',
       attributes: {
         href: '#main',
       },
@@ -35,7 +35,7 @@ export class Cart extends BaseComponent {
     this.title = new BaseComponent({
       tag: 'h3',
       className: 'shopping-title',
-      textContent: 'Корзина',
+      textContent: 'Cart',
     });
 
     this.wrapper = new BaseComponent({

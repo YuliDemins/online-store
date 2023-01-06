@@ -91,13 +91,13 @@ export class Filters extends BaseComponent {
     });
 
     this.filterRange1 = new FilterRangeItem();
-    this.filterRange1.render();
 
     this.filterRange2 = new FilterRangeItem();
-    this.filterRange2.render();
   }
 
   render() {
+    this.filterRange1.render();
+    this.filterRange2.render();
     this.getFiltersView('category');
     this.getFiltersView('brand');
     this.categoryItem1.addChildren(this.title1);

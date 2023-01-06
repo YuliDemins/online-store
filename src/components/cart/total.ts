@@ -43,7 +43,7 @@ export class Total extends BaseComponent {
     this.title = new BaseComponent({
       tag: 'div',
       className: 'total__title',
-      textContent: 'В корзине',
+      textContent: 'In cart',
     });
 
     this.totalCount = new BaseComponent({
@@ -55,7 +55,7 @@ export class Total extends BaseComponent {
     this.totalBtn = new BaseComponent({
       tag: 'button',
       className: 'total__btn',
-      textContent: ' Перейти к оформлению',
+      textContent: 'Buy now',
     });
   }
 

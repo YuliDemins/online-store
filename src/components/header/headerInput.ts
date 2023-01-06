@@ -17,7 +17,7 @@ export class HeaderInput extends BaseComponent {
       className: 'main-search__input',
       attributes: {
         type: 'text',
-        placeholder: 'Поиск по товарам',
+        placeholder: 'Search for anything',
       },
     });
 
