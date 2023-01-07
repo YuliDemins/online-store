@@ -14,6 +14,10 @@
   &__title {
     color: $main_color;
     font-size: 26px;
+
+    &:hover {
+      color: $hover_color;
+    }
   }
 }
 
@@ -70,22 +74,17 @@
 
   &__shopping {
     position: relative;
-    padding: 10px;
-    width: 50px;
-    height: 50px;
+    width: 44px;
+    height: 44px;
 
     &::before {
       position: absolute;
       content: "";
       width: 30px;
       height: 30px;
-      top: calc(50% - 15px);
+      top: calc(50% - 11px);
       right: calc(50% - 15px);
-      background: url(../../assets/svg/cart-header.svg) center/cover no-repeat;
-      font-size: 16px;
-    }
-    &:hover::before {
-      fill: $main_color
+      background: url(../../assets/svg/cart-header.svg) center/contain no-repeat;
     }
   }
   &__value{
@@ -108,10 +107,12 @@
   }
 
   &__title {
-
-    &:hover {
-      color: $main_color;
-    }
+    font-size: 18px;
+font-weight: 700;
+  }
+  
+  &:hover {
+    color: $hover_color;
   }
 }
 

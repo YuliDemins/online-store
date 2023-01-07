@@ -1,0 +1,58 @@
+.sort {
+  display: flex;
+  gap: 15px;
+  color: $additional_color;
+
+  &__item {
+    display: flex;
+flex-wrap: wrap;
+    min-width: 100px;
+
+    &-text {
+      padding: 3px 3px 3px 10px;
+    }
+
+    &-span-down {
+      padding: 5px 3px 5px 10px;
+      background-color: $text_color;
+      mask-image: url(../../assets/svg/arrow-down.svg);
+      -webkit-mask-image: url(../../assets/svg/arrow-down.svg);
+      mask-size: 15px 15px;
+      -webkit-mask-size: 15px 15px;
+      mask-repeat:  no-repeat;
+      -webkit-mask-repeat: no-repeat;
+      mask-position: right;
+      -webkit-mask-position: right;
+      }
+    
+      &-span-up {
+      padding: 5px 3px 5px 10px;
+      background-color: $text_color;
+      mask-image: url(../../assets/svg/arrow-up.svg);
+      -webkit-mask-image: url(../../assets/svg/arrow-up.svg);
+      mask-size: 15px 15px;
+      -webkit-mask-size: 15px 15px;
+      mask-repeat:  no-repeat;
+      -webkit-mask-repeat: no-repeat;
+      mask-position: right;
+      -webkit-mask-position: right;
+    }
+
+    &:hover {
+      color: $main_color;
+    }
+
+    &:hover &-span-up {
+      background-color: $main_color;
+    }
+    &:hover &-span-down {
+      background-color: $main_color;
+    }
+  }
+}
+
+.active_sort {
+  color: $dark_color;
+  font-weight: 700;
+}
+

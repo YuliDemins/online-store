@@ -1,6 +1,6 @@
 .proposals__list-item {
   // margin: 0 15px 15px;
-  padding: 25px;
+  padding: 15px 25px;
   display: flex;
   flex-direction: column;
   border: 1px solid $dim_color;
@@ -144,6 +144,23 @@ box-shadow: 0px 2px 8px 1px rgba(128, 129, 150, 0.21); */
     top: 13px;
     left: 11px;
     background: url(../../assets/svg/cart-plus.svg) center/cover no-repeat;
+    background-color: $main_color;
+    mask-image: url(../../assets/svg/cart-plus.svg);
+    -webkit-mask-image: url(../../assets/svg/cart-plus.svg);
+    mask-size: 25px 25px;
+    -webkit-mask-size: 25px 125px;
+    mask-repeat:  no-repeat;
+    -webkit-mask-repeat: no-repeat;
+    mask-position: right;
+    -webkit-mask-position: right;
+  }
+
+  &:hover::before {
+    background-color: $white-color;
+  }
+
+  &:hover {
+    background-color: $hover_color;
   }
 }
 }

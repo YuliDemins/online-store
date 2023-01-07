@@ -32,6 +32,10 @@
   margin-bottom: 10px;
   cursor: pointer;
   font-size: 16px;
+
+  &:hover {
+    color: $dark_color;
+  }
 }
 
 /* скрываем дефолтный чекбокс */
@@ -48,7 +52,8 @@
   height: 20px;
   width: 20px;
   background-color: $white_color;
-  border: 1px solid $text_color;
+  // border: 1px solid $text_color;
+  border: 1px solid $filter_color;
   border-radius: 4px;
 }
 
