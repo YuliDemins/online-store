@@ -3,6 +3,8 @@ import { BaseComponent } from '@/services/BaseComponent';
 import { ProductCard } from '../products/productCard';
 import { FilterСheckboxItem } from './filterCheckboxItem';
 import { FilterRangeItem } from './filterRangeItem';
+import { Acc } from '../../types/interfaces/acc';
+import { CheckboxTypes } from '@/types/CheckboxTypes';
 
 export class Filters extends BaseComponent {
   categoryItem1;
@@ -90,14 +92,14 @@ export class Filters extends BaseComponent {
       textContent: 'Stock',
     });
 
-    this.filterRange1 = new FilterRangeItem();
+    this.filterRange1 = new FilterRangeItem('price');
 
-    this.filterRange2 = new FilterRangeItem();
+    this.filterRange2 = new FilterRangeItem('stock');
   }
 
   render() {
-    this.filterRange1.render();
-    this.filterRange2.render();
+    this.filterRange1.render('price');
+    this.filterRange2.render('stock');
     this.getFiltersView('category');
     this.getFiltersView('brand');
     this.categoryItem1.addChildren(this.title1);
@@ -113,7 +115,7 @@ export class Filters extends BaseComponent {
     this.addChildren(this.filterCategory.elem);
   }
 
-  async getFiltersView(type: 'category' | 'brand') {
+  async getFiltersView(type: CheckboxTypes) {
     const productsElem = await this.getProducts();
     // const a = this.getFilter(productsElem, 'category');
     const forFilters = Object.keys(this.getFilter(productsElem, type));
@@ -127,7 +129,7 @@ export class Filters extends BaseComponent {
     type === 'category' ? this.categoryItem1.addChildren(...filtergo) : this.categoryItem2.addChildren(...filtergo);
   }
 
-  getFilter(arr: ProductCard[], type: 'category' | 'brand') {
+  getFilter(arr: ProductCard[], type: CheckboxTypes) {
     const filterPart: string[] = [];
     arr.map((item) => {
       filterPart.push(item[type]);
@@ -135,9 +137,6 @@ export class Filters extends BaseComponent {
       return filterPart;
     });
 
-    interface Acc {
-      [index: string]: number;
-    }
     const some = filterPart.reduce((acc: Acc, item) => {
       acc[item] = (acc[item] || 0) + 1;
       return acc;

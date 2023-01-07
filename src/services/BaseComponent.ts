@@ -1,4 +1,4 @@
-import { IBaseComponent } from '../interfaces/interfaces';
+import { IBaseComponent } from '../types/interfaces/interfaces';
 
 export class BaseComponent {
   protected element: HTMLElement;

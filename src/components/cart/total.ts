@@ -1,5 +1,5 @@
-import { IPromo } from '@/interfaces/interfaces';
-import { IProductData } from '@/interfaces/product';
+import { IPromo } from '@/types/interfaces/interfaces';
+import { IProductData } from '@/types/interfaces/product';
 import { BaseComponent } from '@/services/BaseComponent';
 import { promoState } from '@/states/promoState';
 import { Promo } from './promo';

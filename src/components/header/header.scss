@@ -84,6 +84,9 @@
       background: url(../../assets/svg/cart-header.svg) center/cover no-repeat;
       font-size: 16px;
     }
+    &:hover::before {
+      fill: $main_color
+    }
   }
   &__value{
     border-radius: 50%;
