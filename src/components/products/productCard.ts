@@ -1,5 +1,5 @@
 import { app } from '@/index';
-import { IProduct, IProductData } from '@/interfaces/product';
+import { IProduct, IProductData } from '@/types/interfaces/product';
 import { BaseComponent } from '@/services/BaseComponent';
 import { ProductCardOrder } from './productCardOrder';
 

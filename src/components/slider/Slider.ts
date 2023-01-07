@@ -1,4 +1,4 @@
-import { SliderSet } from '@/interfaces/sliderset';
+import { SliderSet } from '@/types/interfaces/sliderset';
 import { BaseComponent } from '@/services/BaseComponent';
 
 export class Slider {

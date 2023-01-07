@@ -1,4 +1,4 @@
-import { IProduct } from '@/interfaces/product';
+import { IProduct } from '@/types/interfaces/product';
 import { BaseComponent } from '@/services/BaseComponent';
 import { ProductCard } from '../products/productCard';
 

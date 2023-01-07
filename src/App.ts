@@ -1,4 +1,4 @@
-import { AppRoute } from './enums/routes';
+import { AppRoute } from './types/enums/routes';
 import { Router } from './services/Router';
 import { BaseComponent } from './services/BaseComponent';
 import { Header } from './components/header/header';
@@ -30,7 +30,7 @@ export class App extends BaseComponent {
 
     if (root) {
       this.createRouter();
-      window.location.hash = '#cart';
+      window.location.hash = '#main';
 
       root.append(preloader.elem, this.header.elem, this.elem, footer.elem);
       preloader.hide();

@@ -1,4 +1,4 @@
-import { IProductData } from '@/interfaces/product';
+import { IProductData } from '@/types/interfaces/product';
 import { BaseComponent } from '@/services/BaseComponent';
 
 export class HeaderCart extends BaseComponent {

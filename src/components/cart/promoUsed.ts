@@ -1,4 +1,4 @@
-import { IPromo } from '@/interfaces/interfaces';
+import { IPromo } from '@/types/interfaces/interfaces';
 import { BaseComponent } from '@/services/BaseComponent';
 import { PromoUsedCode } from './promoUsedCode';
 

@@ -1,4 +1,4 @@
-import { Route } from '@/interfaces/interfaces';
+import { Route } from '@/types/interfaces/interfaces';
 
 export class Router {
   constructor(

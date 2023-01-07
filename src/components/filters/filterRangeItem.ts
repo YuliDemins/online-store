@@ -1,226 +1,234 @@
+import { IProduct } from '@/types/interfaces/product';
 import { BaseComponent } from '@/services/BaseComponent';
+import { ProductCard } from '../products/productCard';
+import { RangeTypes } from '@/types/RangeTypes';
 
 export class FilterRangeItem extends BaseComponent {
-  minmaxWrapper: BaseComponent;
+  wrapper: BaseComponent;
 
-  minLabel: BaseComponent;
+  controls: BaseComponent;
 
-  minInput: BaseComponent;
+  labelRange1: BaseComponent;
 
-  maxLabel: BaseComponent;
+  inputRange1: BaseComponent;
 
-  maxInput: BaseComponent;
+  labelRange2: BaseComponent;
 
-  protected initialValue: BaseComponent;
+  inputRange2: BaseComponent;
 
-  protected finalValue: BaseComponent;
+  line: BaseComponent;
 
-  legend: BaseComponent;
+  progress: BaseComponent;
 
-  protected thumbSize: number;
+  span: BaseComponent;
 
-  protected rangeMin: number;
+  labelNum1: BaseComponent;
 
-  protected rangeWidth: number;
+  inputNum1: BaseComponent;
 
-  protected rangeMax: number;
+  labelNum2: BaseComponent;
 
-  protected averageValue: number;
+  inputNum2: BaseComponent;
 
-  protected legendNum: string;
-
-  constructor() {
+  constructor(type: RangeTypes) {
     super({
       tag: 'div',
-      className: 'filter-category-range',
+      className: ['filter-category-item__range', 'range'],
     });
 
-    this.minmaxWrapper = new BaseComponent({
+    this.wrapper = new BaseComponent({
       tag: 'div',
-      className: 'filter-category-range_wrapper',
+      className: 'range__wrapper',
     });
 
-    this.minLabel = new BaseComponent({
+    this.labelNum1 = new BaseComponent({
       tag: 'label',
-      className: 'filter-category-range_label',
-      textContent: 'Minimum price',
+      className: 'range__label',
+      // textContent: '$',
+    });
+    this.inputNum1 = new BaseComponent({
+      tag: 'input',
+      className: 'range__input',
       attributes: {
-        for: 'min',
+        type: 'number',
+        placeholder: '0',
       },
     });
-    this.minInput = new BaseComponent({
+
+    this.span = new BaseComponent({
+      tag: 'span',
+      textContent: '-',
+    });
+
+    this.labelNum2 = new BaseComponent({
+      tag: 'label',
+      className: 'range__label',
+      // textContent: '$',
+    });
+    this.inputNum2 = new BaseComponent({
       tag: 'input',
-      className: 'min',
+      className: 'range__input',
+      attributes: {
+        type: 'number',
+        placeholder: '2000',
+      },
+    });
+
+    this.line = new BaseComponent({
+      tag: 'div',
+      className: 'range__line',
+    });
+    this.progress = new BaseComponent({
+      tag: 'div',
+      className: 'range__progress',
+    });
+
+    this.controls = new BaseComponent({
+      tag: 'div',
+      className: 'range__controls',
+    });
+    this.labelRange1 = new BaseComponent({
+      tag: 'label',
+      className: ['range__label', 'range__label_range'],
+    });
+    this.inputRange1 = new BaseComponent({
+      tag: 'input',
+      className: ['range__input', 'range__input_range'],
       attributes: {
         type: 'range',
-        name: 'min',
-        min: '0',
-        max: '1000',
         step: '1',
-        id: 'min',
+        min: '0',
+        max: '2000',
         value: '0',
       },
     });
-    this.maxLabel = new BaseComponent({
+    this.labelRange2 = new BaseComponent({
       tag: 'label',
-      className: 'filter-category-range_label',
-      textContent: 'Max price',
-      attributes: {
-        for: 'max',
-      },
+      className: ['range__label', 'range__label_range'],
     });
-    this.maxInput = new BaseComponent({
+    this.inputRange2 = new BaseComponent({
       tag: 'input',
-      className: 'max',
+      className: ['range__input', 'range__input_range'],
       attributes: {
         type: 'range',
-        name: 'max',
-        min: '1000',
-        max: '2000',
         step: '1',
-        id: 'max',
+        min: '0',
+        max: '2000',
         value: '2000',
       },
     });
-
-    this.initialValue = new BaseComponent({
-      tag: 'span',
-      className: 'filter-category-range_initial',
-      textContent: '0',
-    });
-    this.finalValue = new BaseComponent({
-      tag: 'span',
-      className: 'filter-category-range_final',
-      textContent: '2000',
-    });
-
-    this.legend = new BaseComponent({
-      tag: 'span',
-      className: 'filter-category-range_legend',
-    });
-
-    window.addEventListener('load', () => this.init(this.minmaxWrapper.elem));
-
-    this.initialValue.elem.innerHTML = this.minInput.elem.getAttribute('data-value')!;
-    this.finalValue.elem.innerHTML = this.maxInput.elem.getAttribute('data-value')!;
-
-    this.thumbSize = parseInt(this.minmaxWrapper.elem.getAttribute('data-thumbsize')!, 10);
-    this.rangeWidth = this.minmaxWrapper.elem.offsetWidth;
-
-    this.rangeMin = parseInt(this.minInput.elem.getAttribute('min')!, 10);
-
-    this.rangeMax = parseInt(this.maxInput.elem.getAttribute('max')!, 10);
-    this.legendNum = this.minmaxWrapper.elem.getAttribute('data-legendnum')!;
-    this.averageValue = (this.rangeMin + this.rangeMax) / 2;
+    this.change(type);
   }
 
-  render() {
-    this.minmaxWrapper.elem.setAttribute('data-legendnum', '2');
-    this.minmaxWrapper.addChildren(
-      this.initialValue.elem,
-      this.finalValue.elem,
-      this.minLabel.elem,
-      this.minInput.elem,
-      this.maxLabel.elem,
-      this.maxInput.elem,
-      this.legend.elem,
-    );
-    this.addChildren(this.minmaxWrapper.elem);
+  render(type:RangeTypes) {
+    this.line.addChildren(this.progress.elem);
+    this.labelRange1.addChildren(this.inputRange1.elem);
+    this.labelRange2.addChildren(this.inputRange2.elem);
+    this.controls.addChildren(this.labelRange1.elem, this.labelRange2.elem);
+    this.labelNum1.addChildren(this.inputNum1);
+    this.labelNum2.addChildren(this.inputNum2.elem);
+    this.wrapper.addChildren(this.labelNum1.elem, this.span.elem, this.labelNum2.elem);
+    this.addChildren(this.wrapper.elem, this.line.elem, this.controls);
+    // this.change(type);
+    this.getFiltersView(type);
   }
 
-  draw(slider: HTMLElement, splitvalue: number) {
-    /* set function vars */
-
-    this.thumbSize = parseInt(slider.getAttribute('data-thumbsize')!, 10);
-    this.rangeWidth = parseInt(slider.getAttribute('data-rangewidth')!, 10);
-    this.rangeMin = parseInt(slider.getAttribute('data-rangemin')!, 10);
-    this.rangeMax = parseInt(slider.getAttribute('data-rangemax')!, 10);
-
-    /* set min and max attributes */
-    this.minInput.elem.setAttribute('max', splitvalue.toString());
-    this.maxInput.elem.setAttribute('min', splitvalue.toString());
-
-    /* set css */
-    this.minInput.elem.style.width = `${parseInt((this.thumbSize + ((splitvalue - this.rangeMin) /
-    (this.rangeMax - this.rangeMin)) * (this.rangeWidth - (2 * this.thumbSize))).toString(), 10)}px`;
-
-    this.maxInput.elem.style.width = `${parseInt((this.thumbSize +
-    ((this.rangeMax - splitvalue) / (this.rangeMax - this.rangeMin))
-     * (this.rangeWidth - (2 * this.thumbSize))).toString(), 10)}px`;
-
-    this.minInput.elem.style.left = '0px';
-    this.maxInput.elem.style.left = `${parseInt(this.minInput.elem.style.width, 10)}px`;
-    this.minInput.elem.style.top = `${this.initialValue.elem.offsetHeight}px`;
-    this.maxInput.elem.style.top = `${this.initialValue.elem.offsetHeight}px`;
-    this.legend.elem.style.marginTop = `${this.minInput.elem.offsetHeight}px`;
-    slider.style.height = `
-    ${this.initialValue.elem.offsetHeight + this.minInput.elem.offsetHeight + this.legend.elem.offsetHeight}px`;
-    /* correct for 1 off at the end */
-    if (this.maxInput.elem instanceof HTMLInputElement) {
-      if (parseInt(this.maxInput.elem.value, 10) > (this.rangeMax - 1)) {
-        this.maxInput.elem.setAttribute('data-value', this.rangeMax.toString());
+  change(type: RangeTypes) {
+    this.inputRange1.elem.addEventListener('input', () => {
+      if (this.inputRange1.elem instanceof HTMLInputElement &&
+        this.inputNum1.elem instanceof HTMLInputElement) {
+        console.log(this.inputNum1.elem.value);
+        this.progress.elem.style.left = `${(Number(this.inputRange1.elem.value) * 100)
+          / Number(this.inputRange1.elem.max)}%`;
+        this.inputNum1.elem.value = this.inputRange1.elem.value;
       }
-    }
-
-    /* write value and labels */
-    if (this.maxInput.elem instanceof HTMLInputElement && this.minInput.elem instanceof HTMLInputElement) {
-      this.maxInput.elem.value = this.maxInput.elem.getAttribute('data-value')!;
-      this.minInput.elem.value = this.minInput.elem.getAttribute('data-value')!;
-      this.initialValue.elem.innerHTML = this.minInput.elem.getAttribute('data-value')!;
-      this.finalValue.elem.innerHTML = this.maxInput.elem.getAttribute('data-value')!;
-    }
-  }
-
-  init(slider: HTMLElement) {
-    /* set function vars */
-    this.thumbSize = 16;
-    this.rangeMin = parseInt(this.minInput.elem.getAttribute('min')!, 10);
-    this.rangeMax = parseInt(this.maxInput.elem.getAttribute('max')!, 10);
-    this.averageValue = (this.rangeMin + this.rangeMax) / 2;
-
-    this.legendNum = slider.getAttribute('data-legendnum')!;
-
-    /* set data-values */
-    this.minInput.elem.setAttribute('data-value', this.rangeMin.toString());
-    this.maxInput.elem.setAttribute('data-value', this.rangeMax.toString());
-
-    /* set data vars */
-    slider.setAttribute('data-rangemin', this.rangeMin.toString());
-    slider.setAttribute('data-rangemax', this.rangeMax.toString());
-    slider.setAttribute('data-thumbsize', this.thumbSize.toString());
-    slider.setAttribute('data-rangewidth', slider.offsetWidth.toString());
-
-    const arrLegend:HTMLElement[] = [];
-    for (let i = 0; i < parseInt(this.legendNum, 10); i++) {
-      const legendvalue = new BaseComponent({
-        tag: 'div',
-        textContent: (Math.round(this.rangeMin + (i / (parseInt(this.legendNum!, 10) - 1))
-        * (this.rangeMax - this.rangeMin))).toString(),
-      });
-      arrLegend.push(legendvalue.elem);
-      this.legend.addChildren(...arrLegend);
-    }
-
-    /* draw */
-    this.draw(this.minmaxWrapper.elem, this.averageValue);
-
-    /* events */
-    this.minInput.elem.addEventListener('input', () => {
-      this.update();
     });
-    this.maxInput.elem.addEventListener('input', () => {
-      this.update();
+
+    this.inputRange1.elem.addEventListener('mouseup', () => {
+      this.show(type);
+    });
+
+    this.inputRange2.elem.addEventListener('input', () => {
+      if (this.inputRange2.elem instanceof HTMLInputElement && this.inputNum2.elem instanceof HTMLInputElement) {
+        this.progress.elem.style.right = `${100 - (Number(this.inputRange2.elem.value) * 100) /
+        Number(this.inputRange2.elem.max)}%`;
+        this.inputNum2.elem.value = this.inputRange2.elem.value;
+      }
+    });
+
+    this.inputRange2.elem.addEventListener('mouseup', () => {
     });
   }
 
-  update() {
-    if (this.minInput.elem instanceof HTMLInputElement && this.maxInput.elem instanceof HTMLInputElement) {
-      /* set inactive values before draw */
-      this.minInput.elem.setAttribute('data-value', parseInt(this.minInput.elem.value, 10).toString());
-      this.maxInput.elem.setAttribute('data-value', parseInt(this.maxInput.elem.value, 10).toString());
+  async getProducts() {
+    const promise = await fetch('https://dummyjson.com/products')
+      .then((res) => res.json())
+      .then((json) => json.products);
+    return promise;
+  }
 
-      /* draw */
-      this.draw(this.minmaxWrapper.elem, this.averageValue);
+  async show(target: RangeTypes) {
+    const productsElem = await this.getProducts();
+    const productsFilterElem:IProduct[] = [];
+    productsElem.map((item: IProduct) => {
+      if (this.inputRange1.elem instanceof HTMLInputElement && this.inputRange2.elem instanceof HTMLInputElement) {
+        if (item[target] >= Number(this.inputRange1.elem.value)
+        && item[target] <= Number(this.inputRange2.elem.value)) {
+          productsFilterElem.push(item);
+        }
+      }
+      return productsFilterElem;
+    });
+
+    const newRender = document.querySelector<HTMLElement>('.proposals__list');
+    newRender!.innerHTML = '';
+    console.log(productsFilterElem);
+    productsFilterElem.map((item: IProduct) => {
+      const elem = new ProductCard(
+        item.id,
+        item.title,
+        item.rating,
+        item.price,
+        item.category,
+        item.thumbnail,
+        item.images,
+        item.stock,
+        item.brand,
+        item.description,
+        item.discountPercentage,
+      );
+      elem.render();
+      newRender?.appendChild(elem.elem);
+      return elem.elem;
+    });
+  }
+
+  async getFiltersView(type: RangeTypes) {
+    const productsElem = await this.getProducts();
+    const a = this.getFilter(productsElem, type);
+    console.log(a);
+    const forFilters = a.sort((a, b) => parseInt(a, 10) - parseInt(b, 10));
+    if (this.inputRange1.elem instanceof HTMLInputElement &&
+      this.inputRange2.elem instanceof HTMLInputElement &&
+      this.inputNum1.elem instanceof HTMLInputElement &&
+      this.inputNum2.elem instanceof HTMLInputElement) {
+      this.inputNum1.elem.placeholder = forFilters.slice(0, 1).join('');
+      this.inputRange1.elem.min = forFilters.slice(0, 1).join('');
+      this.inputRange1.elem.max = forFilters.slice(-1).join('');
+      this.inputRange2.elem.min = forFilters.slice(0, 1).join('');
+      this.inputNum2.elem.placeholder = forFilters.slice(-1).join('');
+      this.inputRange2.elem.max = forFilters.slice(-1).join('');
+      this.inputRange2.elem.value = forFilters.slice(-1).join('');
     }
+  }
+
+  getFilter(arr: ProductCard[], type: RangeTypes) {
+    const filterPart: string[] = [];
+    arr.map((item) => {
+      filterPart.push(item[type].toString());
+      // console.log(filterPart);
+      return filterPart;
+    });
+    return filterPart;
   }
 }
