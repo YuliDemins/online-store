@@ -59,7 +59,7 @@
     "implicit-arrow-linebreak": 0,
     "no-nested-ternary": 0,
     "no-shadow": 0,
-    "max-len": ["error", { "code": 120 }],
+    "max-len": ["error", { "code": 170 }],
     "no-loop-func": "off",
     "@typescript-eslint/no-loop-func": "off"
   }

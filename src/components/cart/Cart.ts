@@ -1,6 +1,7 @@
 import { app } from '@/index';
 import { IProductData } from '@/interfaces/product';
 import { BaseComponent } from '@/services/BaseComponent';
+import { Modal } from './modal/modal';
 import { Order } from './order';
 import { Total } from './total';
 
@@ -16,6 +17,8 @@ export class Cart extends BaseComponent {
   orders: Order[];
 
   total: Total;
+
+  Modal: Modal;
 
   constructor() {
     super({
@@ -67,12 +70,17 @@ export class Cart extends BaseComponent {
 
     this.total = new Total();
     this.total.render();
+
+    this.Modal = new Modal();
+    this.Modal.render();
+
+    this.onBuyBtn();
   }
 
   render() {
     this.shopping.addChildren(...this.orders);
     this.wrapper.addChildren(this.shopping.elem, this.total);
-    this.addChildren(this.prev.elem, this.title.elem, this.wrapper.elem);
+    this.addChildren(this.prev.elem, this.title.elem, this.wrapper.elem, this.Modal);
   }
 
   updateOnCount() {
@@ -86,5 +94,12 @@ export class Cart extends BaseComponent {
 
     app.header.Cart.updateCartNum();
     app.header.updateTotal();
+  }
+
+  onBuyBtn() {
+    this.total.totalBtn.elem.addEventListener('click', () => {
+      this.Modal.elem.classList.remove('hide');
+      this.Modal.elem.classList.add('show');
+    });
   }
 }

@@ -6,7 +6,7 @@ import { Promo } from './promo';
 import { PromoUsedCode } from './promoUsedCode';
 
 export class Total extends BaseComponent {
-  private title;
+  private title: BaseComponent;
 
   totalCount: BaseComponent;
 
