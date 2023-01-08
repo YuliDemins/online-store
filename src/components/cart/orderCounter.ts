@@ -8,7 +8,7 @@ export class OrderCounter extends ProductCardCounter {
 
   onCountChange(callback: () => void, id: number) {
     this.counterDec.elem.addEventListener('click', () => {
-      if (this.count.elem.getAttribute('oldValue') === '2') {
+      if (this.count.elem.getAttribute('oldvalue') === '1' && this.count.elem.getAttribute('value') === '1') {
         let arr = JSON.parse(window.localStorage.getItem('productsList') ?? '[]');
         arr = arr.filter((item: IProductData) => item.id !== id);
         window.localStorage.setItem('productsList', JSON.stringify(arr));
