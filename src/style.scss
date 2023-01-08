@@ -19,6 +19,7 @@ $hover_color: rgb(66, 176, 10);
 @import './components/cart/cart.scss';
 @import './components/cart/order.scss';
 @import './components/cart/total.scss';
+@import './components/cart/modal/modal.scss';
 @import './components/filters/filterRangeItem.scss';
 @import './components/sort/sort.scss';
 
@@ -32,6 +33,10 @@ $hover_color: rgb(66, 176, 10);
   font-weight: 26px;
   color: $text_color;
   user-select: none;
+}
+
+button {
+  cursor: pointer;
 }
 
 .hide {
