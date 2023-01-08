@@ -1,41 +1,33 @@
-// import { IProduct } from '@/interfaces/product';
 import { BaseComponent } from '@/services/BaseComponent';
-import { ProductCard } from '../products/productCard';
 import { FilterСheckboxItem } from './filterCheckboxItem';
 import { FilterRangeItem } from './filterRangeItem';
 import { Acc } from '../../types/interfaces/acc';
 import { CheckboxTypes } from '@/types/CheckboxTypes';
+import { getProducts } from '@/services/api';
+import { IProduct } from '@/types/interfaces/product';
 
 export class Filters extends BaseComponent {
-  categoryItem1;
-
-  title1;
-
   filterCategory;
 
-  categoryItem2;
+  filterCheckboxBrand;
 
-  title2;
+  filterCheckboxBrandTitle;
 
-  filterItem1!: BaseComponent | HTMLElement;
+  filterRangePriceTitle: BaseComponent;
 
-  form!: BaseComponent;
+  filterRangeStock: BaseComponent;
 
-  input!: BaseComponent;
+  filterRangeStockTitle: BaseComponent;
 
-  span!: BaseComponent;
+  filterRangePrice: BaseComponent;
 
-  categoryItem3: BaseComponent;
+  filterCheckboxCategory: BaseComponent;
 
-  title3: BaseComponent;
+  filterCheckboxCategoryTitle: BaseComponent;
 
-  categoryItem4: BaseComponent;
+  filterRangePriceItem: FilterRangeItem;
 
-  title4: BaseComponent;
-
-  filterRange1: FilterRangeItem;
-
-  filterRange2: FilterRangeItem;
+  filterRangeStockItem: FilterRangeItem;
 
   constructor() {
     super({
@@ -48,75 +40,75 @@ export class Filters extends BaseComponent {
       className: 'filter-category',
     });
 
-    this.categoryItem1 = new BaseComponent({
+    this.filterCheckboxCategory = new BaseComponent({
       tag: 'div',
       className: 'filter-category-item',
     });
 
-    this.title1 = new BaseComponent({
+    this.filterCheckboxCategoryTitle = new BaseComponent({
       tag: 'h3',
       className: 'filter-category-item-title',
       textContent: 'Category',
     });
 
-    this.categoryItem2 = new BaseComponent({
+    this.filterCheckboxBrand = new BaseComponent({
       tag: 'div',
       className: 'filter-category-item',
     });
 
-    this.title2 = new BaseComponent({
+    this.filterCheckboxBrandTitle = new BaseComponent({
       tag: 'h3',
       className: 'filter-category-item-title',
       textContent: 'Brand',
     });
 
-    this.categoryItem3 = new BaseComponent({
+    this.filterRangePrice = new BaseComponent({
       tag: 'div',
       className: 'filter-category-item',
     });
 
-    this.title3 = new BaseComponent({
+    this.filterRangePriceTitle = new BaseComponent({
       tag: 'h3',
       className: 'filter-category-item-title',
       textContent: 'Price',
     });
 
-    this.categoryItem4 = new BaseComponent({
+    this.filterRangeStock = new BaseComponent({
       tag: 'div',
       className: 'filter-category-item',
     });
 
-    this.title4 = new BaseComponent({
+    this.filterRangeStockTitle = new BaseComponent({
       tag: 'h3',
       className: 'filter-category-item-title',
       textContent: 'Stock',
     });
 
-    this.filterRange1 = new FilterRangeItem('price');
+    this.filterRangePriceItem = new FilterRangeItem('price');
 
-    this.filterRange2 = new FilterRangeItem('stock');
+    this.filterRangeStockItem = new FilterRangeItem('stock');
   }
 
   render() {
-    this.filterRange1.render('price');
-    this.filterRange2.render('stock');
+    this.filterRangePriceItem.render('price');
+    this.filterRangeStockItem.render('stock');
     this.getFiltersView('category');
     this.getFiltersView('brand');
-    this.categoryItem1.addChildren(this.title1);
-    this.categoryItem2.addChildren(this.title2);
-    this.categoryItem3.addChildren(this.title3, this.filterRange1.elem);
-    this.categoryItem4.addChildren(this.title4, this.filterRange2.elem);
+    this.filterCheckboxCategory.addChildren(this.filterCheckboxCategoryTitle.elem);
+    this.filterCheckboxBrand.addChildren(this.filterCheckboxBrandTitle.elem);
+    this.filterRangePrice.addChildren(this.filterRangePriceTitle.elem, this.filterRangePriceItem.elem);
+    this.filterRangeStock.addChildren(this.filterRangeStockTitle, this.filterRangeStockItem.elem);
     this.filterCategory.addChildren(
-      this.categoryItem1.elem,
-      this.categoryItem2.elem,
-      this.categoryItem3.elem,
-      this.categoryItem4.elem,
+      this.filterCheckboxCategory.elem,
+      this.filterCheckboxBrand.elem,
+      this.filterRangePrice.elem,
+      this.filterRangeStock.elem,
     );
     this.addChildren(this.filterCategory.elem);
   }
 
   async getFiltersView(type: CheckboxTypes) {
-    const productsElem = await this.getProducts();
+    const productsElem = await getProducts();
     // const a = this.getFilter(productsElem, 'category');
     const forFilters = Object.keys(this.getFilter(productsElem, type));
     const filtergo:BaseComponent[] = [];
@@ -126,10 +118,12 @@ export class Filters extends BaseComponent {
       filtergo.push(elem);
       return elem;
     });
-    type === 'category' ? this.categoryItem1.addChildren(...filtergo) : this.categoryItem2.addChildren(...filtergo);
+    type === 'category' ?
+      this.filterCheckboxCategory.addChildren(...filtergo)
+      : this.filterCheckboxBrand.addChildren(...filtergo);
   }
 
-  getFilter(arr: ProductCard[], type: CheckboxTypes) {
+  getFilter(arr: IProduct[], type: CheckboxTypes) {
     const filterPart: string[] = [];
     arr.map((item) => {
       filterPart.push(item[type]);
@@ -144,13 +138,13 @@ export class Filters extends BaseComponent {
     return some;
   }
 
-  async getProducts() {
-    const promise = await fetch('https://dummyjson.com/products')
-      .then((res) => res.json())
-      .then((json) => json.products);
-    // console.log(promise);
-    return promise;
-  }
+  // async getProducts() {
+  //   const promise = await fetch('https://dummyjson.com/products')
+  //     .then((res) => res.json())
+  //     .then((json) => json.products);
+  //   // console.log(promise);
+  //   return promise;
+  // }
 
   // async show() {
   //   const productsElem = await this.getProducts();

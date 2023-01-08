@@ -1,9 +1,12 @@
 import { IProduct } from '@/types/interfaces/product';
 import { BaseComponent } from '@/services/BaseComponent';
 import { ProductCard } from './productCard';
+import { Sort } from '../sort/sort';
 
 export class ProductList extends BaseComponent {
   listItem: BaseComponent;
+
+  sort: Sort;
 
   constructor() {
     super({
@@ -15,6 +18,9 @@ export class ProductList extends BaseComponent {
       tag: 'div',
       className: 'proposals__list',
     });
+
+    this.sort = new Sort();
+    this.sort.render();
   }
 
   async render() {
@@ -38,7 +44,7 @@ export class ProductList extends BaseComponent {
     });
 
     this.listItem.addChildren(...productsElem);
-    this.addChildren(this.listItem);
+    this.addChildren(this.sort.elem, this.listItem);
   }
 
   async getProducts() {
