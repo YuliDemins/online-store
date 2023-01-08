@@ -1,5 +1,5 @@
 import { app } from '@/index';
-import { IProductData } from '@/interfaces/product';
+import { IProductData } from '@/types/interfaces/product';
 import { BaseComponent } from '@/services/BaseComponent';
 import { Modal } from './modal/modal';
 import { Order } from './order';
@@ -29,7 +29,7 @@ export class Cart extends BaseComponent {
     this.prev = new BaseComponent({
       tag: 'a',
       className: 'prev',
-      textContent: 'Вернуться к покупкам',
+      textContent: 'Back to shopping',
       attributes: {
         href: '#main',
       },
@@ -38,7 +38,7 @@ export class Cart extends BaseComponent {
     this.title = new BaseComponent({
       tag: 'h3',
       className: 'shopping-title',
-      textContent: 'Корзина',
+      textContent: 'Cart',
     });
 
     this.wrapper = new BaseComponent({

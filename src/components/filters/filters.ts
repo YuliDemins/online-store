@@ -1,8 +1,10 @@
 // import { IProduct } from '@/interfaces/product';
 import { BaseComponent } from '@/services/BaseComponent';
 import { ProductCard } from '../products/productCard';
-// import { ProductList } from '../products/productList';
-import { FiltersItem } from './filterItem';
+import { FilterСheckboxItem } from './filterCheckboxItem';
+import { FilterRangeItem } from './filterRangeItem';
+import { Acc } from '../../types/interfaces/acc';
+import { CheckboxTypes } from '@/types/CheckboxTypes';
 
 export class Filters extends BaseComponent {
   categoryItem1;
@@ -22,6 +24,18 @@ export class Filters extends BaseComponent {
   input!: BaseComponent;
 
   span!: BaseComponent;
+
+  categoryItem3: BaseComponent;
+
+  title3: BaseComponent;
+
+  categoryItem4: BaseComponent;
+
+  title4: BaseComponent;
+
+  filterRange1: FilterRangeItem;
+
+  filterRange2: FilterRangeItem;
 
   constructor() {
     super({
@@ -55,24 +69,59 @@ export class Filters extends BaseComponent {
       className: 'filter-category-item-title',
       textContent: 'Brand',
     });
+
+    this.categoryItem3 = new BaseComponent({
+      tag: 'div',
+      className: 'filter-category-item',
+    });
+
+    this.title3 = new BaseComponent({
+      tag: 'h3',
+      className: 'filter-category-item-title',
+      textContent: 'Price',
+    });
+
+    this.categoryItem4 = new BaseComponent({
+      tag: 'div',
+      className: 'filter-category-item',
+    });
+
+    this.title4 = new BaseComponent({
+      tag: 'h3',
+      className: 'filter-category-item-title',
+      textContent: 'Stock',
+    });
+
+    this.filterRange1 = new FilterRangeItem('price');
+
+    this.filterRange2 = new FilterRangeItem('stock');
   }
 
   render() {
+    this.filterRange1.render('price');
+    this.filterRange2.render('stock');
     this.getFiltersView('category');
     this.getFiltersView('brand');
     this.categoryItem1.addChildren(this.title1);
     this.categoryItem2.addChildren(this.title2);
-    this.filterCategory.addChildren(this.categoryItem1.elem, this.categoryItem2.elem);
+    this.categoryItem3.addChildren(this.title3, this.filterRange1.elem);
+    this.categoryItem4.addChildren(this.title4, this.filterRange2.elem);
+    this.filterCategory.addChildren(
+      this.categoryItem1.elem,
+      this.categoryItem2.elem,
+      this.categoryItem3.elem,
+      this.categoryItem4.elem,
+    );
     this.addChildren(this.filterCategory.elem);
   }
 
-  async getFiltersView(type: 'category' | 'brand') {
+  async getFiltersView(type: CheckboxTypes) {
     const productsElem = await this.getProducts();
     // const a = this.getFilter(productsElem, 'category');
     const forFilters = Object.keys(this.getFilter(productsElem, type));
     const filtergo:BaseComponent[] = [];
     forFilters.map((item) => {
-      const elem = new FiltersItem(item);
+      const elem = new FilterСheckboxItem(item);
       elem.render();
       filtergo.push(elem);
       return elem;
@@ -80,17 +129,18 @@ export class Filters extends BaseComponent {
     type === 'category' ? this.categoryItem1.addChildren(...filtergo) : this.categoryItem2.addChildren(...filtergo);
   }
 
-  getFilter(arr: ProductCard[], type: 'category' | 'brand') {
+  getFilter(arr: ProductCard[], type: CheckboxTypes) {
     const filterPart: string[] = [];
     arr.map((item) => {
       filterPart.push(item[type]);
+      // console.log(filterPart)
       return filterPart;
     });
-    const some = filterPart.reduce((acc, item) => {
+
+    const some = filterPart.reduce((acc: Acc, item) => {
       acc[item] = (acc[item] || 0) + 1;
       return acc;
     }, {});
-    // console.log(some);
     return some;
   }
 

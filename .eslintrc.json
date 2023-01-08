@@ -61,6 +61,7 @@
     "no-shadow": 0,
     "max-len": ["error", { "code": 170 }],
     "no-loop-func": "off",
-    "@typescript-eslint/no-loop-func": "off"
+    "@typescript-eslint/no-loop-func": "off",
+    "prefer-destructuring": "off"
   }
 }

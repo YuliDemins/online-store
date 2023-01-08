@@ -1,4 +1,4 @@
-import { IProduct } from '@/interfaces/product';
+import { IProduct } from '@/types/interfaces/product';
 import { BaseComponent } from '@/services/BaseComponent';
 import { OrderCounter } from './orderCounter';
 
@@ -85,7 +85,7 @@ export class Order extends BaseComponent {
     this.inStock = new BaseComponent({
       tag: 'div',
       className: 'order__instock',
-      textContent: 'В наличии ',
+      textContent: 'in stock ',
     });
 
     this.inStockSpan = new BaseComponent({

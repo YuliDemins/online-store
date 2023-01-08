@@ -25,7 +25,7 @@ export class Promo extends BaseComponent {
       className: 'total__input',
       attributes: {
         type: 'text',
-        placeholder: 'Ввести промокод',
+        placeholder: 'enter promocode',
       },
     });
 

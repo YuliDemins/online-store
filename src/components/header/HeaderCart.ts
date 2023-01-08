@@ -1,4 +1,4 @@
-import { IProductData } from '@/interfaces/product';
+import { IProductData } from '@/types/interfaces/product';
 import { BaseComponent } from '@/services/BaseComponent';
 
 export class HeaderCart extends BaseComponent {
@@ -27,7 +27,7 @@ export class HeaderCart extends BaseComponent {
     this.cartShoppingTitle = new BaseComponent({
       tag: 'a',
       className: 'cart__title',
-      textContent: 'Корзина',
+      textContent: 'Cart',
       attributes: {
         href: '#cart',
       },

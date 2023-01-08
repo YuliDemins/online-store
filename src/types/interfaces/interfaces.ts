@@ -1,4 +1,4 @@
-import { AppRoute } from '@/enums/routes';
+import { AppRoute } from '@/types/enums/routes';
 
 export interface Route {
   name: AppRoute;

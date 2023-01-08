@@ -1,5 +1,5 @@
-import { IPromo } from '@/interfaces/interfaces';
-import { IProductData } from '@/interfaces/product';
+import { IPromo } from '@/types/interfaces/interfaces';
+import { IProductData } from '@/types/interfaces/product';
 import { BaseComponent } from '@/services/BaseComponent';
 import { promoState } from '@/states/promoState';
 import { Promo } from './promo';
@@ -43,7 +43,7 @@ export class Total extends BaseComponent {
     this.title = new BaseComponent({
       tag: 'div',
       className: 'total__title',
-      textContent: 'В корзине',
+      textContent: 'In cart',
     });
 
     this.totalCount = new BaseComponent({
@@ -55,7 +55,7 @@ export class Total extends BaseComponent {
     this.totalBtn = new BaseComponent({
       tag: 'button',
       className: 'total__btn',
-      textContent: ' Перейти к оформлению',
+      textContent: 'Buy now',
     });
   }
 

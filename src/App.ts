@@ -1,4 +1,4 @@
-import { AppRoute } from './enums/routes';
+import { AppRoute } from './types/enums/routes';
 import { Router } from './services/Router';
 import { BaseComponent } from './services/BaseComponent';
 import { Header } from './components/header/header';

@@ -1,4 +1,4 @@
-import { IProductData } from '@/interfaces/product';
+import { IProductData } from '@/types/interfaces/product';
 import { ProductCardCounter } from '../products/productCardCounter';
 
 export class OrderCounter extends ProductCardCounter {

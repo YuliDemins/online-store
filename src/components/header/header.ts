@@ -1,4 +1,4 @@
-import { IProductData } from '@/interfaces/product';
+import { IProductData } from '@/types/interfaces/product';
 import { BaseComponent } from '@/services/BaseComponent';
 import { HeaderCart } from './HeaderCart';
 import { HeaderInput } from './headerInput';
@@ -7,12 +7,6 @@ export class Header extends BaseComponent {
   private wrapper;
 
   private title;
-
-  private mainSearch;
-
-  private mainSearchBtn;
-
-  private mainSearchInput;
 
   public Cart: HeaderCart;
 
@@ -34,26 +28,7 @@ export class Header extends BaseComponent {
     this.title = new BaseComponent({
       tag: 'h1',
       className: 'header__title',
-      textContent: 'Store',
-    });
-
-    this.mainSearch = new BaseComponent({
-      tag: 'form',
-      className: 'main-search',
-    });
-
-    this.mainSearchInput = new BaseComponent({
-      tag: 'input',
-      className: 'main-search__input',
-      attributes: {
-        type: 'text',
-        placeholder: 'Поиск по товарам',
-      },
-    });
-
-    this.mainSearchBtn = new BaseComponent({
-      tag: 'button',
-      className: 'main-search__btn',
+      textContent: 'SmartStore',
     });
 
     this.input = new HeaderInput();
@@ -70,9 +45,7 @@ export class Header extends BaseComponent {
   }
 
   render() {
-    this.mainSearch.addChildren(this.mainSearchInput.elem, this.mainSearchBtn.elem);
-    this.wrapper.addChildren(this.title.elem, this.mainSearch.elem, this.totalSum.elem, this.Cart.elem);
-
+    this.wrapper.addChildren(this.title.elem, this.input.elem, this.Cart.elem);
     this.addChildren(this.wrapper.elem);
   }
 

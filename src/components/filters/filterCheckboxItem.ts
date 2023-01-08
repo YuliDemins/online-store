@@ -1,8 +1,8 @@
-import { IProduct } from '@/interfaces/product';
+import { IProduct } from '@/types/interfaces/product';
 import { BaseComponent } from '@/services/BaseComponent';
 import { ProductCard } from '../products/productCard';
 
-export class FiltersItem extends BaseComponent {
+export class FilterСheckboxItem extends BaseComponent {
   span: BaseComponent;
 
   input:BaseComponent;
@@ -19,7 +19,6 @@ export class FiltersItem extends BaseComponent {
       className: 'filter-category-input',
       attributes: {
         type: 'checkbox',
-        // target: '_blank',
         name: 'brand',
         value: elem,
       },
@@ -56,14 +55,14 @@ export class FiltersItem extends BaseComponent {
     const promise = await fetch('https://dummyjson.com/products')
       .then((res) => res.json())
       .then((json) => json.products);
-    // console.log(promise);
+    console.log(promise);
     return promise;
   }
 
   async show(target = '') {
     const productsElem = await this.getProducts();
-    const productsFilterElem:ProductCard[] = [];
-    productsElem.map((item: ProductCard) => {
+    const productsFilterElem:IProduct[] = [];
+    productsElem.map((item: IProduct) => {
       if (item.category === target || item.brand === target) {
         productsFilterElem.push(item);
       }
