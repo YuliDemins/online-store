@@ -119,7 +119,7 @@ export class Filters extends BaseComponent {
       return elem;
     });
     type === 'category' ?
-      this.filterCheckboxCategoryTitle.addChildren(...filtergo)
+      this.filterCheckboxCategory.addChildren(...filtergo)
       : this.filterCheckboxBrand.addChildren(...filtergo);
   }
 
