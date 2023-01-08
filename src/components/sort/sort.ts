@@ -90,7 +90,10 @@ export class Sort extends BaseComponent {
       textContent: 'rating',
     });
 
-    this.sort();
+    this.sort(this.sortPriceUp.elem, (a, b) => a.price - b.price);
+    this.sort(this.sortPriceDown.elem, (a, b) => b.price - a.price);
+    this.sort(this.sortRatingUp.elem, (a, b) => a.rating - b.rating);
+    this.sort(this.sortRatingDown.elem, (a, b) => b.rating - a.rating);
   }
 
   render() {
@@ -105,7 +108,6 @@ export class Sort extends BaseComponent {
     const productsElem = await getProducts();
 
     productsElem.sort(callback);
-    // console.log(productsElem);
 
     const newRender = document.querySelector<HTMLElement>('.proposals__list');
     newRender!.innerHTML = '';
@@ -129,30 +131,19 @@ export class Sort extends BaseComponent {
     });
   }
 
-  sort() {
-    this.sortPriceUp.elem.addEventListener('click', () => {
-      if (this.sortPriceUp.elem.classList.contains('active_sort')) {
-        this.sortPriceUp.elem.classList.remove('active_sort');
-        this.show((a: { rating: number; }, b: { rating: number; }) => b.rating - a.rating);
-      } else {
-        this.sortPriceUp.elem.classList.add('active_sort');
-        this.show((a: { price: number; }, b: { price: number; }) => a.price - b.price);
-      }
+  sort(el: HTMLElement, callback: ((a: IProduct, b: IProduct) => number) | undefined) {
+    el.addEventListener('click', () => {
+      this.defineStyles(el, callback);
     });
+  }
 
-    this.sortPriceDown.elem.addEventListener('click', () => {
-      this.sortPriceDown.elem.classList.add('active_sort');
-      this.show((a: { price: number; }, b: { price: number; }) => b.price - a.price);
-    });
-
-    this.sortRatingUp.elem.addEventListener('click', () => {
-      this.sortRatingUp.elem.classList.add('active_sort');
-      this.show((a: { rating: number; }, b: { rating: number; }) => a.rating - b.rating);
-    });
-
-    this.sortRatingDown.elem.addEventListener('click', () => {
-      this.sortRatingDown.elem.classList.add('active_sort');
+  defineStyles(el: HTMLElement, callback: ((a: IProduct, b: IProduct) => number) | undefined) {
+    if (el.classList.contains('active_sort')) {
+      el.classList.remove('active_sort');
       this.show((a: { rating: number; }, b: { rating: number; }) => b.rating - a.rating);
-    });
+    } else {
+      el.classList.add('active_sort');
+      this.show(callback);
+    }
   }
 }
