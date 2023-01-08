@@ -45,7 +45,7 @@ export class Header extends BaseComponent {
   }
 
   render() {
-    this.wrapper.addChildren(this.title.elem, this.input.elem, this.Cart.elem);
+    this.wrapper.addChildren(this.title.elem, this.input.elem, this.totalSum, this.Cart.elem);
     this.addChildren(this.wrapper.elem);
   }
 
