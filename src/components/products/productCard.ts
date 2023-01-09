@@ -153,7 +153,7 @@ export class ProductCard extends BaseComponent {
       className: 'proposals__list-item-title-link',
       textContent: `${this.name}`,
       attributes: {
-        href: '#',
+        href: `?productId=${this.id}#product`,
       },
     });
 

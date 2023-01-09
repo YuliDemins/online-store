@@ -1,11 +1,11 @@
 import { BaseComponent } from '@/services/BaseComponent';
 
 export class ProductCardCounter extends BaseComponent {
-  public count;
+  public count: BaseComponent;
 
-  public counterDec;
+  public counterDec: BaseComponent;
 
-  public counterInc;
+  public counterInc: BaseComponent;
 
   constructor(limit: number) {
     super({

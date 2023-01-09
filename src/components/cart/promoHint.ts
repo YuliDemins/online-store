@@ -2,11 +2,11 @@ import { IPromo } from '@/types/interfaces/interfaces';
 import { BaseComponent } from '@/services/BaseComponent';
 
 export class PromoHint extends BaseComponent {
-  promoHintBtn;
+  promoHintBtn: BaseComponent;
 
-  promoHintText;
+  promoHintText: BaseComponent;
 
-  promoHintInner;
+  promoHintInner: BaseComponent;
 
   constructor() {
     super({

@@ -3,11 +3,11 @@ import { BaseComponent } from '@/services/BaseComponent';
 import { PromoUsedCode } from './promoUsedCode';
 
 export class PromoUsed extends BaseComponent {
-  promoUsedTitle;
+  promoUsedTitle: BaseComponent;
 
-  promoUsedCodes;
+  promoUsedCodes: BaseComponent;
 
-  promoUsedCode;
+  promoUsedCode: PromoUsedCode[];
 
   constructor(newTitle: BaseComponent, oldTitle: BaseComponent) {
     super({
