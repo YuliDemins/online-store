@@ -1,9 +1,9 @@
 import { BaseComponent } from '@/services/BaseComponent';
 
 export class PromoUsedCode extends BaseComponent {
-  promoUsedCodeName;
+  promoUsedCodeName: BaseComponent;
 
-  promoUsedCodeBtn;
+  promoUsedCodeBtn: BaseComponent;
 
   id: string;
 

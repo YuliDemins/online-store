@@ -30,7 +30,7 @@ export class App extends BaseComponent {
 
     if (root) {
       this.createRouter();
-      window.location.hash = '#main';
+      window.location.hash = '#product';
 
       root.append(preloader.elem, this.header.elem, this.elem, footer.elem);
       preloader.hide();
@@ -57,6 +57,15 @@ export class App extends BaseComponent {
             const cartPage = new Cart();
             cartPage.render();
             return cartPage.elem;
+          },
+        },
+        {
+          name: AppRoute.Product,
+          component: async () => {
+            const { ProductPage } = await import('./components/productPage/productPage');
+            const productPage = new ProductPage();
+            productPage.render();
+            return productPage.elem;
           },
         },
       ],

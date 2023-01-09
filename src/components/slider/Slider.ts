@@ -45,11 +45,13 @@ export class Slider {
     if (item.elemCount <= 1) { // Отключить навигацию
       item.options.dots = false;
     }
+
     if (item.elemCount >= 1) { // показать первый элемент
       if (item.sliderElemFirst instanceof HTMLElement) {
         item.sliderElemFirst.style.opacity = '1';
       }
     }
+
     if (item.options.dots) { // инициализация индикаторных точек
       let sum = '';
       let numb: number;
@@ -141,5 +143,4 @@ Slider.defaults = {
   interval: 5000, // Интервал между пролистыванием элементов (мс)
   arrows: false, // Пролистывание стрелками
   dots: true, // Индикаторные точки
-
 };
