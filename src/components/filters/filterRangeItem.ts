@@ -144,8 +144,8 @@ export class FilterRangeItem extends BaseComponent {
       }
     });
 
-    this.inputRangeStart.elem.addEventListener('mouseup', () => {
-      this.showRangeFilter(type);
+    this.inputRange1.elem.addEventListener('mouseup', () => {
+      this.show(type);
     });
 
     this.inputRangeEnd.elem.addEventListener('input', () => {
@@ -156,13 +156,19 @@ export class FilterRangeItem extends BaseComponent {
       }
     });
 
-    this.inputRangeEnd.elem.addEventListener('mouseup', () => {
-      this.showRangeFilter(type);
+    this.inputRange2.elem.addEventListener('mouseup', () => {
     });
   }
 
-  async showRangeFilter(target: RangeTypes) {
-    const productsElem = await getProducts();
+  async getProducts() {
+    const promise = await fetch('https://dummyjson.com/products')
+      .then((res) => res.json())
+      .then((json) => json.products);
+    return promise;
+  }
+
+  async show(target: RangeTypes) {
+    const productsElem = await this.getProducts();
     const productsFilterElem:IProduct[] = [];
     productsElem.map((item: IProduct) => {
       if (this.inputRangeStart.elem instanceof HTMLInputElement &&
@@ -174,23 +180,46 @@ export class FilterRangeItem extends BaseComponent {
       }
       return productsFilterElem;
     });
-    show(productsFilterElem);
+
+    const newRender = document.querySelector<HTMLElement>('.proposals__list');
+    newRender!.innerHTML = '';
+    console.log(productsFilterElem);
+    productsFilterElem.map((item: IProduct) => {
+      const elem = new ProductCard(
+        item.id,
+        item.title,
+        item.rating,
+        item.price,
+        item.category,
+        item.thumbnail,
+        item.images,
+        item.stock,
+        item.brand,
+        item.description,
+        item.discountPercentage,
+      );
+      elem.render();
+      newRender?.appendChild(elem.elem);
+      return elem.elem;
+    });
   }
 
   async getFiltersView(type: RangeTypes) {
-    const productsElem = await getProducts();
-    const arr = this.getFilter(productsElem, type);
-    const forFilters = arr.sort((a, b) => parseInt(a, 10) - parseInt(b, 10));
-    if (this.inputRangeStart.elem instanceof HTMLInputElement &&
-      this.inputRangeEnd.elem instanceof HTMLInputElement &&
-      this.inputNumStart.elem instanceof HTMLInputElement &&
-      this.inputNumEnd.elem instanceof HTMLInputElement) {
-      this.inputNumStart.elem.placeholder = forFilters.slice(0, 1).join('');
-      this.inputRangeStart.elem.min = forFilters.slice(0, 1).join('');
-      this.inputRangeStart.elem.max = forFilters.slice(-1).join('');
-      this.inputRangeEnd.elem.min = forFilters.slice(0, 1).join('');
-      this.inputNumEnd.elem.placeholder = forFilters.slice(-1).join('');
-      this.inputRangeEnd.elem.max = forFilters.slice(-1).join('');
+    const productsElem = await this.getProducts();
+    const a = this.getFilter(productsElem, type);
+    console.log(a);
+    const forFilters = a.sort((a, b) => parseInt(a, 10) - parseInt(b, 10));
+    if (this.inputRange1.elem instanceof HTMLInputElement &&
+      this.inputRange2.elem instanceof HTMLInputElement &&
+      this.inputNum1.elem instanceof HTMLInputElement &&
+      this.inputNum2.elem instanceof HTMLInputElement) {
+      this.inputNum1.elem.placeholder = forFilters.slice(0, 1).join('');
+      this.inputRange1.elem.min = forFilters.slice(0, 1).join('');
+      this.inputRange1.elem.max = forFilters.slice(-1).join('');
+      this.inputRange2.elem.min = forFilters.slice(0, 1).join('');
+      this.inputNum2.elem.placeholder = forFilters.slice(-1).join('');
+      this.inputRange2.elem.max = forFilters.slice(-1).join('');
+      this.inputRange2.elem.value = forFilters.slice(-1).join('');
     }
   }
 

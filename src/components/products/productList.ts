@@ -9,6 +9,8 @@ export class ProductList extends BaseComponent {
 
   sort: Sort;
 
+  sort: Sort;
+
   constructor() {
     super({
       tag: 'section',
@@ -19,6 +21,9 @@ export class ProductList extends BaseComponent {
       tag: 'div',
       className: 'proposals__list',
     });
+
+    this.sort = new Sort();
+    this.sort.render();
 
     this.sort = new Sort();
     this.sort.render();

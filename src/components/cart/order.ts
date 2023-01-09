@@ -3,27 +3,27 @@ import { BaseComponent } from '@/services/BaseComponent';
 import { OrderCounter } from './orderCounter';
 
 export class Order extends BaseComponent {
-  private number;
+  private number: BaseComponent;
 
-  private image;
+  private image: BaseComponent;
 
-  private info;
+  private info: BaseComponent;
 
-  private title;
+  private title: BaseComponent;
 
-  private desc;
+  private desc: BaseComponent;
 
-  private orderCounter;
+  private orderCounter: OrderCounter;
 
-  private orderPrice;
+  private orderPrice: BaseComponent;
 
-  private orderPriceSpan;
+  private orderPriceSpan: BaseComponent;
 
-  private inStock;
+  private inStock: BaseComponent;
 
-  private inStockSpan;
+  private inStockSpan: BaseComponent;
 
-  private orderDelete;
+  private orderDelete: BaseComponent;
 
   id: number;
 
