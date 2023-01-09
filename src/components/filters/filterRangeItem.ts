@@ -1,8 +1,8 @@
 import { IProduct } from '@/types/interfaces/product';
 import { BaseComponent } from '@/services/BaseComponent';
-import { ProductCard } from '../products/productCard';
 import { RangeTypes } from '@/types/RangeTypes';
 import { getProducts } from '@/services/api';
+import { show } from '@/services/update';
 
 export class FilterRangeItem extends BaseComponent {
   wrapper: BaseComponent;
@@ -145,7 +145,7 @@ export class FilterRangeItem extends BaseComponent {
     });
 
     this.inputRangeStart.elem.addEventListener('mouseup', () => {
-      this.show(type);
+      this.showRangeFilter(type);
     });
 
     this.inputRangeEnd.elem.addEventListener('input', () => {
@@ -157,18 +157,11 @@ export class FilterRangeItem extends BaseComponent {
     });
 
     this.inputRangeEnd.elem.addEventListener('mouseup', () => {
-      this.show(type);
+      this.showRangeFilter(type);
     });
   }
 
-  // async getProducts() {
-  //   const promise = await fetch('https://dummyjson.com/products')
-  //     .then((res) => res.json())
-  //     .then((json) => json.products);
-  //   return promise;
-  // }
-
-  async show(target: RangeTypes) {
+  async showRangeFilter(target: RangeTypes) {
     const productsElem = await getProducts();
     const productsFilterElem:IProduct[] = [];
     productsElem.map((item: IProduct) => {
@@ -181,27 +174,7 @@ export class FilterRangeItem extends BaseComponent {
       }
       return productsFilterElem;
     });
-
-    const newRender = document.querySelector<HTMLElement>('.proposals__list');
-    newRender!.innerHTML = '';
-    productsFilterElem.map((item: IProduct) => {
-      const elem = new ProductCard(
-        item.id,
-        item.title,
-        item.rating,
-        item.price,
-        item.category,
-        item.thumbnail,
-        item.images,
-        item.stock,
-        item.brand,
-        item.description,
-        item.discountPercentage,
-      );
-      elem.render();
-      newRender?.appendChild(elem.elem);
-      return elem.elem;
-    });
+    show(productsFilterElem);
   }
 
   async getFiltersView(type: RangeTypes) {
@@ -218,7 +191,6 @@ export class FilterRangeItem extends BaseComponent {
       this.inputRangeEnd.elem.min = forFilters.slice(0, 1).join('');
       this.inputNumEnd.elem.placeholder = forFilters.slice(-1).join('');
       this.inputRangeEnd.elem.max = forFilters.slice(-1).join('');
-      // this.inputRange2.elem.value = forFilters.slice(-1).join('');
     }
   }
 

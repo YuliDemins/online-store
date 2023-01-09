@@ -2,38 +2,62 @@ import { ProductCard } from '@/components/products/productCard';
 import { IProduct } from '@/types/interfaces/product';
 import { getProducts } from './api';
 
-export const filter = async () => {
-  const productsElem = await getProducts();
-
-  const SortRatingArr = productsElem.sort((a, b) => b.rating - a.rating);
-
-  const filterBtn = document.querySelectorAll('input');
-  // console.log(filterBtn);
-  filterBtn.forEach((item) => {
-    item.addEventListener('click', (e) => {
-      const arr = SortRatingArr.filter((el) => {
-        if (e.target instanceof HTMLInputElement) {
-          // console.log(el.category === e.target.value);
-          return el.category === e.target.value;
-        }
-      });
-      // console.log(arr);
-    });
+export const press = (el: HTMLElement) => {
+  el.addEventListener('input', (e: Event) => {
+    const target = e.target as HTMLInputElement;
+    if (target.type === 'checkbox') {
+      if (el.hasAttribute('checked')) {
+        el.removeAttribute('checked');
+        update(e);
+      } else {
+        el.setAttribute('checked', 'true');
+        console.log(target.value);
+        update(e);
+      }
+    }
+    if (target.type === 'text') filtered(e);
   });
-  // const productsFilterElem:IProduct[] = [];
+};
 
-  // productsElem.map((item: IProduct) => {
-  // if (item.category === target || item.brand === target) {
-  //   productsFilterElem.push(item);
-  // }
+export async function filtered(e: Event) {
+  const productsElem = await getProducts();
+  const copy = [...productsElem];
+  const filteredArr = copy.filter((item:IProduct) => {
+    const target = e.target as HTMLInputElement;
+    const arr = Object.values(item).join(' - ');
+    const regex = new RegExp(target.value, 'i');
+    return regex.test(arr);
+  });
+  show(filteredArr);
+  return filteredArr;
+}
 
-  // });
+async function update(e: Event) {
+  const filteredArr = filtered(e);
+  show(await filteredArr);
 
-  // const price = SortRatingArr.filter((item) => item.price > 1000);
+  const filterType = document.getElementsByTagName('input');
+  const target = e.target as HTMLInputElement;
+  [...filterType].forEach(async (inp) => {
+    if (inp.type === 'checkbox') {
+      if (inp.hasAttribute('checked')) {
+        if (inp.name !== target.name) {
+          const filteredArr1 = (await filteredArr).filter((item:IProduct) => {
+            const arr = Object.values(item).join(',');
+            const regex = new RegExp(inp.value, 'i');
+            return regex.test(arr);
+          });
+          show(filteredArr1);
+        }
+      }
+    }
+  });
+}
 
+export function show(arr: IProduct[]) {
   const newRender = document.querySelector<HTMLElement>('.proposals__list');
   newRender!.innerHTML = '';
-  SortRatingArr.map((item: IProduct) => {
+  arr.map((item: IProduct) => {
     const elem = new ProductCard(
       item.id,
       item.title,
@@ -51,16 +75,4 @@ export const filter = async () => {
     newRender?.appendChild(elem.elem);
     return elem.elem;
   });
-};
-// function listen(el: HTMLElement) {
-  // el.addEventListener('click', (e) => {
-  //   if (e.target instanceof HTMLInputElement) {
-  //     const filtercategory = e.target.name;
-  //     const value = e.target.value
-  //     console.log(e.target.name);
-  //     SortRatingArr.filter((item) => item[filtercategory] === item[value])
-  //   }
-  // });
-// }
-filter();
-// listen()
+}

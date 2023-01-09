@@ -2,6 +2,7 @@ import { IProduct } from '@/types/interfaces/product';
 import { BaseComponent } from '@/services/BaseComponent';
 import { ProductCard } from './productCard';
 import { Sort } from '../sort/sort';
+import { getProducts } from '@/services/api';
 
 export class ProductList extends BaseComponent {
   listItem: BaseComponent;
@@ -24,8 +25,8 @@ export class ProductList extends BaseComponent {
   }
 
   async render() {
-    let productsElem = await this.getProducts();
-    productsElem = productsElem.map((item: IProduct) => {
+    const productsElem = await getProducts();
+    const productsEl = productsElem.map((item: IProduct) => {
       const elem = new ProductCard(
         item.id,
         item.title,
@@ -43,15 +44,7 @@ export class ProductList extends BaseComponent {
       return elem;
     });
 
-    this.listItem.addChildren(...productsElem);
+    this.listItem.addChildren(...productsEl);
     this.addChildren(this.sort.elem, this.listItem);
-  }
-
-  async getProducts() {
-    const promise = await fetch('https://dummyjson.com/products')
-      .then((res) => res.json())
-      .then((json) => json.products);
-    // console.log(promise);
-    return promise;
   }
 }

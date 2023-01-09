@@ -1,7 +1,7 @@
 import { getProducts } from '@/services/api';
 import { BaseComponent } from '@/services/BaseComponent';
 import { IProduct } from '@/types/interfaces/product';
-import { ProductCard } from '../products/productCard';
+import { show } from '../../services/update';
 
 export class Sort extends BaseComponent {
   sortPriceUp: BaseComponent;
@@ -104,31 +104,11 @@ export class Sort extends BaseComponent {
     this.addChildren(this.sortRatingDown.elem, this.sortRatingUp.elem, this.sortPriceDown.elem, this.sortPriceUp.elem);
   }
 
-  async show(callback: ((a: IProduct, b: IProduct) => number) | undefined) {
+  async showSort(callback: ((a: IProduct, b: IProduct) => number) | undefined) {
     const productsElem = await getProducts();
 
     productsElem.sort(callback);
-
-    const newRender = document.querySelector<HTMLElement>('.proposals__list');
-    newRender!.innerHTML = '';
-    productsElem.map((item: IProduct) => {
-      const elem = new ProductCard(
-        item.id,
-        item.title,
-        item.rating,
-        item.price,
-        item.category,
-        item.thumbnail,
-        item.images,
-        item.stock,
-        item.brand,
-        item.description,
-        item.discountPercentage,
-      );
-      elem.render();
-      newRender?.appendChild(elem.elem);
-      return elem.elem;
-    });
+    show(productsElem);
   }
 
   sort(el: HTMLElement, callback: ((a: IProduct, b: IProduct) => number) | undefined) {
@@ -140,10 +120,10 @@ export class Sort extends BaseComponent {
   defineStyles(el: HTMLElement, callback: ((a: IProduct, b: IProduct) => number) | undefined) {
     if (el.classList.contains('active_sort')) {
       el.classList.remove('active_sort');
-      this.show((a: { rating: number; }, b: { rating: number; }) => b.rating - a.rating);
+      this.showSort((a: { rating: number; }, b: { rating: number; }) => b.rating - a.rating);
     } else {
       el.classList.add('active_sort');
-      this.show(callback);
+      this.showSort(callback);
     }
   }
 }
