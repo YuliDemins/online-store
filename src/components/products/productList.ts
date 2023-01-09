@@ -9,8 +9,6 @@ export class ProductList extends BaseComponent {
 
   sort: Sort;
 
-  sort: Sort;
-
   constructor() {
     super({
       tag: 'section',

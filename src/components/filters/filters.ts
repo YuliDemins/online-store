@@ -5,8 +5,6 @@ import { Acc } from '../../types/interfaces/acc';
 import { CheckboxTypes } from '@/types/CheckboxTypes';
 import { getProducts } from '@/services/api';
 import { IProduct } from '@/types/interfaces/product';
-import { getProducts } from '@/services/api';
-import { IProduct } from '@/types/interfaces/product';
 
 export class Filters extends BaseComponent {
   filterCategory;
@@ -110,7 +108,7 @@ export class Filters extends BaseComponent {
   }
 
   async getFiltersView(type: CheckboxTypes) {
-    const productsElem = await this.getProducts();
+    const productsElem = await getProducts();
     // const a = this.getFilter(productsElem, 'category');
     const forFilters = Object.keys(this.getFilter(productsElem, type));
     const filtergo:BaseComponent[] = [];
@@ -138,44 +136,4 @@ export class Filters extends BaseComponent {
     }, {});
     return some;
   }
-
-  async getProducts() {
-    const promise = await fetch('https://dummyjson.com/products')
-      .then((res) => res.json())
-      .then((json) => json.products);
-    // console.log(promise);
-    return promise;
-  }
-
-  // async show() {
-  //   const productsElem = await this.getProducts();
-  //   const productsFilterElem:IProduct[] = [];
-  //   productsElem.map((item: IProduct) => {
-  //     if (item.category === 'smartphones') {
-  //       productsFilterElem.push(item);
-  //       return item;
-  //     }
-  //   });
-
-  //   productsFilterElem.map((item) => {
-  //     const elem = new ProductCard(
-  //       item.id,
-  //       item.title,
-  //       item.rating,
-  //       item.price,
-  //       item.category,
-  //       item.thumbnail,
-  //       item.images,
-  //       item.stock,
-  //       item.brand,
-  //       item.description,
-  //       item.discountPercentage,
-  //     );
-  //     elem.render();
-  //     return elem;
-  //   });
-  //   console.log(productsFilterElem);
-  //   console.log(new ProductList().listItem);
-  //   new ProductList().listItem.addChildren(...productsElem);
-  // }
 }
