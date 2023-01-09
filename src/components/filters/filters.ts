@@ -5,6 +5,7 @@ import { Acc } from '../../types/interfaces/acc';
 import { CheckboxTypes } from '@/types/CheckboxTypes';
 import { getProducts } from '@/services/api';
 import { IProduct } from '@/types/interfaces/product';
+import { filter } from '@/services/update';
 
 export class Filters extends BaseComponent {
   filterCategory;
@@ -105,6 +106,7 @@ export class Filters extends BaseComponent {
       this.filterRangeStock.elem,
     );
     this.addChildren(this.filterCategory.elem);
+    filter();
   }
 
   async getFiltersView(type: CheckboxTypes) {

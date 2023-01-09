@@ -36,7 +36,11 @@ export class HeaderInput extends BaseComponent {
     this.mainSearchBtn.elem.addEventListener('click', (e) => {
       e.preventDefault();
       if (this.mainSearchInput.elem instanceof HTMLInputElement) {
-        console.log(this.mainSearchInput.elem.value);
+        this.show();
+      }
+    });
+    this.mainSearchInput.elem.addEventListener('input', () => {
+      if (this.mainSearchInput.elem instanceof HTMLInputElement) {
         this.show();
       }
     });
@@ -46,32 +50,26 @@ export class HeaderInput extends BaseComponent {
     const promise = await fetch('https://dummyjson.com/products')
       .then((res) => res.json())
       .then((json) => json.products);
-    // console.log(promise);
     return promise;
   }
 
   async show() {
     const productsElem = await this.getProducts();
-    const productsFilterElem:IProduct[] = [];
     const copy = [...productsElem];
-    copy.map((item: IProduct) => {
-      const arr = Object.values(item).map((el) => {
-        delete el.images;
-        delete el.thumbnail;
-        return el.toString().toLowerCase();
-      });
 
+    const filteredArr = copy.filter((item:IProduct) => {
       if (this.mainSearchInput.elem instanceof HTMLInputElement) {
-        if (arr.includes(this.mainSearchInput.elem.value)) {
-          productsFilterElem.push(item);
-        }
+        const arr = Object.values(item).join(' - ');
+        const regex = new RegExp(this.mainSearchInput.elem.value);
+        if (regex.test(arr)) {
+          return item;
+        } return false;
       }
-      return productsFilterElem;
     });
+
     const newRender = document.querySelector<HTMLElement>('.proposals__list');
     newRender!.innerHTML = '';
-    productsFilterElem.map((item: IProduct) => {
-      console.log(item);
+    filteredArr.map((item: IProduct) => {
       const elem = new ProductCard(
         item.id,
         item.title,
