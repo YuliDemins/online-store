@@ -1,4 +1,6 @@
+import { app } from '@/index';
 import { BaseComponent } from '@/services/BaseComponent';
+import { IProductData } from '@/types/interfaces/product';
 import { SliderItem } from '../slider/sliderItem';
 import { ProductPageCart } from './productCart';
 import { ProductDetails } from './productDetails';
@@ -40,6 +42,10 @@ export class ProductPage extends BaseComponent {
 
     this.productPageCart = new ProductPageCart();
     this.productPageCart.render();
+
+    this.checkIfInCart();
+    this.addToCart();
+    this.openCart();
   }
 
   async render() {
@@ -98,6 +104,52 @@ export class ProductPage extends BaseComponent {
         const base64data = reader.result;
         resolve(base64data);
       };
+    });
+  }
+
+  checkIfInCart() {
+    const list = JSON.parse(window.localStorage.getItem('productsList') || '[]');
+    const id = new URLSearchParams(document.location.search).get('productId') ?? -1;
+    const val = list.find((obj: IProductData) => obj.id === +id);
+
+    if (val !== undefined) {
+      this.productPageCart.cartSectionAddBtn.elem.textContent = 'Already in cart';
+      this.productPageCart.cartSectionAddBtn.elem.setAttribute('ableToAdd', 'false');
+    } else {
+      this.productPageCart.cartSectionAddBtn.elem.textContent = 'Add to cart';
+      this.productPageCart.cartSectionAddBtn.elem.setAttribute('ableToAdd', 'true');
+    }
+  }
+
+  async addToCart() {
+    const list = JSON.parse(window.localStorage.getItem('productsList') || '[]');
+    const id = new URLSearchParams(document.location.search).get('productId') ?? -1;
+    const res = await fetch(`https://dummyjson.com/products/${id}`);
+    const data = await res.json();
+    data.amount = 1;
+
+    this.productPageCart.cartSectionAddBtn.elem.addEventListener('click', (e) => {
+      const target = e.target as HTMLButtonElement;
+      if (target.getAttribute('ableToAdd') === 'true') {
+        list.push(data);
+        window.localStorage.setItem('productsList', JSON.stringify(list));
+        app.header.updateTotal();
+        app.header.Cart.updateCartNum();
+        target.setAttribute('ableToAdd', 'false');
+        this.checkIfInCart();
+      }
+    });
+  }
+
+  openCart() {
+    this.productPageCart.cartSectionBuyBtn.elem.addEventListener('click', () => {
+      this.addToCart();
+      window.location.hash = '#cart';
+      setTimeout(() => {
+        const modal = document.querySelector('.modal') as HTMLElement;
+        modal.classList.remove('hide');
+        modal.classList.add('show');
+      }, 1000);
     });
   }
 }
