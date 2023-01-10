@@ -30,7 +30,9 @@ export class App extends BaseComponent {
 
     if (root) {
       this.createRouter();
-      window.location.hash = '#product';
+      if (!window.location.hash) {
+        window.location.hash = '#main';
+      }
 
       root.append(preloader.elem, this.header.elem, this.elem, footer.elem);
       preloader.hide();
