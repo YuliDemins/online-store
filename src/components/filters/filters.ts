@@ -29,6 +29,12 @@ export class Filters extends BaseComponent {
 
   filterRangeStockItem: FilterRangeItem;
 
+  filterCheckboxCategoryBlockCategory: BaseComponent;
+
+  filterCheckboxCategoryBlockBrand: BaseComponent;
+
+  filterResetBtn: BaseComponent;
+
   constructor() {
     super({
       tag: 'aside',
@@ -51,6 +57,11 @@ export class Filters extends BaseComponent {
       textContent: 'Category',
     });
 
+    this.filterCheckboxCategoryBlockCategory = new BaseComponent({
+      tag: 'div',
+      className: 'filter-category-item-block',
+    });
+
     this.filterCheckboxBrand = new BaseComponent({
       tag: 'div',
       className: 'filter-category-item',
@@ -60,6 +71,11 @@ export class Filters extends BaseComponent {
       tag: 'h3',
       className: 'filter-category-item-title',
       textContent: 'Brand',
+    });
+
+    this.filterCheckboxCategoryBlockBrand = new BaseComponent({
+      tag: 'div',
+      className: 'filter-category-item-block',
     });
 
     this.filterRangePrice = new BaseComponent({
@@ -87,6 +103,12 @@ export class Filters extends BaseComponent {
     this.filterRangePriceItem = new FilterRangeItem('price');
 
     this.filterRangeStockItem = new FilterRangeItem('stock');
+
+    this.filterResetBtn = new BaseComponent({
+      tag: 'button',
+      className: 'filter-reset-btn',
+      textContent: 'Reset filters',
+    });
   }
 
   render() {
@@ -94,8 +116,8 @@ export class Filters extends BaseComponent {
     this.filterRangeStockItem.render('stock');
     this.getFiltersView('category');
     this.getFiltersView('brand');
-    this.filterCheckboxCategory.addChildren(this.filterCheckboxCategoryTitle.elem);
-    this.filterCheckboxBrand.addChildren(this.filterCheckboxBrandTitle.elem);
+    this.filterCheckboxCategory.addChildren(this.filterCheckboxCategoryTitle.elem, this.filterCheckboxCategoryBlockCategory.elem);
+    this.filterCheckboxBrand.addChildren(this.filterCheckboxBrandTitle.elem, this.filterCheckboxCategoryBlockBrand.elem);
     this.filterRangePrice.addChildren(this.filterRangePriceTitle.elem, this.filterRangePriceItem.elem);
     this.filterRangeStock.addChildren(this.filterRangeStockTitle, this.filterRangeStockItem.elem);
     this.filterCategory.addChildren(
@@ -103,6 +125,7 @@ export class Filters extends BaseComponent {
       this.filterCheckboxBrand.elem,
       this.filterRangePrice.elem,
       this.filterRangeStock.elem,
+      this.filterResetBtn.elem,
     );
     this.addChildren(this.filterCategory.elem);
   }
@@ -119,8 +142,8 @@ export class Filters extends BaseComponent {
       return elem;
     });
     type === 'category' ?
-      this.filterCheckboxCategory.addChildren(...filtergo)
-      : this.filterCheckboxBrand.addChildren(...filtergo);
+      this.filterCheckboxCategoryBlockCategory.addChildren(...filtergo)
+      : this.filterCheckboxCategoryBlockBrand.addChildren(...filtergo);
   }
 
   getFilter(arr: IProduct[], type: CheckboxTypes) {

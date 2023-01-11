@@ -18,6 +18,12 @@
   margin-bottom: 16px;
 }
 
+.filter-category-item-block {
+  height: 150px;
+  overflow-y: scroll;
+  overflow-x:hidden;
+}
+
 .filter-category-item {
   font-size: 16px;
   margin-bottom: 16px;
@@ -101,4 +107,34 @@
     }
   }
 
+}
+
+/* полоса прокрутки (скроллбар) */
+::-webkit-scrollbar {
+  width: 5px;
+  border: 1px solid $filter_color;
+  border-radius: 4px;
+  background: $white_color;
+}
+
+/* ползунок скроллбара */
+::-webkit-scrollbar-thumb {
+  background-color: $main_color;
+  border-radius: 4px;
+  
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: $hover_color;
+}
+
+.filter-reset-btn{
+  margin-top: 30px;
+  background: $main_color;
+  border-radius: 10px;
+  display: block;
+  padding: 15px 0px;
+  width: 100%;
+  color: $white_color;
+  font-size: 18px
 }
