@@ -14,8 +14,6 @@ export class ProductCard extends BaseComponent {
 
   ratingCount;
 
-  // infoStockValues: BaseComponent[];
-
   infoStock;
 
   title;

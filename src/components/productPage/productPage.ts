@@ -16,11 +16,18 @@ export class ProductPage extends BaseComponent {
 
   productPageCart: ProductPageCart;
 
+  // wrapper: BaseComponent;
+
   constructor() {
     super({
       tag: 'div',
       className: 'product-page',
     });
+
+    // this.wrapper = new BaseComponent({
+    //   className: 'product-page__wrapper',
+    //   textContent: 'store >> laptop >> apple >> macbook',
+    // });
 
     this.breadCrumbs = new BaseComponent({
       className: 'product-page__breadcrumbs',
@@ -53,6 +60,7 @@ export class ProductPage extends BaseComponent {
     const slider = new SliderItem(0, images);
     slider.render();
     this.productPageInner.addChildren(slider, this.productPageDetails, this.productPageCart);
+    // this.wrapper.addChildren(this.breadCrumbs, this.productTitle, this.productPageInner);
     this.addChildren(this.breadCrumbs, this.productTitle, this.productPageInner);
   }
 

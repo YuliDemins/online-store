@@ -30,6 +30,7 @@ export class App extends BaseComponent {
 
     if (root) {
       this.createRouter();
+
       if (!window.location.hash) {
         window.location.hash = '#main';
       }

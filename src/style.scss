@@ -14,6 +14,7 @@ $hover_color: rgb(66, 176, 10);
 @import './components/preloader/preloader.scss';
 @import './components/products/productCard.scss';
 @import './components/products/productList.scss';
+@import './components/productPage/productPage.scss';
 @import './components/filters/filters.scss';
 @import './components/slider/slider.scss';
 @import './components/cart/cart.scss';
@@ -22,7 +23,6 @@ $hover_color: rgb(66, 176, 10);
 @import './components/cart/modal/modal.scss';
 @import './components/filters/filterRangeItem.scss';
 @import './components/sort/sort.scss';
-@import './components/productPage/productPage.scss';
 
 #root {
   max-width: 1440px;

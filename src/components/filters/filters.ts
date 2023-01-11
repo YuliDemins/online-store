@@ -29,6 +29,12 @@ export class Filters extends BaseComponent {
 
   filterRangeStockItem: FilterRangeItem;
 
+  filterCheckboxCategoryBlockCategory: BaseComponent;
+
+  filterCheckboxCategoryBlockBrand: BaseComponent;
+
+  filterResetBtn: BaseComponent;
+
   constructor() {
     super({
       tag: 'aside',
@@ -51,6 +57,11 @@ export class Filters extends BaseComponent {
       textContent: 'Category',
     });
 
+    this.filterCheckboxCategoryBlockCategory = new BaseComponent({
+      tag: 'div',
+      className: 'filter-category-item-block',
+    });
+
     this.filterCheckboxBrand = new BaseComponent({
       tag: 'div',
       className: 'filter-category-item',
@@ -60,6 +71,11 @@ export class Filters extends BaseComponent {
       tag: 'h3',
       className: 'filter-category-item-title',
       textContent: 'Brand',
+    });
+
+    this.filterCheckboxCategoryBlockBrand = new BaseComponent({
+      tag: 'div',
+      className: 'filter-category-item-block',
     });
 
     this.filterRangePrice = new BaseComponent({
@@ -87,6 +103,12 @@ export class Filters extends BaseComponent {
     this.filterRangePriceItem = new FilterRangeItem('price');
 
     this.filterRangeStockItem = new FilterRangeItem('stock');
+
+    this.filterResetBtn = new BaseComponent({
+      tag: 'button',
+      className: 'filter-reset-btn',
+      textContent: 'Reset filters',
+    });
   }
 
   render() {
@@ -94,8 +116,8 @@ export class Filters extends BaseComponent {
     this.filterRangeStockItem.render('stock');
     this.getFiltersView('category');
     this.getFiltersView('brand');
-    this.filterCheckboxCategory.addChildren(this.filterCheckboxCategoryTitle.elem);
-    this.filterCheckboxBrand.addChildren(this.filterCheckboxBrandTitle.elem);
+    this.filterCheckboxCategory.addChildren(this.filterCheckboxCategoryTitle.elem, this.filterCheckboxCategoryBlockCategory.elem);
+    this.filterCheckboxBrand.addChildren(this.filterCheckboxBrandTitle.elem, this.filterCheckboxCategoryBlockBrand.elem);
     this.filterRangePrice.addChildren(this.filterRangePriceTitle.elem, this.filterRangePriceItem.elem);
     this.filterRangeStock.addChildren(this.filterRangeStockTitle, this.filterRangeStockItem.elem);
     this.filterCategory.addChildren(
@@ -103,6 +125,7 @@ export class Filters extends BaseComponent {
       this.filterCheckboxBrand.elem,
       this.filterRangePrice.elem,
       this.filterRangeStock.elem,
+      this.filterResetBtn.elem,
     );
     this.addChildren(this.filterCategory.elem);
   }
@@ -113,21 +136,20 @@ export class Filters extends BaseComponent {
     const forFilters = Object.keys(this.getFilter(productsElem, type));
     const filtergo:BaseComponent[] = [];
     forFilters.map((item) => {
-      const elem = new FilterСheckboxItem(item);
+      const elem = new FilterСheckboxItem(item, type);
       elem.render();
       filtergo.push(elem);
       return elem;
     });
     type === 'category' ?
-      this.filterCheckboxCategory.addChildren(...filtergo)
-      : this.filterCheckboxBrand.addChildren(...filtergo);
+      this.filterCheckboxCategoryBlockCategory.addChildren(...filtergo)
+      : this.filterCheckboxCategoryBlockBrand.addChildren(...filtergo);
   }
 
   getFilter(arr: IProduct[], type: CheckboxTypes) {
     const filterPart: string[] = [];
     arr.map((item) => {
       filterPart.push(item[type]);
-      // console.log(filterPart)
       return filterPart;
     });
 
@@ -137,44 +159,4 @@ export class Filters extends BaseComponent {
     }, {});
     return some;
   }
-
-  // async getProducts() {
-  //   const promise = await fetch('https://dummyjson.com/products')
-  //     .then((res) => res.json())
-  //     .then((json) => json.products);
-  //   // console.log(promise);
-  //   return promise;
-  // }
-
-  // async show() {
-  //   const productsElem = await this.getProducts();
-  //   const productsFilterElem:IProduct[] = [];
-  //   productsElem.map((item: IProduct) => {
-  //     if (item.category === 'smartphones') {
-  //       productsFilterElem.push(item);
-  //       return item;
-  //     }
-  //   });
-
-  //   productsFilterElem.map((item) => {
-  //     const elem = new ProductCard(
-  //       item.id,
-  //       item.title,
-  //       item.rating,
-  //       item.price,
-  //       item.category,
-  //       item.thumbnail,
-  //       item.images,
-  //       item.stock,
-  //       item.brand,
-  //       item.description,
-  //       item.discountPercentage,
-  //     );
-  //     elem.render();
-  //     return elem;
-  //   });
-  //   console.log(productsFilterElem);
-  //   console.log(new ProductList().listItem);
-  //   new ProductList().listItem.addChildren(...productsElem);
-  // }
 }
